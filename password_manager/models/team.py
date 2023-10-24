@@ -1,4 +1,4 @@
-from models.user import BaseUser
+from models.user import User
 
 
 class Team:
@@ -10,9 +10,9 @@ class Team:
     def __init__(
         self,
         team_id: str,
-        creator: BaseUser,
+        creator: User,
         team_name: str,
-        team_members: [BaseUser],
+        team_members: [User],
     ) -> None:
         self.__team_id = team_id
         self.creator = creator
