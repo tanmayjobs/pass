@@ -14,8 +14,9 @@ class SQLQueries:
     CREATE TABLE IF NOT EXISTS passwords(
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         creator_id INTEGER,
+        site_url TEXT,
+        site_username TEXT,
         password_type INTEGER CHECK (password_type IN (0, 1)),
-        username TEXT,
         encrypted_password TEXT NOT NULL,
         notes TEXT,
         FOREIGN KEY(creator_id) REFERENCES authentication(id)
@@ -59,4 +60,14 @@ class SQLQueries:
     SIGN_UP = """
     INSERT INTO authentication(username, password_hash, user_role)
     VALUES(?, ?, ?);
+    """
+
+    PERSONAL_PASSWORDS = """
+    SELECT * FROM passwords
+    WHERE creator_id = ? and password_type = 0;
+    """
+
+    ADD_NEW_PASSWORD = """
+    INSERT INTO passwords(creator_id, site_url, site_username, password_type, encrypted_password, notes)
+    VALUES(?, ?, ?, ?, ?, ?)
     """

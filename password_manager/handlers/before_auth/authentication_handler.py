@@ -4,7 +4,7 @@ from database.queries import SQLQueries
 from models.user import User
 
 from utils.io_functions import credential_input
-from utils.hashing import Hashing
+from utils.crypt import Crypt
 from utils.show_message import show_message
 from utils.helpers.exceptions import InvalidCredentials
 # from utils.state_manager import StateManager
@@ -31,10 +31,10 @@ class AuthenticationHandler:
 
                 hashed_password = user_data[2]
 
-                if not Hashing.check(password, hashed_password):
+                if not Crypt.check(password, hashed_password):
                     raise InvalidCredentials("Invalid password!")
 
-        except:
+        except InvalidCredentials:
             # logging for invalid attempt
             raise
         else:
@@ -43,7 +43,7 @@ class AuthenticationHandler:
     @staticmethod
     def sign_up(user_role: int):
         username, password = credential_input()
-        password_hash = Hashing.hash(password)
+        password_hash = Crypt.hash(password)
         # del password
 
         try:

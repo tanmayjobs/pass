@@ -1,7 +1,8 @@
+from cryptography.fernet import Fernet
 import bcrypt
 
 
-class Hashing:
+class Crypt:
 
     @staticmethod
     def hash(password: str) -> str:
@@ -14,3 +15,5 @@ class Hashing:
     @staticmethod
     def check(password: str, hashed_password: str):
         return bcrypt.checkpw(password, hashed_password)
+
+    

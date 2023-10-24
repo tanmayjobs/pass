@@ -1,13 +1,15 @@
-from handlers.before_auth.authentication_handler import AuthenticationHandler
+from models.user import User
 
-from utils.show_message import show_message
+from handlers.before_auth.authentication_handler import AuthenticationHandler
+from handlers.after_auth.password_handler import PasswordHandler
+
 class AuthenticationMenu:
     prompt = """
     Press:
-    - '1' for sign in
-    - '2' for sign up as user
-    - '3' for sign up as team manager
-    - '4' for exit
+    - '1' to sign in
+    - '2' to sign up as user
+    - '3' to sign up as team manager
+    - '4' to exit
 
     Your choice:"""
 
@@ -32,14 +34,71 @@ class AuthenticationMenu:
 class MainMenu:
     prompt = """
     Press:
-    - '1' for personal passwords
-    - '2' for team passowrds
-    - '3' for sign out
+    - '1' to personal passwords
+    - '2' to team passowrds
+    - '3' to sign out
 
     Your choice:"""
 
     @staticmethod
-    def handler(user_choice):
+    def handler(user_choice, user: User):
+        if user_choice == 1:
+            return PersonalPasswordsMenu
+        elif user_choice == 2:
+            return TeamPasswordsMenu
+        elif user_choice == 3:
+            AuthenticationHandler.sign_out()
+            return AuthenticationMenu
+        raise ValueError("Invalid Choice.")
+
+class PersonalPasswordsMenu:
+    prompt = """
+    Press:
+    - '1' to list passwords
+    - '2' to search password
+    - '3' to add new password
+    - '4' to delete password
+    - '5' to update password
+    - '6' to go back
+
+    Your choice:"""
+
+    @staticmethod
+    def handler(user_choice, user: User):
+
+        if user_choice == 1:
+            PasswordHandler.get_all_passwords(user)
+        elif user_choice == 2:
+            ...
+        elif user_choice == 3:
+            PasswordHandler.add_new_password(user)
+        elif user_choice == 4:
+            ...
+        elif user_choice == 5:
+            ...
+        elif user_choice == 6:
+            return MainMenu
+        else:
+            raise ValueError("Invalid Choice.")
+
+        return PersonalPasswordsMenu
+
+
+
+class TeamPasswordsMenu:
+    prompt = """
+    Press:
+    - '1' to list passwords
+    - '2' to search password
+    - '3' to add new password
+    - '4' to delete password
+    - '5' to update password
+    - '6' to go back
+
+    Your choice:"""
+
+    @staticmethod
+    def handler(user_choice, user: User):
         if user_choice == 1:
             ...
         elif user_choice == 2:
