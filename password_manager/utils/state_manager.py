@@ -2,10 +2,11 @@ from sqlite3 import IntegrityError
 
 from utils.helpers.menu_prompts import AuthenticationMenu, MainMenu
 from utils.helpers.exceptions import InvalidCredentials
-from utils.show_message import show_message
+from utils.io_functions import show_message
 
 from models.user import User
 import sys
+
 
 class StateManager:
     current_user: User | None = None
@@ -32,16 +33,27 @@ class StateManager:
                 except IntegrityError:
                     show_message("Username already exists.")
 
+                except NotImplementedError:
+                    show_message("Will soon be implemented, have some patience!")
+
                 except SystemExit:
                     show_message("Bye.")
                     sys.exit(0)
 
-            show_message(f"Successfully signed in as {StateManager.current_user.username}...")
+            show_message(
+                f"Successfully signed in as {StateManager.current_user.username}..."
+            )
 
             while StateManager.current_user:
                 try:
+                    StateManager.current_prompt = StateManager.current_prompt(
+                        StateManager.current_user
+                    )
+
                     user_choice = int(input(StateManager.current_prompt.prompt))
-                    StateManager.current_prompt = StateManager.current_prompt.handler(user_choice, StateManager.current_user)
+                    StateManager.current_prompt = StateManager.current_prompt.handler(
+                        user_choice
+                    )
 
                     if StateManager.current_prompt == AuthenticationMenu:
                         StateManager.current_user = None
@@ -50,7 +62,9 @@ class StateManager:
                 except ValueError:
                     show_message("Invalid Choice.")
 
+                except NotImplementedError:
+                    show_message("Will soon be implemented, have some patience!")
+
                 except SystemExit:
                     show_message("Bye.")
                     sys.exit(0)
-

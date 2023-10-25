@@ -1,7 +1,11 @@
-from models.user import User
+from models.user import User, UserType
 
 from handlers.before_auth.authentication_handler import AuthenticationHandler
 from handlers.after_auth.password_handler import PasswordHandler
+from handlers.after_auth.team_password_handler import TeamPasswordHandler
+
+from utils.io_functions import show_passwords, show_message
+
 
 class AuthenticationMenu:
     prompt = """
@@ -31,7 +35,12 @@ class AuthenticationMenu:
         raise ValueError("Invalid Choice.")
 
 
-class MainMenu:
+class UserHandlingMenu:
+    def __init__(self, user) -> None:
+        self.user = user
+
+
+class MainMenu(UserHandlingMenu):
     prompt = """
     Press:
     - '1' to personal passwords
@@ -40,8 +49,7 @@ class MainMenu:
 
     Your choice:"""
 
-    @staticmethod
-    def handler(user_choice, user: User):
+    def handler(self, user_choice):
         if user_choice == 1:
             return PersonalPasswordsMenu
         elif user_choice == 2:
@@ -51,7 +59,8 @@ class MainMenu:
             return AuthenticationMenu
         raise ValueError("Invalid Choice.")
 
-class PersonalPasswordsMenu:
+
+class PersonalPasswordsMenu(UserHandlingMenu):
     prompt = """
     Press:
     - '1' to list passwords
@@ -63,48 +72,77 @@ class PersonalPasswordsMenu:
 
     Your choice:"""
 
-    @staticmethod
-    def handler(user_choice, user: User):
+    def handler(self, user_choice):
+        if user_choice == 1 or user_choice == 2 or user_choice == 4:
+            passwords = PasswordHandler.get_passwords(self.user, user_choice == 2)
 
-        if user_choice == 1:
-            PasswordHandler.get_all_passwords(user)
-        elif user_choice == 2:
-            ...
+            if not passwords:
+                show_message(f"Nothing to {'delete' if user_choice == 4 else 'show'}.")
+            else:
+                show_passwords(passwords)
+                if user_choice == 4:
+                    PasswordHandler.delete_password(self.user)
+
         elif user_choice == 3:
-            PasswordHandler.add_new_password(user)
-        elif user_choice == 4:
-            ...
+            PasswordHandler.add_new_password(self.user)
+
         elif user_choice == 5:
-            ...
+            raise NotImplementedError
+
         elif user_choice == 6:
             return MainMenu
+
         else:
             raise ValueError("Invalid Choice.")
 
         return PersonalPasswordsMenu
 
 
-
-class TeamPasswordsMenu:
-    prompt = """
+class TeamPasswordsMenu(UserHandlingMenu):
+    user_prompt = """
     Press:
     - '1' to list passwords
     - '2' to search password
-    - '3' to add new password
-    - '4' to delete password
-    - '5' to update password
-    - '6' to go back
+    - '3' to go back
 
     Your choice:"""
 
-    @staticmethod
-    def handler(user_choice, user: User):
-        if user_choice == 1:
-            ...
-        elif user_choice == 2:
-            ...
-        elif user_choice == 3:
-            AuthenticationHandler.sign_out()
-            return AuthenticationMenu
-        raise ValueError("Invalid Choice.")
+    team_manager_prompt = """
+    Press:
+    - '1' to list passwords
+    - '2' to search password
+    - '3' to manage team
+    - '4' to go back
 
+    Your choice:"""
+
+    @property
+    def prompt(self):
+        if self.user.user_type == UserType.BASIC_USER:
+            return TeamPasswordsMenu.user_prompt
+
+        return TeamPasswordsMenu.team_manager_prompt
+
+    def user_handler(self, user_choice):
+        if user_choice == 1 or user_choice == 2:
+            TeamPasswordHandler.get_passwords(self.user, user_choice == 2)
+        elif user_choice == 3:
+            return MainMenu
+        else:
+            raise ValueError("Invalid Choice.")
+        return TeamPasswordsMenu
+
+    def team_manager_handler(self, user_choice):
+        if user_choice == 1 or user_choice == 2:
+            TeamPasswordHandler.get_passwords(self.user, user_choice == 2)
+        elif user_choice == 4:
+            return MainMenu
+        else:
+            raise ValueError("Invalid Choice.")
+        return TeamPasswordsMenu
+
+    def handler(self, user_choice):
+        if self.user.user_type == UserType.BASIC_USER:
+            return TeamPasswordsMenu.user_handler(user_choice, self.user)
+
+        return TeamPasswordsMenu.team_manager_handler(user_choice, self.user)

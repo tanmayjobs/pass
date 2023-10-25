@@ -6,7 +6,7 @@ class User:
     User model which contains all the user's public details.
     """
 
-    def __init__(self, user_id: int, user_type: int, username: str) -> None:
+    def __init__(self, user_id: int, user_type: UserType, username: str) -> None:
         self.user_id = user_id
         self.user_type = UserType(user_type).name
         self.username = username
