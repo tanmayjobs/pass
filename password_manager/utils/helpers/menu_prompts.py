@@ -35,12 +35,16 @@ class AuthenticationMenu:
         raise ValueError("Invalid Choice.")
 
 
-class UserHandlingMenu:
+class UserRequired:
     def __init__(self, user) -> None:
         self.user = user
 
+class TeamRequired:
+    def __init__(self, team) -> None:
+        self.team = team
 
-class MainMenu(UserHandlingMenu):
+
+class MainMenu(UserRequired):
     prompt = """
     Press:
     - '1' to personal passwords
@@ -60,7 +64,7 @@ class MainMenu(UserHandlingMenu):
         raise ValueError("Invalid Choice.")
 
 
-class PersonalPasswordsMenu(UserHandlingMenu):
+class PersonalPasswordsMenu(UserRequired):
     prompt = """
     Press:
     - '1' to list passwords
@@ -100,7 +104,7 @@ class PersonalPasswordsMenu(UserHandlingMenu):
         return self
 
 
-class TeamPasswordsMenu(UserHandlingMenu):
+class TeamPasswordsMenu(UserRequired):
     user_prompt = """
     Press:
     - '1' to list passwords
@@ -159,3 +163,25 @@ class TeamPasswordsMenu(UserHandlingMenu):
             return self.user_handler(user_choice)
 
         return self.team_manager_handler(user_choice)
+
+class TeamsManagementMenu(UserRequired):
+    prompt = """
+    Press:
+    - '1' to add team
+    - '2' to delete team
+    - '3' to update team
+    - '4' to go back
+
+    Your choice:"""
+
+class TeamManagementMenu(UserRequired):
+    prompt = """
+    Press:
+    - '1' to add team member
+    - '2' to remove team member
+    - '3' to add password
+    - '4' to delete password
+    - '5' to update password
+    - '4' to go back
+
+    Your choice:"""
