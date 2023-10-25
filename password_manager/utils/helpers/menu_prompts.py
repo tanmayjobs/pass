@@ -185,13 +185,13 @@ class TeamsManagementMenu(UserRequired):
 
     def handler(self, user_choice):
         if user_choice == 1:
-            TeamsHandler.add_team()
+            TeamsHandler.add_team(self.user)
         elif user_choice == 2:
-            TeamsHandler.delete_team()
+            TeamsHandler.delete_team(self.user)
         elif user_choice == 3:
-            ...
+            raise NotImplementedError
         elif user_choice == 4:
-            raise SystemExit
+            return TeamPasswordsMenu(self.user)
         else:
             raise ValueError("Invalid Choice.")
 
@@ -209,3 +209,6 @@ class TeamManagementMenu(UserRequired):
     - '4' to go back
 
     Your choice:"""
+
+    def handler(self, user_choice):
+        ...
