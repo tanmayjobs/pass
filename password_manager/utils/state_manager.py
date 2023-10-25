@@ -21,7 +21,7 @@ class StateManager:
                     user = AuthenticationMenu.handler(user_choice)
 
                     StateManager.current_user = user
-                    StateManager.current_prompt = MainMenu
+                    StateManager.current_prompt = MainMenu(user)
                     break
 
                 except ValueError:
@@ -46,14 +46,9 @@ class StateManager:
 
             while StateManager.current_user:
                 try:
-                    StateManager.current_prompt = StateManager.current_prompt(
-                        StateManager.current_user
-                    )
 
                     user_choice = int(input(StateManager.current_prompt.prompt))
-                    StateManager.current_prompt = StateManager.current_prompt.handler(
-                        user_choice
-                    )
+                    StateManager.current_prompt = StateManager.current_prompt.handler(user_choice)
 
                     if StateManager.current_prompt == AuthenticationMenu:
                         StateManager.current_user = None

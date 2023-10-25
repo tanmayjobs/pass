@@ -1,0 +1,10 @@
+{
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "driver": "SQLite",
+            "name": "password_manager",
+            "database": "${workspaceFolder:projects}/password_manager/database/storage/db.sql"
+        }
+    ]
+}

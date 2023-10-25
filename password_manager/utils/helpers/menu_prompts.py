@@ -51,9 +51,9 @@ class MainMenu(UserHandlingMenu):
 
     def handler(self, user_choice):
         if user_choice == 1:
-            return PersonalPasswordsMenu
+            return PersonalPasswordsMenu(self.user)
         elif user_choice == 2:
-            return TeamPasswordsMenu
+            return TeamPasswordsMenu(self.user)
         elif user_choice == 3:
             AuthenticationHandler.sign_out()
             return AuthenticationMenu
@@ -90,12 +90,12 @@ class PersonalPasswordsMenu(UserHandlingMenu):
             raise NotImplementedError
 
         elif user_choice == 6:
-            return MainMenu
+            return MainMenu(self.user)
 
         else:
             raise ValueError("Invalid Choice.")
 
-        return PersonalPasswordsMenu
+        return self
 
 
 class TeamPasswordsMenu(UserHandlingMenu):
@@ -125,24 +125,32 @@ class TeamPasswordsMenu(UserHandlingMenu):
 
     def user_handler(self, user_choice):
         if user_choice == 1 or user_choice == 2:
-            TeamPasswordHandler.get_passwords(self.user, user_choice == 2)
+            passwords = TeamPasswordHandler.get_passwords(self.user, user_choice == 2)
+            show_passwords(passwords)
+
         elif user_choice == 3:
-            return MainMenu
+            return MainMenu(self.user)
+
         else:
             raise ValueError("Invalid Choice.")
-        return TeamPasswordsMenu
+
+        return self
 
     def team_manager_handler(self, user_choice):
         if user_choice == 1 or user_choice == 2:
-            TeamPasswordHandler.get_passwords(self.user, user_choice == 2)
+            passwords = TeamPasswordHandler.get_passwords(self.user, user_choice == 2)
+            show_passwords(passwords)
+
         elif user_choice == 4:
-            return MainMenu
+            return MainMenu(self.user)
+
         else:
             raise ValueError("Invalid Choice.")
-        return TeamPasswordsMenu
+
+        return self
 
     def handler(self, user_choice):
         if self.user.user_type == UserType.BASIC_USER:
-            return TeamPasswordsMenu.user_handler(user_choice, self.user)
+            return self.user_handler(user_choice)
 
-        return TeamPasswordsMenu.team_manager_handler(user_choice, self.user)
+        return self.team_manager_handler(user_choice)

@@ -8,7 +8,7 @@ class User:
 
     def __init__(self, user_id: int, user_type: UserType, username: str) -> None:
         self.user_id = user_id
-        self.user_type = UserType(user_type).name
+        self.user_type = UserType(user_type)
         self.username = username
 
     @staticmethod

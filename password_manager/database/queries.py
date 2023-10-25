@@ -4,7 +4,7 @@ class SQLQueries:
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         username TEXT NOT NULL UNIQUE,
         password_hash TEXT NOT NULL,
-        user_role INTEGER CHECK (user_role IN (0, 1)) DEFAULT 0,
+        user_role INTEGER CHECK (user_role IN (0, 1)) DEFAULT 1,
         is_deleted BOOL NOT NULL DEFAULT False,
         created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
     );
@@ -74,18 +74,20 @@ class SQLQueries:
     """
 
     TEAM_PASSWORDS = """
-    SELECT * FROM team_members
-    WHERE member_id = ?
-    INNER JOIN team_passwords WHERE team_passwords.team_id = team_members.team_id
-    INNER JOIN passwords WHERE passwords.id = team_passwords.password_id;
+    SELECT passwords.id, passwords.creator_id, passwords.password_type, passwords.site_url, passwords.site_username, passwords.encrypted_password, passwords.notes
+    FROM team_members
+    INNER JOIN team_passwords ON team_passwords.team_id = team_members.team_id
+    INNER JOIN passwords ON team_passwords.password_id = passwords.id
+    WHERE team_members.member_id = ?;
     """
 
     TEAM_PASSWORDS_FILTER = """
-    SELECT * FROM team_members
-    WHERE member_id = ?
+    SELECT passwords.id, passwords.creator_id, passwords.password_type, passwords.site_url, passwords.site_username, passwords.encrypted_password, passwords.notes
+    FROM team_members
     INNER JOIN team_passwords ON team_passwords.team_id = team_members.team_id
-    INNER JOIN passwords ON passwords.id = team_passwords.password_id
-    AND (passwords.site_url LIKE ? or passwords.site_username LIKE ? or passwords.notes LIKE ?);
+    INNER JOIN passwords ON team_passwords.password_id = passwords.id
+    AND (passwords.site_url LIKE ? or passwords.site_username LIKE ? or passwords.notes LIKE ?)
+    WHERE member_id = ?
     """
 
     ADD_NEW_PASSWORD = """

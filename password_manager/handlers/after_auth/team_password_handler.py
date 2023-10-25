@@ -19,11 +19,12 @@ class TeamPasswordHandler:
         try:
             with SQLCursor() as cursor:
                 query = (
-                    SQLQueries.TEAM_PASSWORDS
+                    SQLQueries.TEAM_PASSWORDS_FILTER
                     if key
                     else SQLQueries.TEAM_PASSWORDS
                 )
-                params = (user.user_id, *[f'%{search_key}%' for _ in range(3) if key])
+
+                params = (*[f'%{search_key}%' for _ in range(3) if key], user.user_id)
 
                 passwords = cursor.execute(query, params).fetchall()
                 passwords = [Password.from_database(password) for password in passwords]
