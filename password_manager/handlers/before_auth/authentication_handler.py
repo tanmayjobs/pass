@@ -24,7 +24,8 @@ class AuthenticationHandler:
 
         try:
             with SQLCursor() as cursor:
-                user_data = cursor.execute(SQLQueries.SIGN_IN, (username,)).fetchone()
+                user_data = cursor.execute(SQLQueries.SIGN_IN,
+                                           (username, )).fetchone()
 
                 if not user_data:
                     raise InvalidCredentials("Invalid username")
@@ -48,7 +49,8 @@ class AuthenticationHandler:
 
         try:
             with SQLCursor() as cursor:
-                cursor.execute(SQLQueries.SIGN_UP, (username, password_hash, user_role))
+                cursor.execute(SQLQueries.SIGN_UP,
+                               (username, password_hash, user_role))
         except IntegrityError:
             Logger.log(WARN, f"Duplicate account creation attempt {username}.")
             raise

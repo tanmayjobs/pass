@@ -7,7 +7,9 @@ from utils.io_functions import show_message
 
 import sys
 
+
 def handle_exception(menu_func):
+
     def wrapper():
         try:
             result = menu_func()
@@ -30,7 +32,8 @@ def handle_exception(menu_func):
             sys.exit(0)
 
         except Exception as error:
-            Logger.log(CRITICAL, f"Closing System due to unexpected error.<{error}>")
+            Logger.log(CRITICAL,
+                       f"Closing System due to unexpected error.<{error}>")
             show_message("Unexpected Error Occurred! Turning System Down...")
             sys.exit(0)
 
@@ -38,4 +41,3 @@ def handle_exception(menu_func):
             return result
 
     return wrapper
-

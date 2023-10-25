@@ -4,7 +4,6 @@ from utils.io_functions import show_message
 
 from models.user import User
 
-import os
 
 class StateManager:
     current_user: User | None = None
@@ -23,7 +22,8 @@ class StateManager:
     @staticmethod
     def after_auth():
         user_choice = int(input(StateManager.current_prompt.prompt))
-        StateManager.current_prompt = StateManager.current_prompt.handler(user_choice)
+        StateManager.current_prompt = StateManager.current_prompt.handler(
+            user_choice)
 
         if StateManager.current_prompt == AuthenticationMenu:
             StateManager.current_user = None
@@ -42,4 +42,3 @@ class StateManager:
                 StateManager.after_auth()
 
             show_message("You're logged out of the system.")
-        os

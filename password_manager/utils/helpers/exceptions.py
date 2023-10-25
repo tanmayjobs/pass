@@ -1,5 +1,6 @@
 class UserNotFound(Exception):
     ...
 
+
 class InvalidCredentials(Exception):
     ...

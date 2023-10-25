@@ -3,6 +3,7 @@ from models.user import UserType
 from handlers.before_auth.authentication_handler import AuthenticationHandler
 from handlers.after_auth.password_handler import PasswordHandler
 from handlers.after_auth.team_password_handler import TeamPasswordHandler
+from handlers.after_auth.teams_handler import TeamsHandler
 
 from utils.io_functions import show_passwords, show_message
 
@@ -36,10 +37,13 @@ class AuthenticationMenu:
 
 
 class UserRequired:
+
     def __init__(self, user) -> None:
         self.user = user
 
+
 class TeamRequired:
+
     def __init__(self, team) -> None:
         self.team = team
 
@@ -78,10 +82,12 @@ class PersonalPasswordsMenu(UserRequired):
 
     def handler(self, user_choice):
         if user_choice == 1 or user_choice == 2 or user_choice == 4 or user_choice == 5:
-            passwords = PasswordHandler.get_passwords(self.user, user_choice == 2)
+            passwords = PasswordHandler.get_passwords(self.user,
+                                                      user_choice == 2)
 
             if not passwords:
-                show_message(f"Nothing to {'delete' if user_choice == 4 else 'show'}.")
+                show_message(
+                    f"Nothing to {'delete' if user_choice == 4 else 'show'}.")
             else:
                 show_passwords(passwords)
                 if user_choice == 4:
@@ -117,7 +123,7 @@ class TeamPasswordsMenu(UserRequired):
     Press:
     - '1' to list passwords
     - '2' to search password
-    - '3' to manage team
+    - '3' to manage your teams
     - '4' to go back
 
     Your choice:"""
@@ -131,7 +137,8 @@ class TeamPasswordsMenu(UserRequired):
 
     def user_handler(self, user_choice):
         if user_choice == 1 or user_choice == 2:
-            passwords = TeamPasswordHandler.get_passwords(self.user, user_choice == 2)
+            passwords = TeamPasswordHandler.get_passwords(
+                self.user, user_choice == 2)
             show_passwords(passwords)
 
         elif user_choice == 3:
@@ -144,11 +151,12 @@ class TeamPasswordsMenu(UserRequired):
 
     def team_manager_handler(self, user_choice):
         if user_choice == 1 or user_choice == 2:
-            passwords = TeamPasswordHandler.get_passwords(self.user, user_choice == 2)
+            passwords = TeamPasswordHandler.get_passwords(
+                self.user, user_choice == 2)
             show_passwords(passwords)
 
         elif user_choice == 3:
-            raise NotImplementedError
+            return TeamsManagementMenu(self.user)
 
         elif user_choice == 4:
             return MainMenu(self.user)
@@ -164,15 +172,31 @@ class TeamPasswordsMenu(UserRequired):
 
         return self.team_manager_handler(user_choice)
 
+
 class TeamsManagementMenu(UserRequired):
     prompt = """
     Press:
     - '1' to add team
     - '2' to delete team
-    - '3' to update team
+    - '3' to manage team
     - '4' to go back
 
     Your choice:"""
+
+    def handler(self, user_choice):
+        if user_choice == 1:
+            TeamsHandler.add_team()
+        elif user_choice == 2:
+            TeamsHandler.delete_team()
+        elif user_choice == 3:
+            ...
+        elif user_choice == 4:
+            raise SystemExit
+        else:
+            raise ValueError("Invalid Choice.")
+
+        return self
+
 
 class TeamManagementMenu(UserRequired):
     prompt = """

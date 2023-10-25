@@ -1,5 +1,6 @@
 from enum import Enum
 
+
 class PasswordType(Enum):
     """
     Differentiate the password types:
@@ -8,6 +9,7 @@ class PasswordType(Enum):
     """
     PERSONAL_PASSWORD = 0
     TEAM_PASSWORD = 1
+
 
 class UserType(Enum):
     """

@@ -12,22 +12,23 @@ from utils.io_functions import (
 
 
 class TeamPasswordHandler:
+
     @staticmethod
     def get_passwords(user: User, key: bool = False):
         if key:
             search_key = search_key_input()
         try:
             with SQLCursor() as cursor:
-                query = (
-                    SQLQueries.TEAM_PASSWORDS_FILTER
-                    if key
-                    else SQLQueries.TEAM_PASSWORDS
-                )
+                query = (SQLQueries.TEAM_PASSWORDS_FILTER
+                         if key else SQLQueries.TEAM_PASSWORDS)
 
-                params = (*[f'%{search_key}%' for _ in range(3) if key], user.user_id)
+                params = (*[f'%{search_key}%'
+                            for _ in range(3) if key], user.user_id)
 
                 passwords = cursor.execute(query, params).fetchall()
-                passwords = [Password.from_database(password) for password in passwords]
+                passwords = [
+                    Password.from_database(password) for password in passwords
+                ]
 
         except:
             raise
@@ -41,7 +42,8 @@ class TeamPasswordHandler:
             with SQLCursor() as cursor:
                 cursor.execute(
                     SQLQueries.ADD_NEW_PASSWORD,
-                    (user.user_id, site_url, site_username, 0, password, notes),
+                    (user.user_id, site_url, site_username, 0, password,
+                     notes),
                 )
 
         except:
@@ -55,8 +57,9 @@ class TeamPasswordHandler:
         password_id = password_id_input()
         try:
             with SQLCursor() as cursor:
-                cursor.execute(SQLQueries.DELETE_PASSWORD, (password_id,))
-                cursor.execute(SQLQueries.DELETE_TEAM_PASSWORD, (password_id,))
+                cursor.execute(SQLQueries.DELETE_PASSWORD, (password_id, ))
+                cursor.execute(SQLQueries.DELETE_TEAM_PASSWORD,
+                               (password_id, ))
 
         except:
             raise

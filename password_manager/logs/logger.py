@@ -4,7 +4,7 @@ import logging
 
 logging.basicConfig(
     level=logging.DEBUG,
-    filename="server.log",
+    filename="logs/server.log",
     filemode="a+",
     format="%(asctime)s %(levelname)-10s [%(filename)s:%(lineno)d] %(message)s",
     datefmt="%d-%m-%Y %H:%M:%S",
@@ -12,6 +12,7 @@ logging.basicConfig(
 
 
 class Logger:
+
     @staticmethod
     def log(lvl: int, msg: str, specific_name="server"):
         spc_logger = logging.getLogger(specific_name)

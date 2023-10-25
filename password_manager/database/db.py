@@ -8,6 +8,7 @@ DB_FILE = DB_PATH + "db.sql"
 
 
 class SQLCursor:
+
     def __enter__(self):
         global DB_FILE, DB_PATH
         self.connection = sqlite3.connect(DB_FILE)
@@ -22,6 +23,7 @@ class SQLCursor:
 
 
 class SQLDatabase:
+
     @staticmethod
     def initialize() -> None:
         global DB_FILE, DB_PATH

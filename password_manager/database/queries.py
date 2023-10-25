@@ -110,3 +110,37 @@ class SQLQueries:
     SET (site_url, site_username, encrypted_password, notes) = (?, ?, ?, ?)
     WHERE id = ?;
     """
+
+    ALL_TEAMS = """
+    SELECT * FROM teams
+    WHERE creator_id = ?;
+    """
+
+    ADD_TEAM = """
+    INSERT INTO teams
+    VALUES(NULL, ?, ?);
+    """
+
+    DELETE_ALL_TEAM_PASSWORDS = """
+    DELETE FROM passwords
+    WHERE passwords.id IN(
+        SELECT * FROM passwords
+        INNER JOIN team_passwords ON team_passwords.password_id = passwords.id AND team_passwords.team_id = ?
+        WHERE password_type = 1
+    ) AND passwords.creator_id = ?;
+    """
+
+    DELETE_ALL_TEAM_MEMBERS = """
+    DELETE FROM team_members
+    WHERE team_id = ?;
+    """
+
+    DELETE_ALL_TEAM_PASSWORDS_RECORDS = """
+    DELETE FROM team_passwords
+    WHERE id team_id = ?;
+    """
+
+    DELETE_TEAM = """
+    DELETE FROM teams
+    WHERE id = ?;
+    """

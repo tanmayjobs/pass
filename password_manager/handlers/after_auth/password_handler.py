@@ -12,21 +12,22 @@ from utils.io_functions import (
 
 
 class PasswordHandler:
+
     @staticmethod
     def get_passwords(user: User, key: bool = False):
-        if key:
-            search_key = search_key_input()
         try:
+            if key:
+                search_key = search_key_input()
             with SQLCursor() as cursor:
-                query = (
-                    SQLQueries.PERSONAL_PASSWORDS_FILTER
-                    if key
-                    else SQLQueries.PERSONAL_PASSWORDS
-                )
-                params = (user.user_id, *[f'%{search_key}%' for _ in range(3) if key])
+                query = (SQLQueries.PERSONAL_PASSWORDS_FILTER
+                         if key else SQLQueries.PERSONAL_PASSWORDS)
+                params = (user.user_id,
+                          *[f'%{search_key}%' for _ in range(3) if key])
 
                 passwords = cursor.execute(query, params).fetchall()
-                passwords = [Password.from_database(password) for password in passwords]
+                passwords = [
+                    Password.from_database(password) for password in passwords
+                ]
 
         except:
             raise
@@ -35,12 +36,13 @@ class PasswordHandler:
 
     @staticmethod
     def add_new_password(user: User):
-        site_url, site_username, password, notes = create_password_input()
         try:
+            site_url, site_username, password, notes = create_password_input()
             with SQLCursor() as cursor:
                 cursor.execute(
                     SQLQueries.ADD_NEW_PASSWORD,
-                    (user.user_id, site_url, site_username, 0, password, notes),
+                    (user.user_id, site_url, site_username, 0, password,
+                     notes),
                 )
 
         except:
@@ -56,8 +58,9 @@ class PasswordHandler:
             password_id = passwords[selected_password].password_id
 
             with SQLCursor() as cursor:
-                cursor.execute(SQLQueries.DELETE_PASSWORD, (password_id,))
-                cursor.execute(SQLQueries.DELETE_TEAM_PASSWORD, (password_id,))
+                cursor.execute(SQLQueries.DELETE_PASSWORD, (password_id, ))
+                cursor.execute(SQLQueries.DELETE_TEAM_PASSWORD,
+                               (password_id, ))
 
         except (TypeError, IndexError):
             raise ValueError

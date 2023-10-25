@@ -9,7 +9,7 @@ class Password:
     def __init__(
         self,
         password_id: int,
-        creator: str,
+        creator_id: str,
         password_type: PasswordType,
         site_url: str,
         username: str,
@@ -17,7 +17,7 @@ class Password:
         notes: str,
     ) -> None:
         self.password_id = password_id
-        self.creator = creator
+        self.creator_id = creator_id
         self.password_type = password_type
         self.site_url = site_url
         self.username = username

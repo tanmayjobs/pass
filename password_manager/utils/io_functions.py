@@ -30,16 +30,32 @@ def password_id_input():
 def show_passwords(passwords):
     print()
     print()
-    print(f"{'Id':6}\t{'URL':20}\t{'username':20}\t{'Password':8}\t{'Notes':20}")
-    
+    print(
+        f"{'Id':6}\t{'URL':20}\t{'username':20}\t{'Password':8}\t{'Notes':20}")
+
     for index, password in enumerate(passwords, start=1):
         print(f"{index:6}\t{password}")
-    
+
+    print()
+
+def show_teams(teams):
+    print()
+    print()
+    print(
+        f"{'Id':6}\t{'Team Name':20}")
+
+    for index, team in enumerate(teams, start=1):
+        print(f"{index:6}\t{team}")
+
     print()
 
 
 def show_message(message: str):
-    print(
-        f"""
-    {message}"""
-    )
+    print(f"""
+    {message}""")
+
+def create_team_input():
+    return input("    Enter Team Name:")
+
+def team_id_input():
+    return input("    Enter team id:")
