@@ -1,5 +1,7 @@
 from sqlite3 import IntegrityError
 
+from logs.logger import Logger, CRITICAL, INFO
+
 from utils.helpers.exceptions import InvalidCredentials
 from utils.io_functions import show_message
 
@@ -23,11 +25,12 @@ def handle_exception(menu_func):
             show_message("Will soon be implemented, have some patience!")
 
         except SystemExit:
+            Logger.log(INFO, "Closing System.")
             show_message("Bye.")
             sys.exit(0)
 
         except Exception as error:
-            # logging unexpected error
+            Logger.log(CRITICAL, f"Closing System due to unexpected error.<{error}>")
             show_message("Unexpected Error Occurred! Turning System Down...")
             sys.exit(0)
 

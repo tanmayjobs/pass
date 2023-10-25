@@ -4,7 +4,7 @@ from utils.io_functions import show_message
 
 from models.user import User
 
-
+import os
 
 class StateManager:
     current_user: User | None = None
@@ -40,3 +40,6 @@ class StateManager:
 
             while StateManager.current_user:
                 StateManager.after_auth()
+
+            show_message("You're logged out of the system.")
+        os

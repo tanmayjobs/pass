@@ -1,6 +1,8 @@
 from database.db import SQLCursor
 from database.queries import SQLQueries
 
+from logs.logger import Logger, WARN, INFO
+
 from models.user import User
 
 from utils.io_functions import credential_input
@@ -16,7 +18,7 @@ class AuthenticationHandler:
     """
 
     @staticmethod
-    def sign_in(username = None, password = None):
+    def sign_in(username=None, password=None):
         if not username or not password:
             username, password = credential_input()
 
@@ -33,7 +35,7 @@ class AuthenticationHandler:
                     raise InvalidCredentials("Invalid password!")
 
         except InvalidCredentials:
-            # logging for invalid attempt
+            Logger.log(WARN, f"Invalid Credentials by {username}.")
             raise
         else:
             return User.from_database(user_data)
@@ -48,11 +50,11 @@ class AuthenticationHandler:
             with SQLCursor() as cursor:
                 cursor.execute(SQLQueries.SIGN_UP, (username, password_hash, user_role))
         except IntegrityError:
-            # logging for unique username
+            Logger.log(WARN, f"Duplicate account creation attempt {username}.")
             raise
         else:
             return AuthenticationHandler.sign_in(username, password)
 
     @staticmethod
     def sign_out():
-        ...
+        Logger.log(INFO, f"User signed out.")
