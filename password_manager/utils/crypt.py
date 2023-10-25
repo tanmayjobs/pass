@@ -1,4 +1,3 @@
-from cryptography.fernet import Fernet
 import bcrypt
 
 
@@ -16,4 +15,10 @@ class Crypt:
     def check(password: str, hashed_password: str):
         return bcrypt.checkpw(password, hashed_password)
 
-    
+    @staticmethod
+    def encrypt(password: str):
+        raise NotImplementedError
+
+    @staticmethod
+    def decrypt(password: str):
+        raise NotImplementedError

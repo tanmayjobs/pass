@@ -1,8 +1,8 @@
 from database.db import SQLCursor
 from database.queries import SQLQueries
 
-from models.user import User, UserType
-from models.password import Password, PasswordType
+from models.user import User
+from models.password import Password
 
 from utils.io_functions import (
     create_password_input,
@@ -50,12 +50,17 @@ class PasswordHandler:
             return
 
     @staticmethod
-    def delete_password(user: User):
-        password_id = password_id_input()
+    def delete_password(passwords: list[Password], user: User):
         try:
+            selected_password = int(password_id_input()) - 1
+            password_id = passwords[selected_password].password_id
+
             with SQLCursor() as cursor:
                 cursor.execute(SQLQueries.DELETE_PASSWORD, (password_id,))
                 cursor.execute(SQLQueries.DELETE_TEAM_PASSWORD, (password_id,))
+
+        except (TypeError, IndexError):
+            raise ValueError
 
         except:
             raise
@@ -64,16 +69,20 @@ class PasswordHandler:
             return
 
     @staticmethod
-    def update_password(user: User):
-        password_id = password_id_input()
-        site_url, site_username, password, notes = create_password_input()
+    def update_password(passwords, user: User):
 
         try:
+            selected_password = int(password_id_input()) - 1
+            password_id = passwords[selected_password].password_id
+            site_url, site_username, password, notes = create_password_input()
             with SQLCursor() as cursor:
                 cursor.execute(
                     SQLQueries.UPDATE_PASSWORD,
                     (site_url, site_username, password, notes, password_id),
                 )
+
+        except (TypeError, IndexError):
+            raise ValueError
 
         except:
             raise

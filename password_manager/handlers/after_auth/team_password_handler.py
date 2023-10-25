@@ -1,8 +1,8 @@
 from database.db import SQLCursor
 from database.queries import SQLQueries
 
-from models.user import User, UserType
-from models.password import Password, PasswordType
+from models.user import User
+from models.password import Password
 
 from utils.io_functions import (
     create_password_input,

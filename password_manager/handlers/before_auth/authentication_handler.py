@@ -6,7 +6,6 @@ from models.user import User
 from utils.io_functions import credential_input
 from utils.crypt import Crypt
 from utils.helpers.exceptions import InvalidCredentials
-# from utils.state_manager import StateManager
 
 from sqlite3 import IntegrityError
 

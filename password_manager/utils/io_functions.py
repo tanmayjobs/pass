@@ -31,8 +31,10 @@ def show_passwords(passwords):
     print()
     print()
     print(f"{'Id':6}\t{'URL':20}\t{'username':20}\t{'Password':8}\t{'Notes':20}")
-    for password in passwords:
-        print(password)
+    
+    for index, password in enumerate(passwords, start=1):
+        print(f"{index:6}\t{password}")
+    
     print()
 
 

@@ -1,43 +1,9 @@
-from sqlite3 import IntegrityError
-
+from utils.exception_handler import handle_exception
 from utils.helpers.menu_prompts import AuthenticationMenu, MainMenu
-from utils.helpers.exceptions import InvalidCredentials
 from utils.io_functions import show_message
 
 from models.user import User
-import sys
 
-
-def handle_exception(menu_func):
-    def wrapper():
-        try:
-            menu_func()
-
-        except ValueError:
-            show_message("Invalid Choice.")
-
-        except InvalidCredentials:
-            show_message("Invalid username or password.")
-
-        except IntegrityError:
-            show_message("Username already exists.")
-
-        except NotImplementedError:
-            show_message("Will soon be implemented, have some patience!")
-
-        except SystemExit:
-            show_message("Bye.")
-            sys.exit(0)
-
-        except:
-            show_message("Unexpected Error Occurred!")
-            show_message("Closing the system!")
-            show_message("For more contact the administrator!")
-
-        else:
-            return
-
-    return wrapper
 
 
 class StateManager:

@@ -1,4 +1,4 @@
-from models.user import User, UserType
+from models.user import UserType
 
 from handlers.before_auth.authentication_handler import AuthenticationHandler
 from handlers.after_auth.password_handler import PasswordHandler
@@ -81,9 +81,9 @@ class PersonalPasswordsMenu(UserHandlingMenu):
             else:
                 show_passwords(passwords)
                 if user_choice == 4:
-                    PasswordHandler.delete_password(self.user)
+                    PasswordHandler.delete_password(passwords, self.user)
                 elif user_choice == 5:
-                    PasswordHandler.update_password(self.user)
+                    PasswordHandler.update_password(passwords, self.user)
 
         elif user_choice == 3:
             PasswordHandler.add_new_password(self.user)

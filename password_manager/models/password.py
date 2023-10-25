@@ -29,4 +29,4 @@ class Password:
         return Password(*password_data)
 
     def __repr__(self) -> str:
-        return f"{self.password_id:6}\t{self.site_url:20}\t{self.username:20}\t{'*' * 6:8}\t{self.notes:20}"
+        return f"{self.site_url:20}\t{self.username:20}\t{'*' * 6:8}\t{self.notes:20}"
