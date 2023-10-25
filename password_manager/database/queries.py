@@ -92,7 +92,7 @@ class SQLQueries:
 
     ADD_NEW_PASSWORD = """
     INSERT INTO passwords(creator_id, site_url, site_username, password_type, encrypted_password, notes)
-    VALUES(?, ?, ?, ?, ?, ?)
+    VALUES(?, ?, ?, ?, ?, ?);
     """
 
     DELETE_PASSWORD = """
@@ -103,4 +103,10 @@ class SQLQueries:
     DELETE_TEAM_PASSWORD = """
     DELETE FROM team_passwords
     WHERE password_id = ?;
+    """
+
+    UPDATE_PASSWORD = """
+    UPDATE passwords
+    SET (site_url, site_username, encrypted_password, notes) = (?, ?, ?, ?)
+    WHERE id = ?;
     """

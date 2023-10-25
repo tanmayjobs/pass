@@ -73,7 +73,7 @@ class PersonalPasswordsMenu(UserHandlingMenu):
     Your choice:"""
 
     def handler(self, user_choice):
-        if user_choice == 1 or user_choice == 2 or user_choice == 4:
+        if user_choice == 1 or user_choice == 2 or user_choice == 4 or user_choice == 5:
             passwords = PasswordHandler.get_passwords(self.user, user_choice == 2)
 
             if not passwords:
@@ -82,6 +82,8 @@ class PersonalPasswordsMenu(UserHandlingMenu):
                 show_passwords(passwords)
                 if user_choice == 4:
                     PasswordHandler.delete_password(self.user)
+                elif user_choice == 5:
+                    PasswordHandler.update_password(self.user)
 
         elif user_choice == 3:
             PasswordHandler.add_new_password(self.user)
@@ -140,6 +142,9 @@ class TeamPasswordsMenu(UserHandlingMenu):
         if user_choice == 1 or user_choice == 2:
             passwords = TeamPasswordHandler.get_passwords(self.user, user_choice == 2)
             show_passwords(passwords)
+
+        elif user_choice == 3:
+            raise NotImplementedError
 
         elif user_choice == 4:
             return MainMenu(self.user)

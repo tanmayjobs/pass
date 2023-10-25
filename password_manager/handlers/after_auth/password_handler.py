@@ -62,3 +62,21 @@ class PasswordHandler:
 
         else:
             return
+
+    @staticmethod
+    def update_password(user: User):
+        password_id = password_id_input()
+        site_url, site_username, password, notes = create_password_input()
+
+        try:
+            with SQLCursor() as cursor:
+                cursor.execute(
+                    SQLQueries.UPDATE_PASSWORD,
+                    (site_url, site_username, password, notes, password_id),
+                )
+
+        except:
+            raise
+
+        else:
+            return
