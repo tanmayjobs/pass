@@ -12,7 +12,7 @@ from utils.helpers.exceptions import InvalidCredentials
 from sqlite3 import IntegrityError
 
 
-class AuthenticationHandler:
+class Authorizer:
     """
     Authentication Handler which provides sign up, sign in and sign out.
     """
@@ -55,7 +55,7 @@ class AuthenticationHandler:
             Logger.log(WARN, f"Duplicate account creation attempt {username}.")
             raise
         else:
-            return AuthenticationHandler.sign_in(username, password)
+            return
 
     @staticmethod
     def sign_out():

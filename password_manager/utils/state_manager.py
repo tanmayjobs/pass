@@ -1,9 +1,9 @@
 from utils.exception_handler import handle_exception
-from utils.helpers.menu_prompts import AuthenticationMenu, MainMenu
+from menus.authentication_menu import AuthenticationMenu
+from menus.main_menu import MainMenu
 from utils.io_functions import show_message
 
 from models.user import User
-
 
 class StateManager:
     current_user: User | None = None
@@ -15,6 +15,9 @@ class StateManager:
         user_choice = int(input(AuthenticationMenu.prompt))
         user = AuthenticationMenu.handler(user_choice)
 
+        if not user:
+            return
+
         StateManager.current_user = user
         StateManager.current_prompt = MainMenu(user)
 
@@ -22,8 +25,7 @@ class StateManager:
     @staticmethod
     def after_auth():
         user_choice = int(input(StateManager.current_prompt.prompt))
-        StateManager.current_prompt = StateManager.current_prompt.handler(
-            user_choice)
+        StateManager.current_prompt = StateManager.current_prompt.handler(user_choice)
 
         if StateManager.current_prompt == AuthenticationMenu:
             StateManager.current_user = None

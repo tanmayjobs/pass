@@ -36,7 +36,7 @@ def show_passwords(passwords, hide_password=True):
     print()
     print(f"    {'Id':6}\t{'URL':20}\t{'username':20}\t{'Password':20}\t{'Notes':20}")
     for index, password in enumerate(passwords, start=1):
-        print(password.description(index, hide_password))
+        print(f'    {password.description(index, hide_password)}')
 
     print()
 
@@ -44,10 +44,10 @@ def show_passwords(passwords, hide_password=True):
 def show_teams(teams):
     print()
     print()
-    print(f"{'Id':6}\t{'Team Name':20}")
+    print(f"    {'Id':6}\t{'Team Name':20}")
 
     for index, team in enumerate(teams, start=1):
-        print(f"{index:6}\t{team}")
+        print(f"    {index:6}\t{team}")
 
     print()
 

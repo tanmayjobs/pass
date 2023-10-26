@@ -11,14 +11,17 @@ from utils.io_functions import (
 )
 
 
-class PasswordHandler:
+class PasswordController:
     @staticmethod
     def show_true_passwords(passwords: list[Password]):
         try:
+            user_input = password_ids_input()
+            if user_input == 'A':
+                return passwords
+
             selected_passwords_id = list(
-                map(lambda x: int(x) - 1, password_ids_input().split(","))
+                map(lambda x: int(x) - 1, user_input.split(","))
             )
-            Logger.log(DEBUG, selected_passwords_id)
             selected_passwords = [
                 passwords[selected_id] for selected_id in selected_passwords_id
             ]

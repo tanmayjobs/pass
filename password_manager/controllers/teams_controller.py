@@ -7,7 +7,7 @@ from models.team import Team
 from utils.io_functions import create_team_input, team_id_input
 
 
-class TeamsHandler:
+class TeamsController:
     @staticmethod
     def get_teams(user: User):
         try:

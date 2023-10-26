@@ -6,7 +6,7 @@ logging.basicConfig(
     level=logging.DEBUG,
     filename="logs/server.log",
     filemode="a+",
-    format="%(asctime)s %(levelname)-10s [%(filename)s:%(lineno)d] %(message)s",
+    format="%(asctime)s %(levelname)-10s %(message)s",
     datefmt="%d-%m-%Y %H:%M:%S",
 )
 
