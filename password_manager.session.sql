@@ -16,3 +16,5 @@
 -- SELECT * FROM team_passwords
 
 -- DELETE FROM team_members
+
+-- SELECT * FROM team_members

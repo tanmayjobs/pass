@@ -19,3 +19,6 @@ class User:
             user_type=user_data[3],
             username=user_data[1],
         )
+
+    def __repr__(self) -> str:
+        return f"{self.username:20}"

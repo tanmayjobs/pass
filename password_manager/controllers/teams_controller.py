@@ -1,10 +1,20 @@
-from database.db import SQLCursor
-from database.queries import SQLQueries
+from logs.logger import Logger, ERROR, DEBUG
+
+from utils.helpers.exceptions import InvalidMemberName
 
 from models.user import User
 from models.team import Team
 
-from utils.io_functions import create_team_input, team_id_input
+from sqlite3 import IntegrityError
+
+from utils.io_functions import (
+    create_team_input,
+    team_id_input,
+    team_member_username_input,
+    member_id_input,
+    show_members,
+    show_message,
+)
 
 
 class TeamsController:
@@ -33,7 +43,10 @@ class TeamsController:
         try:
             selected_team = int(team_id_input()) - 1
             team = teams[selected_team]
-            Team.remove(user, team)
+            Team.delete(user, team)
+        except (TypeError, IndexError) as error:
+            Logger.log(ERROR, error)
+            raise ValueError
         except:
             raise
         else:
@@ -44,7 +57,44 @@ class TeamsController:
         try:
             selected_team = int(team_id_input()) - 1
             team = teams[selected_team]
+        except (TypeError, IndexError) as error:
+            Logger.log(ERROR, error)
+            raise ValueError
         except:
             raise
         else:
             return team
+
+    @staticmethod
+    def add_member(user: User, team: Team):
+        member_username = team_member_username_input()
+        if member_username == user.username:
+            raise InvalidMemberName
+        try:
+            team.add_member(team, member_username)
+        except IntegrityError:
+            raise InvalidMemberName
+        except:
+            raise
+        else:
+            return
+
+    @staticmethod
+    def delete_member(team: Team):
+        try:
+            all_members = team.members()
+
+            if not all_members:
+                show_message("There are no members in your team, except you.")
+            else:
+                show_members(all_members)
+
+                member_id = int(member_id_input()) - 1
+                team.delete_member(member_id)
+        except (TypeError, IndexError) as error:
+            Logger.log(ERROR, error)
+            raise ValueError
+        except:
+            raise
+        else:
+            return

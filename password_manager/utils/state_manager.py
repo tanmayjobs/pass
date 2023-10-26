@@ -1,6 +1,6 @@
 from utils.exception_handler import handle_exception
 from menus.authentication_menu import AuthenticationMenu
-from menus.main_menu import MainMenu
+from menus.home_menu import HomeMenu
 from utils.io_functions import show_message
 
 from models.user import User
@@ -8,7 +8,7 @@ from models.user import User
 
 class StateManager:
     current_user: User | None = None
-    current_prompt = MainMenu
+    current_prompt = HomeMenu
 
     @handle_exception
     @staticmethod
@@ -20,7 +20,7 @@ class StateManager:
             return
 
         StateManager.current_user = user
-        StateManager.current_prompt = MainMenu(user)
+        StateManager.current_prompt = HomeMenu(user)
 
     @handle_exception
     @staticmethod

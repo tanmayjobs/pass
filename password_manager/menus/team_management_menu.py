@@ -1,4 +1,9 @@
-from utils.io_functions import team_add_member_input
+from controllers.password_controller import PasswordController
+from controllers.teams_controller import TeamsController
+
+from models.password import PasswordType
+
+from utils.io_functions import show_message, show_passwords
 
 import menus.user_required_menu as user_required_menu
 import menus.team_required_menu as team_required_menu
@@ -25,17 +30,35 @@ class TeamManagementMenu(user_required_menu.UserRequiredMenu,
 
     def handler(self, user_choice):
         if user_choice == 1:
-            member_username = team_add_member_input()
-            raise NotImplementedError
+            TeamsController.add_member(self.user, self.team)
+            show_message("Member added successfully.")
         elif user_choice == 2:
-            raise NotImplementedError
+            if not self.team.members():
+                show_message("No Member to delete.")
+            else:
+                TeamsController.delete_member(self.team)
+                show_message("Member deleted successfully.")
         elif user_choice == 3:
-            raise NotImplementedError
-        elif user_choice == 4:
-            raise NotImplementedError
-        elif user_choice == 5:
-            raise NotImplementedError
+            PasswordController.add_password(self.user, self.team)
+            show_message("Password added successfully.")
+        elif user_choice == 4 or user_choice == 5:
+            passwords = PasswordController.get_passwords(
+                self.user,
+                password_type=PasswordType.TEAM_PASSWORD,
+            )
+
+            if not passwords:
+                show_message(f"You haven't saved any password yet.")
+            else:
+                show_passwords(passwords)
+                if user_choice == 4:
+                    PasswordController.delete_password(self.user, passwords)
+                    show_message("Password deleted successfully.")
+                else:
+                    PasswordController.update_password(self.user, passwords)
+                    show_message("Password updated successfully.")
         elif user_choice == 6:
             return teams_management_menu.TeamsManagementMenu(self.user)
         else:
             raise ValueError
+        return self

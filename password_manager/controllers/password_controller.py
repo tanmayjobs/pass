@@ -1,6 +1,7 @@
 from logs.logger import Logger, ERROR, DEBUG
 
 from models.user import User
+from models.team import Team
 from models.password import Password, PasswordType
 
 from utils.io_functions import (
@@ -54,11 +55,11 @@ class PasswordController:
             return passwords
 
     @staticmethod
-    def add_password(user: User):
+    def add_password(user: User, team: Team = None):
         try:
             site_url, site_username, password, notes = create_password_input()
             Password.add_password(user, site_url, site_username, password,
-                                  notes)
+                                  notes, team)
 
         except Exception as error:
             Logger.log(ERROR, error)
@@ -90,12 +91,12 @@ class PasswordController:
     def update_password(user: User, passwords: list[Password]):
         try:
             selected_password = int(password_id_input()) - 1
-            encrypted_password = passwords[selected_password]
+            password = passwords[selected_password]
             site_url, site_username, encrypted_password, notes = create_password_input(
             )
 
-            Password.update_password(encrypted_password, site_url,
-                                     site_username, encrypted_password, notes)
+            Password.update_password(password, site_url, site_username,
+                                     encrypted_password, notes)
 
         except (TypeError, IndexError) as error:
             Logger.log(ERROR, error)

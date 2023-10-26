@@ -1,11 +1,15 @@
 import pwinput
 from utils.crypt import Crypt
-from utils.helpers.exceptions import NullPassword
+from utils.helpers.exceptions import NullPassword, NullUsername
 
 
 def credential_input():
-    username = input("    Enter username:")
-    password = pwinput.pwinput("    Enter password:")
+    username = input("    Enter username:").strip()
+
+    if not username:
+        raise NullUsername
+
+    password = pwinput.pwinput("    Enter password:").strip()
 
     if not password:
         raise NullPassword
@@ -65,6 +69,17 @@ def show_teams(teams):
     print()
 
 
+def show_members(members):
+    print()
+    print()
+    print(f"    {'Id':6}\t{'Member Name':20}")
+
+    for index, member in enumerate(members, start=1):
+        print(f"    {str(index):6}\t{member}")
+
+    print()
+
+
 def show_message(message: str):
     print(f"""
     {message}""")
@@ -78,5 +93,9 @@ def team_id_input():
     return input("    Enter team id:")
 
 
-def team_add_member_input():
+def team_member_username_input():
     return input("    Enter username of the member:")
+
+
+def member_id_input():
+    return input("    Enter member id:")

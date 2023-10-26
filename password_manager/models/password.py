@@ -63,13 +63,22 @@ class Password:
         return passwords
 
     @staticmethod
-    def add_password(user: User, site_url: str, site_username: str,
-                     password: str, notes: str):
+    def add_password(user: User,
+                     site_url: str,
+                     site_username: str,
+                     password: str,
+                     notes: str,
+                     team=None):
         with SQLCursor() as cursor:
             cursor.execute(
                 SQLQueries.ADD_PASSWORD,
-                (user.user_id, site_url, site_username, 0, password, notes),
+                (user.user_id, site_url, site_username, 0 if not team else 1,
+                 password, notes),
             )
+
+            if team:
+                cursor.execute(SQLQueries.ADD_TEAM_PASSWORD_MAPPING,
+                               (cursor.lastrowid, team.team_id))
 
     @staticmethod
     def delete_password(password):

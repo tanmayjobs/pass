@@ -95,6 +95,11 @@ class SQLQueries:
     VALUES(?, ?, ?, ?, ?, ?);
     """
 
+    ADD_TEAM_PASSWORD_MAPPING = """
+    INSERT INTO team_passwords
+    VALUES(NULL, ?, ?);
+    """
+
     DELETE_PASSWORD = """
     DELETE FROM passwords
     WHERE id = ?;
@@ -121,6 +126,11 @@ class SQLQueries:
     VALUES(NULL, ?, ?);
     """
 
+    ADD_TEAM_LEADER = """
+    INSERT INTO team_members
+    VALUES(NULL, ?, ?);
+    """
+
     DELETE_ALL_TEAM_PASSWORDS = """
     DELETE FROM passwords
     WHERE passwords.id IN(
@@ -143,4 +153,27 @@ class SQLQueries:
     DELETE_TEAM = """
     DELETE FROM teams
     WHERE id = ?;
+    """
+
+    GET_MEMBERS = """
+    SELECT authentication.id, username, NULL, user_role, is_deleted, created_at FROM team_members
+    INNER JOIN authentication ON authentication.id = team_members.member_id
+    WHERE team_id = ?;
+    """
+
+    ADD_MEMBER = """
+    INSERT INTO team_members
+    VALUES
+    (
+        NULL,?,
+        (
+            SELECT authentication.id from authentication
+            WHERE username = ?
+        )
+    );
+    """
+
+    DELETE_MEMBER = """
+    DELETE FROM team_members
+    WHERE team_id = ? AND member_id = ?;
     """

@@ -1,5 +1,6 @@
 from database.db import SQLCursor, SQLQueries
-from logs.logger import Logger, DEBUG, logging
+
+from utils.helpers.exceptions import InvalidMemberName
 
 from models.user import User
 
@@ -22,6 +23,7 @@ class Team:
     def __repr__(self) -> str:
         return f"{self.team_name:20}"
 
+    @staticmethod
     def get_teams(user: User):
         with SQLCursor() as cursor:
             teams = cursor.execute(SQLQueries.ALL_TEAMS,
@@ -30,11 +32,15 @@ class Team:
 
         return teams
 
+    @staticmethod
     def add(user: User, team_name: str):
         with SQLCursor() as cursor:
             cursor.execute(SQLQueries.ADD_TEAM, (user.user_id, team_name))
+            cursor.execute(SQLQueries.ADD_TEAM_LEADER,
+                           (cursor.lastrowid, user.user_id))
 
-    def remove(user: User, team):
+    @staticmethod
+    def delete(user: User, team):
         with SQLCursor() as cursor:
             cursor.execute(SQLQueries.DELETE_ALL_TEAM_PASSWORDS,
                            (team.team_id, user.user_id))
@@ -44,5 +50,20 @@ class Team:
                            (team.team_id, ))
             cursor.execute(SQLQueries.DELETE_TEAM, (team.team_id, ))
 
-    def add_member(user: User, team, member_name: str):
-        ...
+    @staticmethod
+    def add_member(team, member_username: str):
+        with SQLCursor() as cursor:
+            cursor.execute(SQLQueries.ADD_MEMBER,
+                           (team.team_id, member_username))
+            if not cursor.rowcount:
+                raise InvalidMemberName
+
+    def delete_member(self, member_id: str):
+        with SQLCursor() as cursor:
+            cursor.execute(SQLQueries.DELETE_MEMBER, (self.team_id, member_id))
+
+    def members(self):
+        with SQLCursor() as cursor:
+            all_members = cursor.execute(SQLQueries.GET_MEMBERS,
+                                         (self.team_id, )).fetchall()
+            return [User.from_database(member) for member in all_members]

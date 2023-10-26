@@ -10,7 +10,7 @@ class HomeMenu(user_required_menu.UserRequiredMenu):
     prompt = """
     Press:
     - '1' to personal passwords
-    - '2' to team passowrds
+    - '2' to team passwords
     - '3' to sign out
 
     Your choice:"""
