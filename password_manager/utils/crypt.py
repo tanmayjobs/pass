@@ -6,6 +6,7 @@ import bcrypt
 
 dotenv.load_dotenv()
 
+
 class Crypt:
 
     @staticmethod

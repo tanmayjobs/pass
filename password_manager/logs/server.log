@@ -131,3 +131,19 @@
 26-10-2023 16:44:35 INFO       Initializing System...
 26-10-2023 16:45:14 INFO       User signed out.
 26-10-2023 16:45:16 INFO       Closing System.
+26-10-2023 16:59:01 INFO       Initializing System...
+26-10-2023 16:59:10 WARNING    Duplicate account creation attempt Tanmay.
+26-10-2023 16:59:19 INFO       Closing System.
+26-10-2023 16:59:22 INFO       Initializing System...
+26-10-2023 16:59:49 INFO       Initializing System...
+26-10-2023 17:00:03 ERROR      
+26-10-2023 17:00:14 INFO       User signed out.
+26-10-2023 17:00:15 INFO       Closing System.
+26-10-2023 17:00:18 INFO       Initializing System...
+26-10-2023 17:00:23 WARNING    Invalid Credentials by Someone.
+26-10-2023 17:00:34 WARNING    Invalid Credentials by Someone.
+26-10-2023 17:00:36 INFO       Closing System.
+26-10-2023 17:09:47 INFO       Initializing System...
+26-10-2023 17:09:51 WARNING    Invalid Credentials by Tanmay.
+26-10-2023 17:10:44 INFO       User signed out.
+26-10-2023 17:10:46 INFO       Closing System.

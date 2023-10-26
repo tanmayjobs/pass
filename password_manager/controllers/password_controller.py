@@ -12,6 +12,7 @@ from utils.io_functions import (
 
 
 class PasswordController:
+
     @staticmethod
     def show_true_passwords(passwords: list[Password]):
         try:
@@ -20,8 +21,7 @@ class PasswordController:
                 return passwords
 
             selected_passwords_id = list(
-                map(lambda x: int(x) - 1, user_input.split(","))
-            )
+                map(lambda x: int(x) - 1, user_input.split(",")))
             selected_passwords = [
                 passwords[selected_id] for selected_id in selected_passwords_id
             ]
@@ -57,7 +57,8 @@ class PasswordController:
     def add_password(user: User):
         try:
             site_url, site_username, password, notes = create_password_input()
-            Password.add_password(user, site_url, site_username, password, notes)
+            Password.add_password(user, site_url, site_username, password,
+                                  notes)
 
         except Exception as error:
             Logger.log(ERROR, error)
@@ -90,11 +91,11 @@ class PasswordController:
         try:
             selected_password = int(password_id_input()) - 1
             encrypted_password = passwords[selected_password]
-            site_url, site_username, encrypted_password, notes = create_password_input()
-
-            Password.update_password(
-                encrypted_password, site_url, site_username, encrypted_password, notes
+            site_url, site_username, encrypted_password, notes = create_password_input(
             )
+
+            Password.update_password(encrypted_password, site_url,
+                                     site_username, encrypted_password, notes)
 
         except (TypeError, IndexError) as error:
             Logger.log(ERROR, error)

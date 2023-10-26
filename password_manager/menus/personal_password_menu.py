@@ -3,13 +3,14 @@ from controllers.password_controller import PasswordController
 from utils.io_functions import show_passwords, show_message
 
 import menus.user_required_menu as user_required_menu
-import menus.main_menu as main_menu
+import menus.home_menu as home_menu
+
 
 class PersonalPasswordsMenu(user_required_menu.UserRequiredMenu):
     prompt = """
     Press:
     - '1' to list passwords
-    - '2' to search password
+    - '2' to search password`
     - '3' to add new password
     - '4' to delete password
     - '5' to update password
@@ -19,14 +20,16 @@ class PersonalPasswordsMenu(user_required_menu.UserRequiredMenu):
 
     def handler(self, user_choice):
         if user_choice == 1 or user_choice == 2 or user_choice == 4 or user_choice == 5:
-            passwords = PasswordController.get_passwords(self.user, user_choice == 2)
+            passwords = PasswordController.get_passwords(
+                self.user, user_choice == 2)
 
             if not passwords:
                 show_message(f"You haven't saved any password yet.")
             else:
                 show_passwords(passwords)
                 if user_choice < 3:
-                    passwords = PasswordController.show_true_passwords(passwords)
+                    passwords = PasswordController.show_true_passwords(
+                        passwords)
                     show_passwords(passwords, False)
                 if user_choice == 4:
                     PasswordController.delete_password(self.user, passwords)
@@ -40,10 +43,9 @@ class PersonalPasswordsMenu(user_required_menu.UserRequiredMenu):
             show_message("Password added successfuly.")
 
         elif user_choice == 6:
-            return main_menu.MainMenu(self.user)
+            return home_menu.HomeMenu(self.user)
 
         else:
             raise ValueError("Invalid Choice.")
 
         return self
-

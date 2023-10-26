@@ -1,10 +1,14 @@
 import pwinput
 from utils.crypt import Crypt
+from utils.helpers.exceptions import NullPassword
 
 
 def credential_input():
     username = input("    Enter username:")
     password = pwinput.pwinput("    Enter password:")
+
+    if not password:
+        raise NullPassword
 
     return username, password.encode()
 
@@ -15,6 +19,10 @@ def create_password_input():
     site_url = input("    Enter site url(optional):")
     username = input("    Enter username(optional):")
     password = pwinput.pwinput("    Enter password:")
+
+    if not password:
+        raise NullPassword
+
     notes = input("    Enter any keynote(optional):")
 
     return site_url, username, Crypt.encrypt(password), notes
@@ -29,13 +37,17 @@ def password_id_input():
 
 
 def password_ids_input():
-    return input("    Enter password ids to see password(comma seprated values or A for all):")
+    return input(
+        "    Enter password ids to see password(comma seprated values or A for all):"
+    )
 
 
 def show_passwords(passwords, hide_password=True):
     print()
     print()
-    print(f"    {'Id':6}\t{'URL':20}\t{'username':20}\t{'Password':20}\t{'Notes':20}")
+    print(
+        f"    {'Id':6}\t{'URL':20}\t{'username':20}\t{'Password':20}\t{'Notes':20}\t{'Strength':20}"
+    )
     for index, password in enumerate(passwords, start=1):
         print(f'    {password.description(index, hide_password)}')
 
@@ -54,10 +66,8 @@ def show_teams(teams):
 
 
 def show_message(message: str):
-    print(
-        f"""
-    {message}"""
-    )
+    print(f"""
+    {message}""")
 
 
 def create_team_input():
@@ -66,3 +76,7 @@ def create_team_input():
 
 def team_id_input():
     return input("    Enter team id:")
+
+
+def team_add_member_input():
+    return input("    Enter username of the member:")

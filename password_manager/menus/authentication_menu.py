@@ -2,6 +2,7 @@ from controllers.authorizer import Authorizer
 
 from utils.io_functions import show_message
 
+
 class AuthenticationMenu:
     prompt = """
     Press:
@@ -28,7 +29,6 @@ class AuthenticationMenu:
 
         else:
             raise ValueError("Invalid Choice.")
-
 
 
 # class AuthenticationMenu:
@@ -58,4 +58,3 @@ class AuthenticationMenu:
 
 #         else:
 #             raise ValueError("Invalid Choice.")
-

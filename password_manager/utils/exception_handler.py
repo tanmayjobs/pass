@@ -2,7 +2,7 @@ from sqlite3 import IntegrityError
 
 from logs.logger import Logger, CRITICAL, INFO
 
-from utils.helpers.exceptions import InvalidCredentials
+from utils.helpers.exceptions import InvalidCredentials, NullPassword
 from utils.io_functions import show_message
 
 import sys
@@ -16,6 +16,9 @@ def handle_exception(menu_func):
 
         except ValueError:
             show_message("Invalid Choice.")
+
+        except NullPassword:
+            show_message("Password can't be empty.")
 
         except InvalidCredentials:
             show_message("Invalid username or password.")

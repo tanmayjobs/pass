@@ -3,6 +3,7 @@ from logs.logger import Logger, DEBUG, logging
 
 from models.user import User
 
+
 class Team:
     """
     Team model which contains all the team's details,
@@ -23,7 +24,8 @@ class Team:
 
     def get_teams(user: User):
         with SQLCursor() as cursor:
-            teams = cursor.execute(SQLQueries.ALL_TEAMS, (user.user_id,)).fetchall()
+            teams = cursor.execute(SQLQueries.ALL_TEAMS,
+                                   (user.user_id, )).fetchall()
             teams = [Team.from_database(team) for team in teams]
 
         return teams
@@ -34,7 +36,13 @@ class Team:
 
     def remove(user: User, team):
         with SQLCursor() as cursor:
-            cursor.execute(SQLQueries.DELETE_ALL_TEAM_PASSWORDS, (team.team_id, user.user_id))
-            cursor.execute(SQLQueries.DELETE_ALL_TEAM_MEMBERS, (team.team_id,))
-            cursor.execute(SQLQueries.DELETE_ALL_TEAM_PASSWORDS_RECORDS, (team.team_id,))
-            cursor.execute(SQLQueries.DELETE_TEAM, (team.team_id,))
+            cursor.execute(SQLQueries.DELETE_ALL_TEAM_PASSWORDS,
+                           (team.team_id, user.user_id))
+            cursor.execute(SQLQueries.DELETE_ALL_TEAM_MEMBERS,
+                           (team.team_id, ))
+            cursor.execute(SQLQueries.DELETE_ALL_TEAM_PASSWORDS_RECORDS,
+                           (team.team_id, ))
+            cursor.execute(SQLQueries.DELETE_TEAM, (team.team_id, ))
+
+    def add_member(user: User, team, member_name: str):
+        ...

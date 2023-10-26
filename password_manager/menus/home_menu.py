@@ -5,7 +5,8 @@ import menus.personal_password_menu as personal_password_menu
 import menus.team_password_menu as team_password_menu
 import menus.authentication_menu as authentication_menu
 
-class MainMenu(user_required_menu.UserRequiredMenu):
+
+class HomeMenu(user_required_menu.UserRequiredMenu):
     prompt = """
     Press:
     - '1' to personal passwords

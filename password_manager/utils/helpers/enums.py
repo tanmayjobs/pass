@@ -19,3 +19,14 @@ class UserType(Enum):
     """
     ADMIN_USER = 0
     BASIC_USER = 1
+
+
+class PasswordStrength(Enum):
+    """
+    Password strengths.
+    """
+    NONE = -1
+    WEAK = 0
+    FAIR = 1
+    GOOD = 2
+    EXCELLENT = 3

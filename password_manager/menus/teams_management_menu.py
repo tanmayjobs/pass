@@ -6,6 +6,7 @@ import menus.user_required_menu as user_required_menu
 import menus.team_password_menu as team_password_menu
 import menus.team_management_menu as team_management_menu
 
+
 class TeamsManagementMenu(user_required_menu.UserRequiredMenu):
     prompt = """
     Press:
@@ -34,4 +35,3 @@ class TeamsManagementMenu(user_required_menu.UserRequiredMenu):
             raise ValueError("Invalid Choice.")
 
         return self
-
