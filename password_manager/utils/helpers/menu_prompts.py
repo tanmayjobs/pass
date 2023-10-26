@@ -1,8 +1,9 @@
 from models.user import UserType
+from models.password import PasswordType
 
 from handlers.before_auth.authentication_handler import AuthenticationHandler
 from handlers.after_auth.password_handler import PasswordHandler
-from handlers.after_auth.team_password_handler import TeamPasswordHandler
+
 from handlers.after_auth.teams_handler import TeamsHandler
 
 from utils.io_functions import show_passwords, show_message
@@ -37,13 +38,11 @@ class AuthenticationMenu:
 
 
 class UserRequired:
-
     def __init__(self, user) -> None:
         self.user = user
 
 
 class TeamRequired:
-
     def __init__(self, team) -> None:
         self.team = team
 
@@ -82,24 +81,25 @@ class PersonalPasswordsMenu(UserRequired):
 
     def handler(self, user_choice):
         if user_choice == 1 or user_choice == 2 or user_choice == 4 or user_choice == 5:
-            passwords = PasswordHandler.get_passwords(self.user,
-                                                      user_choice == 2)
+            passwords = PasswordHandler.get_passwords(self.user, user_choice == 2)
 
             if not passwords:
-                show_message(
-                    f"Nothing to {'delete' if user_choice == 4 else 'show'}.")
+                show_message(f"You haven't saved any password yet.")
             else:
                 show_passwords(passwords)
+                if user_choice < 3:
+                    passwords = PasswordHandler.show_true_passwords(passwords)
+                    show_passwords(passwords, False)
                 if user_choice == 4:
-                    PasswordHandler.delete_password(passwords, self.user)
+                    PasswordHandler.delete_password(self.user, passwords)
+                    show_message("Password deleted successfuly.")
                 elif user_choice == 5:
-                    PasswordHandler.update_password(passwords, self.user)
+                    PasswordHandler.update_password(self.user, passwords)
+                    show_message("Password updated successfuly.")
 
         elif user_choice == 3:
-            PasswordHandler.add_new_password(self.user)
-
-        elif user_choice == 5:
-            raise NotImplementedError
+            PasswordHandler.add_password(self.user)
+            show_message("Password added successfuly.")
 
         elif user_choice == 6:
             return MainMenu(self.user)
@@ -137,9 +137,13 @@ class TeamPasswordsMenu(UserRequired):
 
     def user_handler(self, user_choice):
         if user_choice == 1 or user_choice == 2:
-            passwords = TeamPasswordHandler.get_passwords(
-                self.user, user_choice == 2)
-            show_passwords(passwords)
+            passwords = PasswordHandler.get_passwords(self.user, user_choice == 2, PasswordType.TEAM_PASSWORD)
+            if not passwords:
+                show_message(f"You haven't saved any password yet.")
+            else:
+                show_passwords(passwords)
+                passwords = PasswordHandler.show_true_passwords(passwords)
+                show_passwords(passwords, False)
 
         elif user_choice == 3:
             return MainMenu(self.user)
@@ -151,9 +155,14 @@ class TeamPasswordsMenu(UserRequired):
 
     def team_manager_handler(self, user_choice):
         if user_choice == 1 or user_choice == 2:
-            passwords = TeamPasswordHandler.get_passwords(
-                self.user, user_choice == 2)
+            passwords = PasswordHandler.get_passwords(self.user, user_choice == 2, PasswordType.TEAM_PASSWORD)
             show_passwords(passwords)
+            if not passwords:
+                show_message(f"You haven't saved any password yet.")
+            else:
+                show_passwords(passwords)
+                passwords = PasswordHandler.show_true_passwords(passwords)
+                show_passwords(passwords, False)
 
         elif user_choice == 3:
             return TeamsManagementMenu(self.user)
@@ -187,7 +196,7 @@ class TeamsManagementMenu(UserRequired):
         if user_choice == 1:
             TeamsHandler.add_team(self.user)
         elif user_choice == 2:
-            TeamsHandler.delete_team(self.user)
+            TeamsHandler.delete_team(teams, self.user)
         elif user_choice == 3:
             raise NotImplementedError
         elif user_choice == 4:

@@ -1,93 +1,104 @@
-from database.db import SQLCursor
-from database.queries import SQLQueries
+from logs.logger import Logger, ERROR, DEBUG
 
 from models.user import User
-from models.password import Password
+from models.password import Password, PasswordType
 
 from utils.io_functions import (
     create_password_input,
     search_key_input,
     password_id_input,
+    password_ids_input,
 )
 
 
 class PasswordHandler:
-
     @staticmethod
-    def get_passwords(user: User, key: bool = False):
+    def show_true_passwords(passwords: list[Password]):
         try:
-            if key:
-                search_key = search_key_input()
-            with SQLCursor() as cursor:
-                query = (SQLQueries.PERSONAL_PASSWORDS_FILTER
-                         if key else SQLQueries.PERSONAL_PASSWORDS)
-                params = (user.user_id,
-                          *[f'%{search_key}%' for _ in range(3) if key])
+            selected_passwords_id = list(
+                map(lambda x: int(x) - 1, password_ids_input().split(","))
+            )
+            Logger.log(DEBUG, selected_passwords_id)
+            selected_passwords = [
+                passwords[selected_id] for selected_id in selected_passwords_id
+            ]
 
-                passwords = cursor.execute(query, params).fetchall()
-                passwords = [
-                    Password.from_database(password) for password in passwords
-                ]
+        except (TypeError, IndexError) as error:
+            Logger.log(ERROR, error)
+            raise ValueError
 
         except:
+            raise
+
+        else:
+            return selected_passwords
+
+    @staticmethod
+    def get_passwords(
+        user: User,
+        key: bool = False,
+        password_type: PasswordType = PasswordType.PERSONAL_PASSWORD,
+    ):
+        try:
+            search_key = search_key_input() if key else ""
+
+            passwords = Password.get_passwords(user, search_key, password_type)
+
+        except Exception as error:
+            Logger.log(ERROR, error)
             raise
         else:
             return passwords
 
     @staticmethod
-    def add_new_password(user: User):
+    def add_password(user: User):
         try:
             site_url, site_username, password, notes = create_password_input()
-            with SQLCursor() as cursor:
-                cursor.execute(
-                    SQLQueries.ADD_NEW_PASSWORD,
-                    (user.user_id, site_url, site_username, 0, password,
-                     notes),
-                )
+            Password.add_password(user, site_url, site_username, password, notes)
 
-        except:
+        except Exception as error:
+            Logger.log(ERROR, error)
             raise
 
         else:
             return
 
     @staticmethod
-    def delete_password(passwords: list[Password], user: User):
+    def delete_password(user: User, passwords: list[Password]):
         try:
             selected_password = int(password_id_input()) - 1
-            password_id = passwords[selected_password].password_id
+            password = passwords[selected_password]
 
-            with SQLCursor() as cursor:
-                cursor.execute(SQLQueries.DELETE_PASSWORD, (password_id, ))
-                cursor.execute(SQLQueries.DELETE_TEAM_PASSWORD,
-                               (password_id, ))
+            Password.delete_password(password)
 
-        except (TypeError, IndexError):
+        except (TypeError, IndexError) as error:
+            Logger.log(ERROR, error)
             raise ValueError
 
-        except:
+        except Exception as error:
+            Logger.log(ERROR, error)
             raise
 
         else:
             return
 
     @staticmethod
-    def update_password(passwords, user: User):
-
+    def update_password(user: User, passwords: list[Password]):
         try:
             selected_password = int(password_id_input()) - 1
-            password_id = passwords[selected_password].password_id
-            site_url, site_username, password, notes = create_password_input()
-            with SQLCursor() as cursor:
-                cursor.execute(
-                    SQLQueries.UPDATE_PASSWORD,
-                    (site_url, site_username, password, notes, password_id),
-                )
+            encrypted_password = passwords[selected_password]
+            site_url, site_username, encrypted_password, notes = create_password_input()
 
-        except (TypeError, IndexError):
+            Password.update_password(
+                encrypted_password, site_url, site_username, encrypted_password, notes
+            )
+
+        except (TypeError, IndexError) as error:
+            Logger.log(ERROR, error)
             raise ValueError
 
-        except:
+        except Exception as error:
+            Logger.log(ERROR, error)
             raise
 
         else:

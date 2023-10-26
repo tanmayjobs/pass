@@ -34,7 +34,7 @@ class TeamsHandler:
     def delete_team(teams: list[Team], user: User):
         try:
             selected_team = int(team_id_input()) - 1
-            team_id = teams[selected_team].password_id
+            team_id = teams[selected_team].team_id
             with SQLCursor() as cursor:
                 cursor.execute(SQLQueries.DELETE_ALL_TEAM_PASSWORDS, (team_id, user.user_id))
                 cursor.execute(SQLQueries.DELETE_ALL_TEAM_MEMBERS, (team_id,))

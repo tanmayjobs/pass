@@ -8,3 +8,221 @@
 25-10-2023 22:00:00 INFO       [logger.py:19] Initializing System...
 25-10-2023 22:00:17 INFO       [logger.py:19] User signed out.
 25-10-2023 22:00:19 INFO       [logger.py:19] Closing System.
+26-10-2023 09:21:26 INFO       [logger.py:19] Initializing System...
+26-10-2023 09:21:33 CRITICAL   [logger.py:19] Closing System due to unexpected error.<'list' object has no attribute 'description'>
+26-10-2023 10:00:58 INFO       [logger.py:19] Initializing System...
+26-10-2023 10:08:29 CRITICAL   [logger.py:19] Closing System due to unexpected error.<'list' object has no attribute 'description'>
+26-10-2023 10:09:00 INFO       [logger.py:19] Initializing System...
+26-10-2023 10:09:08 WARNING    [logger.py:19] Invalid Credentials by Vinny.
+26-10-2023 10:09:14 WARNING    [logger.py:19] Duplicate account creation attempt Tanmay.
+26-10-2023 10:15:52 INFO       [logger.py:19] User signed out.
+26-10-2023 10:15:53 INFO       [logger.py:19] Closing System.
+26-10-2023 11:56:04 INFO       [logger.py:19] Initializing System...
+26-10-2023 12:01:48 INFO       [logger.py:19] User signed out.
+26-10-2023 12:02:42 CRITICAL   [logger.py:19] Closing System due to unexpected error.<TeamsHandler.delete_team() missing 1 required positional argument: 'user'>
+26-10-2023 12:04:28 INFO       [logger.py:19] Initializing System...
+26-10-2023 12:04:43 INFO       [logger.py:19] User signed out.
+26-10-2023 12:04:45 INFO       [logger.py:19] Closing System.
+26-10-2023 12:29:50 INFO       [logger.py:19] Initializing System...
+26-10-2023 12:30:03 CRITICAL   [logger.py:19] Closing System due to unexpected error.<cannot access local variable 'search_key' where it is not associated with a value>
+26-10-2023 12:31:31 INFO       [logger.py:19] Initializing System...
+26-10-2023 12:33:15 INFO       [logger.py:19] User signed out.
+26-10-2023 12:33:15 INFO       [logger.py:19] Closing System.
+26-10-2023 12:33:18 INFO       [logger.py:19] Initializing System...
+26-10-2023 12:33:26 DEBUG      [logger.py:19] 
+    SELECT passwords.id, passwords.creator_id, passwords.password_type, passwords.site_url, passwords.site_username, passwords.encrypted_password, passwords.notes
+    FROM team_members
+    INNER JOIN team_passwords ON team_passwords.team_id = team_members.team_id
+    INNER JOIN passwords ON team_passwords.password_id = passwords.id
+    AND (passwords.site_url LIKE ? or passwords.site_username LIKE ? or passwords.notes LIKE ?)
+    WHERE member_id = ?
+    	(1, '%test%', '%test%', '%test%')
+26-10-2023 12:34:44 INFO       [logger.py:19] User signed out.
+26-10-2023 12:34:45 INFO       [logger.py:19] Closing System.
+26-10-2023 12:34:50 INFO       [logger.py:19] Initializing System...
+26-10-2023 12:34:57 DEBUG      [logger.py:19] 
+    SELECT passwords.id, passwords.creator_id, passwords.password_type, passwords.site_url, passwords.site_username, passwords.encrypted_password, passwords.notes
+    FROM team_members
+    INNER JOIN team_passwords ON team_passwords.team_id = team_members.team_id
+    INNER JOIN passwords ON team_passwords.password_id = passwords.id
+    AND (passwords.site_url LIKE ? or passwords.site_username LIKE ? or passwords.notes LIKE ?)
+    WHERE member_id = ?
+    	('%test%', '%test%', '%test%', 1)
+26-10-2023 12:35:00 DEBUG      [logger.py:19] 
+    SELECT passwords.id, passwords.creator_id, passwords.password_type, passwords.site_url, passwords.site_username, passwords.encrypted_password, passwords.notes
+    FROM team_members
+    INNER JOIN team_passwords ON team_passwords.team_id = team_members.team_id
+    INNER JOIN passwords ON team_passwords.password_id = passwords.id
+    AND (passwords.site_url LIKE ? or passwords.site_username LIKE ? or passwords.notes LIKE ?)
+    WHERE member_id = ?
+    	('%asd%', '%asd%', '%asd%', 1)
+26-10-2023 12:35:05 DEBUG      [logger.py:19] 
+    SELECT passwords.id, passwords.creator_id, passwords.password_type, passwords.site_url, passwords.site_username, passwords.encrypted_password, passwords.notes
+    FROM team_members
+    INNER JOIN team_passwords ON team_passwords.team_id = team_members.team_id
+    INNER JOIN passwords ON team_passwords.password_id = passwords.id
+    AND (passwords.site_url LIKE ? or passwords.site_username LIKE ? or passwords.notes LIKE ?)
+    WHERE member_id = ?
+    	('%sjgj%', '%sjgj%', '%sjgj%', 1)
+26-10-2023 12:35:09 INFO       [logger.py:19] User signed out.
+26-10-2023 12:35:10 INFO       [logger.py:19] Closing System.
+26-10-2023 12:37:54 INFO       [logger.py:19] Initializing System...
+26-10-2023 12:38:05 DEBUG      [logger.py:19] 
+    SELECT * FROM passwords
+    WHERE creator_id = ? AND password_type = 0;
+    	(1,)
+26-10-2023 12:38:54 INFO       [logger.py:19] User signed out.
+26-10-2023 12:38:55 INFO       [logger.py:19] Closing System.
+26-10-2023 12:38:56 INFO       [logger.py:19] Initializing System...
+26-10-2023 12:39:05 DEBUG      [logger.py:19] 
+    SELECT * FROM passwords
+    WHERE creator_id = ? AND password_type = 0;
+    	(1,)
+26-10-2023 12:39:05 CRITICAL   [logger.py:19] Closing System due to unexpected error.<>
+26-10-2023 12:40:25 INFO       [logger.py:19] Initializing System...
+26-10-2023 12:40:30 DEBUG      [logger.py:19] 
+    SELECT * FROM passwords
+    WHERE creator_id = ? AND password_type = 0;
+    	(1,)
+26-10-2023 12:40:30 ERROR      [logger.py:19] 'function' object is not iterable
+26-10-2023 12:40:58 INFO       [logger.py:19] User signed out.
+26-10-2023 12:40:59 INFO       [logger.py:19] Closing System.
+26-10-2023 12:41:01 INFO       [logger.py:19] Initializing System...
+26-10-2023 12:41:06 DEBUG      [logger.py:19] 
+    SELECT * FROM passwords
+    WHERE creator_id = ? AND password_type = 0;
+    	(1,)
+26-10-2023 12:41:06 ERROR      [logger.py:19] 'function' object is not iterable
+26-10-2023 12:41:57 INFO       [logger.py:19] User signed out.
+26-10-2023 12:41:58 INFO       [logger.py:19] Closing System.
+26-10-2023 12:42:33 INFO       [logger.py:19] Initializing System...
+26-10-2023 12:42:38 DEBUG      [logger.py:19] 
+    SELECT * FROM passwords
+    WHERE creator_id = ? AND password_type = 0;
+    	(1,)
+26-10-2023 12:42:42 DEBUG      [logger.py:19] [0, 1]
+26-10-2023 12:42:42 ERROR      [logger.py:19] list indices must be integers or slices, not tuple
+26-10-2023 12:43:11 INFO       [logger.py:19] User signed out.
+26-10-2023 12:43:12 INFO       [logger.py:19] Closing System.
+26-10-2023 12:43:13 INFO       [logger.py:19] Initializing System...
+26-10-2023 12:43:18 DEBUG      [logger.py:19] 
+    SELECT * FROM passwords
+    WHERE creator_id = ? AND password_type = 0;
+    	(1,)
+26-10-2023 12:43:20 DEBUG      [logger.py:19] [0, 1]
+26-10-2023 12:43:44 INFO       [logger.py:19] User signed out.
+26-10-2023 12:43:46 INFO       [logger.py:19] Closing System.
+26-10-2023 12:43:47 INFO       [logger.py:19] Initializing System...
+26-10-2023 12:43:53 DEBUG      [logger.py:19] 
+    SELECT * FROM passwords
+    WHERE creator_id = ? AND password_type = 0;
+    	(1,)
+26-10-2023 12:43:54 DEBUG      [logger.py:19] [0, 1]
+26-10-2023 12:43:54 CRITICAL   [logger.py:19] Closing System due to unexpected error.<unsupported format string passed to bytes.__format__>
+26-10-2023 13:24:33 INFO       [logger.py:19] Initializing System...
+26-10-2023 13:24:38 DEBUG      [logger.py:19] 
+    SELECT * FROM passwords
+    WHERE creator_id = ? AND password_type = 0;
+    	(1,)
+26-10-2023 13:24:39 DEBUG      [logger.py:19] [0]
+26-10-2023 13:24:45 DEBUG      [logger.py:19] 
+    SELECT * FROM passwords
+    WHERE creator_id = ? AND password_type = 0;
+    	(1,)
+26-10-2023 13:24:48 DEBUG      [logger.py:19] [0, 1, 2]
+26-10-2023 13:24:58 DEBUG      [logger.py:19] 
+    SELECT * FROM passwords
+    WHERE (site_url LIKE ? or site_username LIKE ? or notes LIKE ?)
+    AND creator_id = ? AND password_type = 0;
+    	('%fun%', '%fun%', '%fun%', 1)
+26-10-2023 13:25:08 DEBUG      [logger.py:19] [0, 1]
+26-10-2023 13:25:17 INFO       [logger.py:19] User signed out.
+26-10-2023 13:25:18 INFO       [logger.py:19] Closing System.
+26-10-2023 13:25:26 INFO       [logger.py:19] Initializing System...
+26-10-2023 13:25:31 DEBUG      [logger.py:19] 
+    SELECT passwords.id, passwords.creator_id, passwords.password_type, passwords.site_url, passwords.site_username, passwords.encrypted_password, passwords.notes
+    FROM team_members
+    INNER JOIN team_passwords ON team_passwords.team_id = team_members.team_id
+    INNER JOIN passwords ON team_passwords.password_id = passwords.id
+    WHERE team_members.member_id = ?;
+    	(1,)
+26-10-2023 13:25:35 DEBUG      [logger.py:19] 
+    SELECT passwords.id, passwords.creator_id, passwords.password_type, passwords.site_url, passwords.site_username, passwords.encrypted_password, passwords.notes
+    FROM team_members
+    INNER JOIN team_passwords ON team_passwords.team_id = team_members.team_id
+    INNER JOIN passwords ON team_passwords.password_id = passwords.id
+    WHERE team_members.member_id = ?;
+    	(1,)
+26-10-2023 13:25:37 INFO       [logger.py:19] User signed out.
+26-10-2023 13:25:39 INFO       [logger.py:19] Closing System.
+26-10-2023 13:29:09 INFO       [logger.py:19] Initializing System...
+26-10-2023 13:29:30 CRITICAL   [logger.py:19] Closing System due to unexpected error.<TeamsHandler.delete_team() missing 1 required positional argument: 'user'>
+26-10-2023 13:31:15 INFO       [logger.py:19] Initializing System...
+26-10-2023 13:31:19 DEBUG      [logger.py:19] 
+    SELECT * FROM passwords
+    WHERE creator_id = ? AND password_type = 0;
+    	(1,)
+26-10-2023 13:32:28 INFO       [logger.py:19] Initializing System...
+26-10-2023 13:32:33 DEBUG      [logger.py:19] 
+    SELECT * FROM passwords
+    WHERE creator_id = ? AND password_type = 0;
+    	(1,)
+26-10-2023 13:33:12 INFO       [logger.py:19] Initializing System...
+26-10-2023 13:33:16 DEBUG      [logger.py:19] 
+    SELECT * FROM passwords
+    WHERE creator_id = ? AND password_type = 0;
+    	(1,)
+26-10-2023 13:34:06 INFO       [logger.py:19] Initializing System...
+26-10-2023 13:34:09 DEBUG      [logger.py:19] 
+    SELECT * FROM passwords
+    WHERE creator_id = ? AND password_type = 0;
+    	(1,)
+26-10-2023 13:34:33 INFO       [logger.py:19] Initializing System...
+26-10-2023 13:34:38 DEBUG      [logger.py:19] 
+    SELECT * FROM passwords
+    WHERE creator_id = ? AND password_type = 0;
+    	(1,)
+26-10-2023 13:34:43 DEBUG      [logger.py:19] [0]
+26-10-2023 13:34:48 INFO       [logger.py:19] User signed out.
+26-10-2023 13:34:49 INFO       [logger.py:19] Closing System.
+26-10-2023 13:36:05 INFO       [logger.py:19] Initializing System...
+26-10-2023 13:36:11 DEBUG      [logger.py:19] 
+    SELECT * FROM passwords
+    WHERE creator_id = ? AND password_type = 0;
+    	(1,)
+26-10-2023 13:37:45 INFO       [logger.py:19] Initializing System...
+26-10-2023 13:37:49 DEBUG      [logger.py:19] 
+    SELECT * FROM passwords
+    WHERE creator_id = ? AND password_type = 0;
+    	(1,)
+26-10-2023 13:38:02 INFO       [logger.py:19] Initializing System...
+26-10-2023 13:38:08 DEBUG      [logger.py:19] 
+    SELECT * FROM passwords
+    WHERE creator_id = ? AND password_type = 0;
+    	(1,)
+26-10-2023 13:38:29 INFO       [logger.py:19] Initializing System...
+26-10-2023 13:38:33 DEBUG      [logger.py:19] 
+    SELECT * FROM passwords
+    WHERE creator_id = ? AND password_type = 0;
+    	(1,)
+26-10-2023 13:38:49 INFO       [logger.py:19] Initializing System...
+26-10-2023 13:38:54 DEBUG      [logger.py:19] 
+    SELECT * FROM passwords
+    WHERE creator_id = ? AND password_type = 0;
+    	(1,)
+26-10-2023 13:39:25 INFO       [logger.py:19] Initializing System...
+26-10-2023 13:39:30 DEBUG      [logger.py:19] 
+    SELECT * FROM passwords
+    WHERE creator_id = ? AND password_type = 0;
+    	(1,)
+26-10-2023 13:39:56 INFO       [logger.py:19] Initializing System...
+26-10-2023 13:40:01 DEBUG      [logger.py:19] 
+    SELECT * FROM passwords
+    WHERE creator_id = ? AND password_type = 0;
+    	(1,)
+26-10-2023 13:40:13 DEBUG      [logger.py:19] [0, 1, 2]
+26-10-2023 13:40:20 INFO       [logger.py:19] User signed out.
+26-10-2023 13:40:21 INFO       [logger.py:19] Closing System.
+26-10-2023 13:44:13 INFO       [logger.py:19] Initializing System...
+26-10-2023 13:44:38 INFO       [logger.py:19] User signed out.
+26-10-2023 13:44:43 INFO       [logger.py:19] Closing System.

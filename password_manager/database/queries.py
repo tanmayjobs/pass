@@ -69,8 +69,8 @@ class SQLQueries:
 
     PERSONAL_PASSWORDS_FILTER = """
     SELECT * FROM passwords
-    WHERE creator_id = ? and password_type = 0
-    AND (site_url LIKE ? or site_username LIKE ? or notes LIKE ?);
+    WHERE (site_url LIKE ? or site_username LIKE ? or notes LIKE ?)
+    AND creator_id = ? AND password_type = 0;
     """
 
     TEAM_PASSWORDS = """
@@ -90,7 +90,7 @@ class SQLQueries:
     WHERE member_id = ?
     """
 
-    ADD_NEW_PASSWORD = """
+    ADD_PASSWORD = """
     INSERT INTO passwords(creator_id, site_url, site_username, password_type, encrypted_password, notes)
     VALUES(?, ?, ?, ?, ?, ?);
     """
