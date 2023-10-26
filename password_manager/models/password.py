@@ -1,10 +1,9 @@
 from database.db import SQLCursor, SQLQueries
 
-from utils.helpers.enums import PasswordType
 from models.user import User
 
-from logs.logger import Logger, DEBUG
-
+from utils.crypt import Crypt
+from utils.helpers.enums import PasswordType
 
 class Password:
     """
@@ -34,7 +33,7 @@ class Password:
         return Password(*password_data)
 
     def description(self, index = 1, hide_password: bool = True) -> str:
-        return f"{str(index):6}\t{self.site_url:20}\t{self.username:20}\t{(self.encrypted_password.decode() if not hide_password else '*' * 6):20}\t{self.notes:20}"
+        return f"{str(index):6}\t{self.site_url:20}\t{self.username:20}\t{(Crypt.decrypt(self.encrypted_password) if not hide_password else '*' * 6):20}\t{self.notes:20}"
 
     @staticmethod
     def get_passwords(
@@ -61,14 +60,10 @@ class Password:
                 user.user_id,
             )
 
-            Logger.log(
-                DEBUG,
-                f"{query}\t{params}"
-            )
-
             passwords = cursor.execute(query, params).fetchall()
             passwords = [Password.from_database(password) for password in passwords]
-            return passwords
+
+        return passwords
 
     @staticmethod
     def add_password(

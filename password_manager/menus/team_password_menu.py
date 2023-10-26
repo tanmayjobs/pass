@@ -5,7 +5,7 @@ from models.password import PasswordType
 
 from utils.io_functions import show_passwords, show_message
 
-import menus.team_management_menu as team_management_menu
+import menus.teams_management_menu as teams_management_menu
 import menus.user_required_menu as user_required_menu
 import menus.main_menu as main_menu
 
@@ -55,7 +55,6 @@ class TeamPasswordsMenu(user_required_menu.UserRequiredMenu):
     def team_manager_handler(self, user_choice):
         if user_choice == 1 or user_choice == 2:
             passwords = PasswordController.get_passwords(self.user, user_choice == 2, PasswordType.TEAM_PASSWORD)
-            show_passwords(passwords)
             if not passwords:
                 show_message(f"You haven't saved any password yet.")
             else:
@@ -64,7 +63,7 @@ class TeamPasswordsMenu(user_required_menu.UserRequiredMenu):
                 show_passwords(passwords, False)
 
         elif user_choice == 3:
-            return team_management_menu.TeamsManagementMenu(self.user)
+            return teams_management_menu.TeamsManagementMenu(self.user)
 
         elif user_choice == 4:
             return main_menu.MainMenu(self.user)

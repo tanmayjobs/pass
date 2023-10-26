@@ -1,5 +1,10 @@
+from cryptography.fernet import Fernet
+
+import os
+import dotenv
 import bcrypt
 
+dotenv.load_dotenv()
 
 class Crypt:
 
@@ -17,8 +22,14 @@ class Crypt:
 
     @staticmethod
     def encrypt(password: str):
-        raise NotImplementedError
+        key = os.getenv('KEY')
+        fernet = Fernet(key)
+        encrypted_password = fernet.encrypt(password.encode())
+        return encrypted_password
 
     @staticmethod
-    def decrypt(password: str):
-        raise NotImplementedError
+    def decrypt(encrypted_password: str):
+        key = os.getenv('KEY')
+        fernet = Fernet(key)
+        decrypted_password = fernet.decrypt(encrypted_password).decode()
+        return decrypted_password

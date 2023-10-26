@@ -1,11 +1,12 @@
-import getpass
+import pwinput
+from utils.crypt import Crypt
 
 
 def credential_input():
     username = input("    Enter username:")
-    password = getpass.getpass("    Enter password:")
+    password = pwinput.pwinput("    Enter password:")
 
-    return username, password.encode("utf-8")
+    return username, password.encode()
 
 
 def create_password_input():
@@ -13,10 +14,10 @@ def create_password_input():
 
     site_url = input("    Enter site url(optional):")
     username = input("    Enter username(optional):")
-    password = getpass.getpass("    Enter password:")
+    password = pwinput.pwinput("    Enter password:")
     notes = input("    Enter any keynote(optional):")
 
-    return site_url, username, password.encode("utf-8"), notes
+    return site_url, username, Crypt.encrypt(password), notes
 
 
 def search_key_input():
@@ -28,7 +29,7 @@ def password_id_input():
 
 
 def password_ids_input():
-    return input("    Enter password ids(comma seprated values or A for all):")
+    return input("    Enter password ids to see password(comma seprated values or A for all):")
 
 
 def show_passwords(passwords, hide_password=True):
@@ -47,7 +48,7 @@ def show_teams(teams):
     print(f"    {'Id':6}\t{'Team Name':20}")
 
     for index, team in enumerate(teams, start=1):
-        print(f"    {index:6}\t{team}")
+        print(f"    {str(index):6}\t{team}")
 
     print()
 

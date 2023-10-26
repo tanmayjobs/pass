@@ -11,9 +11,7 @@ class TeamsController:
     @staticmethod
     def get_teams(user: User):
         try:
-            with SQLCursor() as cursor:
-                teams = cursor.execute(SQLQueries.ALL_TEAMS, (user.user_id,)).fetchall()
-                teams = [Team.from_database(team) for team in teams]
+            teams = Team.get_teams(user)
         except:
             raise
         else:
@@ -23,8 +21,7 @@ class TeamsController:
     def add_team(user: User):
         try:
             team_name = create_team_input()
-            with SQLCursor() as cursor:
-                cursor.execute(SQLQueries.ADD_TEAM, (user.user_id, team_name))
+            Team.add(user, team_name)
         except:
             raise
         else:
@@ -34,13 +31,19 @@ class TeamsController:
     def delete_team(teams: list[Team], user: User):
         try:
             selected_team = int(team_id_input()) - 1
-            team_id = teams[selected_team].team_id
-            with SQLCursor() as cursor:
-                cursor.execute(SQLQueries.DELETE_ALL_TEAM_PASSWORDS, (team_id, user.user_id))
-                cursor.execute(SQLQueries.DELETE_ALL_TEAM_MEMBERS, (team_id,))
-                cursor.execute(SQLQueries.DELETE_ALL_TEAM_PASSWORDS_RECORDS, (team_id,))
-                cursor.execute(SQLQueries.DELETE_TEAM, (team_id))
+            team = teams[selected_team]
+            Team.remove(user, team)
         except:
             raise
         else:
             return
+
+    @staticmethod
+    def choose_team(teams: list[Team]):
+        try:
+            selected_team = int(team_id_input()) - 1
+            team = teams[selected_team]
+        except:
+            raise
+        else:
+            return team
