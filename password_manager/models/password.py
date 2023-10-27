@@ -42,7 +42,7 @@ class Password:
         return Password(*password_data)
 
     def description(self, index=1, hide_password: bool = True) -> str:
-        return f"{str(index):6}\t{self.site_url:20}\t{self.username:20}\t{(Crypt.decrypt(self.encrypted_password) if not hide_password else '*' * 6):20}\t{self.notes:20}\t{self.strength().name:20}"
+        return f"{str(index):6}\t{self.site_url:20}\t{self.username:20}\t{(Crypt.decrypt(self.encrypted_password) if not hide_password else '*' * 6):20}\t{self.notes:40}\t{self.strength().name:20}"
 
     @staticmethod
     def get_passwords(

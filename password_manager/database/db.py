@@ -10,7 +10,7 @@ import os
 import sqlite3
 
 DB_PATH = "database/storage/"
-DB_FILE = DB_PATH + "db.sql"
+DB_FILE = DB_PATH + "database.db"
 
 
 class SQLCursor:

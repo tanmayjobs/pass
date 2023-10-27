@@ -22,7 +22,7 @@ class PasswordType(Enum):
 class UserType(Enum):
     """
     Differentiate the user types:
-        1.Admin User
+        1.Team Manager User
         2.Basic User
     """
 

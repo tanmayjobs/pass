@@ -63,7 +63,7 @@ def show_passwords(passwords, hide_password=True):
     print()
     print()
     print(
-        f"    {'Id':6}\t{'URL':20}\t{'username':20}\t{'Password':20}\t{'Notes':20}\t{'Strength':20}"
+        f"    {'Id':6}\t{'URL':20}\t{'username':20}\t{'Password':20}\t{'Notes':40}\t{'Strength':20}"
     )
     for index, password in enumerate(passwords, start=1):
         print(f"    {password.description(index, hide_password)}")
