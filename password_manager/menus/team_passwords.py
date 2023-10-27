@@ -4,14 +4,14 @@ Here user can view there team passwords.
 And Team Managers have extra feature of Team Management.
 """
 
-from controllers.password_controller import PasswordController
+from controllers.password import PasswordController
 
 from models.user import UserType
 from models.password import PasswordType
 
 from utils.io_functions import show_passwords, show_message
 
-import menus.teams_management_menu as teams_management_menu
+import menus.teams_management as teams_management
 import menus.user_required_menu as user_required_menu
 import menus.home_menu as home_menu
 
@@ -72,7 +72,7 @@ class TeamPasswordsMenu(user_required_menu.UserRequiredMenu):
                 show_passwords(passwords, False)
 
         elif user_choice == 3:
-            return teams_management_menu.TeamsManagementMenu(self.user)
+            return teams_management.TeamsManagementMenu(self.user)
 
         elif user_choice == 4:
             return home_menu.HomeMenu(self.user)

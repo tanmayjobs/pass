@@ -6,9 +6,9 @@ From here user can go to personal or team passwords.
 from controllers.authorizer import Authorizer
 
 import menus.user_required_menu as user_required_menu
-import menus.personal_password_menu as personal_password_menu
-import menus.team_password_menu as team_password_menu
-import menus.authentication_menu as authentication_menu
+import menus.personal_passwords as personal_passwords
+import menus.team_passwords as team_passwords
+import menus.authentication as authentication
 
 
 class HomeMenu(user_required_menu.UserRequiredMenu):
@@ -22,10 +22,10 @@ class HomeMenu(user_required_menu.UserRequiredMenu):
 
     def handler(self, user_choice):
         if user_choice == 1:
-            return personal_password_menu.PersonalPasswordsMenu(self.user)
+            return personal_passwords.PersonalPasswordsMenu(self.user)
         elif user_choice == 2:
-            return team_password_menu.TeamPasswordsMenu(self.user)
+            return team_passwords.TeamPasswordsMenu(self.user)
         elif user_choice == 3:
             Authorizer.sign_out()
-            return authentication_menu.AuthenticationMenu
+            return authentication.AuthenticationMenu
         raise ValueError("Invalid Choice.")

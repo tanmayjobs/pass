@@ -304,3 +304,7 @@
 27-10-2023 16:45:25 INFO       Closing System.
 27-10-2023 16:56:37 INFO       Initializing System...
 27-10-2023 16:57:01 INFO       Closing System.
+27-10-2023 22:09:00 INFO       Initializing System...
+27-10-2023 22:09:04 WARNING    Invalid Credentials by asd.
+27-10-2023 22:09:08 WARNING    Invalid Credentials by admin.
+27-10-2023 22:09:09 INFO       Closing System.

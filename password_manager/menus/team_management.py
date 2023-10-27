@@ -3,8 +3,8 @@ This file contains the Team Management Menu
 Here user can manage any one previously selected team from Teams Password Menu.
 """
 
-from controllers.password_controller import PasswordController
-from controllers.teams_controller import TeamsController
+from controllers.password import PasswordController
+from controllers.teams import TeamsController
 
 from models.password import PasswordType
 
@@ -12,7 +12,7 @@ from utils.io_functions import show_message, show_passwords
 
 import menus.user_required_menu as user_required_menu
 import menus.team_required_menu as team_required_menu
-import menus.teams_management_menu as teams_management_menu
+import menus.teams_management as teams_management
 
 
 class TeamManagementMenu(user_required_menu.UserRequiredMenu,
@@ -79,7 +79,7 @@ class TeamManagementMenu(user_required_menu.UserRequiredMenu,
                     show_message("Password updated successfully.")
 
         elif user_choice == 6:
-            return teams_management_menu.TeamsManagementMenu(self.user)
+            return teams_management.TeamsManagementMenu(self.user)
 
         else:
             raise ValueError

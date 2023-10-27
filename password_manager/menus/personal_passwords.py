@@ -9,7 +9,7 @@ Here user have choice to:
 their personal passwords.
 """
 
-from controllers.password_controller import PasswordController
+from controllers.password import PasswordController
 
 from utils.io_functions import show_passwords, show_message
 
