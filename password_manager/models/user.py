@@ -1,4 +1,8 @@
+from database.db import SQLCursor, SQLQueries
+
 from utils.helpers.enums import UserType
+from utils.helpers.exceptions import InvalidCredentials
+from utils.crypt import Crypt
 
 
 class User:
@@ -21,3 +25,23 @@ class User:
 
     def __repr__(self) -> str:
         return f"{self.username:20}"
+
+    @staticmethod
+    def sign_in(username, password):
+        with SQLCursor() as cursor:
+            user_data = cursor.execute(SQLQueries.SIGN_IN, (username,)).fetchone()
+
+            if not user_data:
+                raise InvalidCredentials("Invalid username")
+
+            hashed_password = user_data[2]
+
+            if not Crypt.check(password, hashed_password):
+                raise InvalidCredentials("Invalid password!")
+
+        return User.from_database(user_data)
+
+    @staticmethod
+    def sign_up(username, password_hash, user_role):
+        with SQLCursor() as cursor:
+            cursor.execute(SQLQueries.SIGN_UP, (username, password_hash, user_role))

@@ -1,4 +1,4 @@
-from logs.logger import Logger, ERROR, DEBUG
+from logs.logger import Logger, ERROR
 
 from utils.helpers.exceptions import InvalidMemberName, MemberAlreadyExists
 
