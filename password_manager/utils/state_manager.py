@@ -26,8 +26,7 @@ class StateManager:
     @staticmethod
     def after_auth():
         user_choice = int(input(StateManager.current_prompt.prompt))
-        StateManager.current_prompt = StateManager.current_prompt.handler(
-            user_choice)
+        StateManager.current_prompt = StateManager.current_prompt.handler(user_choice)
 
         if StateManager.current_prompt == AuthenticationMenu:
             StateManager.current_user = None

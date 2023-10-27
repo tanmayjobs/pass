@@ -26,8 +26,7 @@ class Team:
     @staticmethod
     def get_teams(user: User):
         with SQLCursor() as cursor:
-            teams = cursor.execute(SQLQueries.ALL_TEAMS,
-                                   (user.user_id, )).fetchall()
+            teams = cursor.execute(SQLQueries.ALL_TEAMS, (user.user_id,)).fetchall()
             teams = [Team.from_database(team) for team in teams]
 
         return teams
@@ -36,25 +35,24 @@ class Team:
     def add(user: User, team_name: str):
         with SQLCursor() as cursor:
             cursor.execute(SQLQueries.ADD_TEAM, (user.user_id, team_name))
-            cursor.execute(SQLQueries.ADD_TEAM_LEADER,
-                           (cursor.lastrowid, user.user_id))
+            cursor.execute(SQLQueries.ADD_TEAM_LEADER, (cursor.lastrowid, user.user_id))
 
     @staticmethod
     def delete(user: User, team):
         with SQLCursor() as cursor:
-            cursor.execute(SQLQueries.DELETE_ALL_TEAM_PASSWORDS,
-                           (team.team_id, user.user_id))
-            cursor.execute(SQLQueries.DELETE_ALL_TEAM_MEMBERS,
-                           (team.team_id, ))
-            cursor.execute(SQLQueries.DELETE_ALL_TEAM_PASSWORDS_RECORDS,
-                           (team.team_id, ))
-            cursor.execute(SQLQueries.DELETE_TEAM, (team.team_id, ))
+            cursor.execute(
+                SQLQueries.DELETE_ALL_TEAM_PASSWORDS, (team.team_id, user.user_id)
+            )
+            cursor.execute(SQLQueries.DELETE_ALL_TEAM_MEMBERS, (team.team_id,))
+            cursor.execute(
+                SQLQueries.DELETE_ALL_TEAM_PASSWORDS_RECORDS, (team.team_id,)
+            )
+            cursor.execute(SQLQueries.DELETE_TEAM, (team.team_id,))
 
     @staticmethod
     def add_member(team, member_username: str):
         with SQLCursor() as cursor:
-            cursor.execute(SQLQueries.ADD_MEMBER,
-                           (team.team_id, member_username))
+            cursor.execute(SQLQueries.ADD_MEMBER, (team.team_id, member_username))
             if not cursor.rowcount:
                 raise InvalidMemberName
 
@@ -64,6 +62,7 @@ class Team:
 
     def members(self):
         with SQLCursor() as cursor:
-            all_members = cursor.execute(SQLQueries.GET_MEMBERS,
-                                         (self.team_id, )).fetchall()
+            all_members = cursor.execute(
+                SQLQueries.GET_MEMBERS, (self.team_id,)
+            ).fetchall()
             return [User.from_database(member) for member in all_members]

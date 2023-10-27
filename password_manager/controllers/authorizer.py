@@ -43,7 +43,7 @@ class Authorizer:
 
     @staticmethod
     def sign_up(user_role: int):
-        username, password = credential_input()
+        username, password = credential_input(check_strength=True)
         password_hash = Crypt.hash(password)
         # del password
 

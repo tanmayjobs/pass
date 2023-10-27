@@ -10,6 +10,10 @@ class NullPassword(Exception):
     ...
 
 
+class WeakPassword(Exception):
+    ...
+
+
 class NullUsername(Exception):
     ...
 

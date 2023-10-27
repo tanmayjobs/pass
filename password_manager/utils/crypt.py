@@ -8,7 +8,6 @@ dotenv.load_dotenv()
 
 
 class Crypt:
-
     @staticmethod
     def hash(password: str) -> str:
         password_bytes = password
@@ -23,14 +22,14 @@ class Crypt:
 
     @staticmethod
     def encrypt(password: str):
-        key = os.getenv('KEY')
+        key = os.getenv("KEY")
         fernet = Fernet(key)
         encrypted_password = fernet.encrypt(password.encode())
         return encrypted_password
 
     @staticmethod
     def decrypt(encrypted_password: str):
-        key = os.getenv('KEY')
+        key = os.getenv("KEY")
         fernet = Fernet(key)
         decrypted_password = fernet.decrypt(encrypted_password).decode()
         return decrypted_password

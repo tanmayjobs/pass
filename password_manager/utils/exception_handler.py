@@ -2,14 +2,20 @@ from sqlite3 import IntegrityError
 
 from logs.logger import Logger, CRITICAL, INFO
 
-from utils.helpers.exceptions import InvalidCredentials, NullPassword, NullUsername, InvalidMemberName, MemberAlreadyExists
+from utils.helpers.exceptions import (
+    InvalidCredentials,
+    NullPassword,
+    NullUsername,
+    InvalidMemberName,
+    MemberAlreadyExists,
+    WeakPassword,
+)
 from utils.io_functions import show_message
 
 import sys
 
 
 def handle_exception(menu_func):
-
     def wrapper():
         try:
             result = menu_func()
@@ -29,6 +35,12 @@ def handle_exception(menu_func):
         except NullUsername:
             show_message("Username can't be empty.")
 
+        except WeakPassword:
+            show_message("Your password is too weak.")
+            show_message(
+                "Password must be alteast 6 character long and must contain atleast 1 digit, 1 lowercase, 1 uppercase, 1 special character."
+            )
+
         except InvalidCredentials:
             show_message("Invalid username or password.")
 
@@ -44,8 +56,7 @@ def handle_exception(menu_func):
             sys.exit(0)
 
         except Exception as error:
-            Logger.log(CRITICAL,
-                       f"Closing System due to unexpected error.<{error}>")
+            Logger.log(CRITICAL, f"Closing System due to unexpected error.<{error}>")
             show_message("Unexpected Error Occurred! Turning System Down...")
             sys.exit(0)
 

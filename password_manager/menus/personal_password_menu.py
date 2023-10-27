@@ -10,7 +10,7 @@ class PersonalPasswordsMenu(user_required_menu.UserRequiredMenu):
     prompt = """
     Press:
     - '1' to list passwords
-    - '2' to search password`
+    - '2' to search password
     - '3' to add new password
     - '4' to delete password
     - '5' to update password

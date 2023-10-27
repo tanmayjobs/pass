@@ -1,9 +1,12 @@
-import pwinput
+from models.password import Password, PasswordStrength
+
 from utils.crypt import Crypt
-from utils.helpers.exceptions import NullPassword, NullUsername
+from utils.helpers.exceptions import NullPassword, NullUsername, WeakPassword
+
+import pwinput
 
 
-def credential_input():
+def credential_input(check_strength=False):
     username = input("    Enter username:").strip()
 
     if not username:
@@ -13,6 +16,12 @@ def credential_input():
 
     if not password:
         raise NullPassword
+
+    if check_strength and Password.strength("", password) in [
+        PasswordStrength.WEAK,
+        PasswordStrength.VERY_WEAK,
+    ]:
+        raise WeakPassword
 
     return username, password.encode()
 
@@ -53,7 +62,7 @@ def show_passwords(passwords, hide_password=True):
         f"    {'Id':6}\t{'URL':20}\t{'username':20}\t{'Password':20}\t{'Notes':20}\t{'Strength':20}"
     )
     for index, password in enumerate(passwords, start=1):
-        print(f'    {password.description(index, hide_password)}')
+        print(f"    {password.description(index, hide_password)}")
 
     print()
 
@@ -81,8 +90,10 @@ def show_members(members):
 
 
 def show_message(message: str):
-    print(f"""
-    {message}""")
+    print(
+        f"""
+    {message}"""
+    )
 
 
 def create_team_input():
