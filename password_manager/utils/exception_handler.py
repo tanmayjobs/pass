@@ -2,7 +2,7 @@ from sqlite3 import IntegrityError
 
 from logs.logger import Logger, CRITICAL, INFO
 
-from utils.helpers.exceptions import InvalidCredentials, NullPassword, NullUsername, InvalidMemberName
+from utils.helpers.exceptions import InvalidCredentials, NullPassword, NullUsername, InvalidMemberName, MemberAlreadyExists
 from utils.io_functions import show_message
 
 import sys
@@ -23,6 +23,9 @@ def handle_exception(menu_func):
         except InvalidMemberName:
             show_message("Invalid username entered.")
 
+        except MemberAlreadyExists:
+            show_message("Member already is in team.")
+
         except NullUsername:
             show_message("Username can't be empty.")
 
@@ -40,11 +43,11 @@ def handle_exception(menu_func):
             show_message("Bye.")
             sys.exit(0)
 
-        # except Exception as error:
-        #     Logger.log(CRITICAL,
-        #                f"Closing System due to unexpected error.<{error}>")
-        #     show_message("Unexpected Error Occurred! Turning System Down...")
-        #     sys.exit(0)
+        except Exception as error:
+            Logger.log(CRITICAL,
+                       f"Closing System due to unexpected error.<{error}>")
+            show_message("Unexpected Error Occurred! Turning System Down...")
+            sys.exit(0)
 
         else:
             return result

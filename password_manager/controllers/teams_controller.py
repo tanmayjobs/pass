@@ -1,6 +1,6 @@
 from logs.logger import Logger, ERROR, DEBUG
 
-from utils.helpers.exceptions import InvalidMemberName
+from utils.helpers.exceptions import InvalidMemberName, MemberAlreadyExists
 
 from models.user import User
 from models.team import Team
@@ -67,7 +67,13 @@ class TeamsController:
 
     @staticmethod
     def add_member(user: User, team: Team):
+        all_members = team.members()
         member_username = team_member_username_input()
+
+        for member in all_members:
+            if member.username == member_username:
+                raise MemberAlreadyExists
+
         if member_username == user.username:
             raise InvalidMemberName
         try:

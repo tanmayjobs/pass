@@ -16,3 +16,7 @@ class NullUsername(Exception):
 
 class InvalidMemberName(Exception):
     ...
+
+
+class MemberAlreadyExists(Exception):
+    ...

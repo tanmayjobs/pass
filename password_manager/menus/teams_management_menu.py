@@ -1,6 +1,6 @@
 from controllers.teams_controller import TeamsController
 
-from utils.io_functions import show_teams
+from utils.io_functions import show_teams, show_message
 
 import menus.user_required_menu as user_required_menu
 import menus.team_password_menu as team_password_menu
@@ -22,13 +22,19 @@ class TeamsManagementMenu(user_required_menu.UserRequiredMenu):
             TeamsController.add_team(self.user)
         elif user_choice == 2:
             teams = TeamsController.get_teams(self.user)
-            show_teams(teams)
-            TeamsController.delete_team(teams, self.user)
+            if not teams:
+                show_message("You haven't created any teams yet.")
+            else:
+                show_teams(teams)
+                TeamsController.delete_team(teams, self.user)
         elif user_choice == 3:
             teams = TeamsController.get_teams(self.user)
-            show_teams(teams)
-            team = TeamsController.choose_team(teams)
-            return team_management_menu.TeamManagementMenu(self.user, team)
+            if not teams:
+                show_message("You haven't created any teams yet.")
+            else:
+                show_teams(teams)
+                team = TeamsController.choose_team(teams)
+                return team_management_menu.TeamManagementMenu(self.user, team)
         elif user_choice == 4:
             return team_password_menu.TeamPasswordsMenu(self.user)
         else:
