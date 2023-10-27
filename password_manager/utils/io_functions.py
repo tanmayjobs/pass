@@ -1,3 +1,7 @@
+"""
+All the Input-Output related methods are defined here.
+"""
+
 from models.password import Password, PasswordStrength
 
 from utils.crypt import Crypt
@@ -18,8 +22,8 @@ def credential_input(check_strength=False):
         raise NullPassword
 
     if check_strength and Password.strength("", password) in [
-        PasswordStrength.WEAK,
-        PasswordStrength.VERY_WEAK,
+            PasswordStrength.WEAK,
+            PasswordStrength.VERY_WEAK,
     ]:
         raise WeakPassword
 
@@ -90,10 +94,8 @@ def show_members(members):
 
 
 def show_message(message: str):
-    print(
-        f"""
-    {message}"""
-    )
+    print(f"""
+    {message}""")
 
 
 def create_team_input():

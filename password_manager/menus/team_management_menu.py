@@ -1,3 +1,8 @@
+"""
+This file contains the Team Management Menu
+Here user can manage any one previously selected team from Teams Password Menu.
+"""
+
 from controllers.password_controller import PasswordController
 from controllers.teams_controller import TeamsController
 
@@ -32,15 +37,27 @@ class TeamManagementMenu(user_required_menu.UserRequiredMenu,
         if user_choice == 1:
             TeamsController.add_member(self.user, self.team)
             show_message("Member added successfully.")
+
         elif user_choice == 2:
+
             if not self.team.members():
                 show_message("No Member to delete.")
+
             else:
-                TeamsController.delete_member(self.team)
-                show_message("Member deleted successfully.")
+                members = self.team.members()
+
+                if len(members) == 1:
+                    show_message(
+                        "There are no members in your team, except you.")
+
+                else:
+                    TeamsController.delete_member(self.user, self.team)
+                    show_message("Member deleted successfully.")
+
         elif user_choice == 3:
             PasswordController.add_password(self.user, self.team)
             show_message("Password added successfully.")
+
         elif user_choice == 4 or user_choice == 5:
             passwords = PasswordController.get_passwords(
                 self.user,
@@ -49,16 +66,22 @@ class TeamManagementMenu(user_required_menu.UserRequiredMenu,
 
             if not passwords:
                 show_message(f"You haven't saved any password yet.")
+
             else:
                 show_passwords(passwords)
+
                 if user_choice == 4:
                     PasswordController.delete_password(self.user, passwords)
                     show_message("Password deleted successfully.")
+
                 else:
                     PasswordController.update_password(self.user, passwords)
                     show_message("Password updated successfully.")
+
         elif user_choice == 6:
             return teams_management_menu.TeamsManagementMenu(self.user)
+
         else:
             raise ValueError
+
         return self

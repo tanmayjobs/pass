@@ -1,3 +1,7 @@
+"""
+All the custom exceptions are defined here.
+"""
+
 class UserNotFound(Exception):
     ...
 
@@ -23,4 +27,8 @@ class InvalidMemberName(Exception):
 
 
 class MemberAlreadyExists(Exception):
+    ...
+
+
+class UserRemovingSelf(Exception):
     ...

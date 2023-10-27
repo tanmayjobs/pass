@@ -1,3 +1,9 @@
+"""
+This file contains Team Password Menu.
+Here user can view there team passwords.
+And Team Managers have extra feature of Team Management.
+"""
+
 from controllers.password_controller import PasswordController
 
 from models.user import UserType

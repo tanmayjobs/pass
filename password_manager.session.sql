@@ -18,3 +18,4 @@
 -- DELETE FROM team_members
 
 -- SELECT * FROM team_members
+-- SELECT * FROM authentication

@@ -1,3 +1,8 @@
+"""
+This file defines a decorator for functions which handles the menus.
+Here all the exceptions(custom exceptions as well) are handled.
+"""
+
 from sqlite3 import IntegrityError
 
 from logs.logger import Logger, CRITICAL, INFO
@@ -9,6 +14,7 @@ from utils.helpers.exceptions import (
     InvalidMemberName,
     MemberAlreadyExists,
     WeakPassword,
+    UserRemovingSelf,
 )
 from utils.io_functions import show_message
 
@@ -16,6 +22,7 @@ import sys
 
 
 def handle_exception(menu_func):
+
     def wrapper():
         try:
             result = menu_func()
@@ -50,13 +57,17 @@ def handle_exception(menu_func):
         except NotImplementedError:
             show_message("Will soon be implemented, have some patience!")
 
+        except UserRemovingSelf:
+            show_message("Leader can't be removed from the team.")
+
         except SystemExit:
             Logger.log(INFO, "Closing System.")
             show_message("Bye.")
             sys.exit(0)
 
         except Exception as error:
-            Logger.log(CRITICAL, f"Closing System due to unexpected error.<{error}>")
+            Logger.log(CRITICAL,
+                       f"Closing System due to unexpected error.<{error}>")
             show_message("Unexpected Error Occurred! Turning System Down...")
             sys.exit(0)
 

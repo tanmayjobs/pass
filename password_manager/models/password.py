@@ -1,3 +1,9 @@
+"""
+This file contains the Password Model.
+Password Model is created for each password saved by any type of user.
+Password Model is capable of accessing the Database to perform CRUD operation related to passwords.
+"""
+
 from database.db import SQLCursor, SQLQueries
 
 from models.user import User
@@ -46,17 +52,11 @@ class Password:
     ):
         with SQLCursor() as cursor:
             if password_type == PasswordType.PERSONAL_PASSWORD:
-                query = (
-                    SQLQueries.PERSONAL_PASSWORDS_FILTER
-                    if search_key
-                    else SQLQueries.PERSONAL_PASSWORDS
-                )
+                query = (SQLQueries.PERSONAL_PASSWORDS_FILTER
+                         if search_key else SQLQueries.PERSONAL_PASSWORDS)
             else:
-                query = (
-                    SQLQueries.TEAM_PASSWORDS_FILTER
-                    if search_key
-                    else SQLQueries.TEAM_PASSWORDS
-                )
+                query = (SQLQueries.TEAM_PASSWORDS_FILTER
+                         if search_key else SQLQueries.TEAM_PASSWORDS)
 
             params = (
                 *[f"%{search_key}%" for _ in range(3) if search_key],
@@ -64,7 +64,9 @@ class Password:
             )
 
             passwords = cursor.execute(query, params).fetchall()
-            passwords = [Password.from_database(password) for password in passwords]
+            passwords = [
+                Password.from_database(password) for password in passwords
+            ]
 
         return passwords
 
@@ -99,12 +101,15 @@ class Password:
     @staticmethod
     def delete_password(password):
         with SQLCursor() as cursor:
-            cursor.execute(SQLQueries.DELETE_PASSWORD, (password.password_id,))
+            cursor.execute(SQLQueries.DELETE_PASSWORD,
+                           (password.password_id, ))
             if password.password_type == PasswordType.TEAM_PASSWORD:
-                cursor.execute(SQLQueries.DELETE_TEAM_PASSWORD, (password.password_id,))
+                cursor.execute(SQLQueries.DELETE_TEAM_PASSWORD,
+                               (password.password_id, ))
 
     @staticmethod
-    def update_password(password, site_url, site_username, encrypted_password, notes):
+    def update_password(password, site_url, site_username, encrypted_password,
+                        notes):
         with SQLCursor() as cursor:
             cursor.execute(
                 SQLQueries.UPDATE_PASSWORD,

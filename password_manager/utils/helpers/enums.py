@@ -1,3 +1,10 @@
+"""
+This file contains enums used in the program.
+    PasswordType
+    UserType
+    PasswordStrength
+"""
+
 from enum import Enum
 
 

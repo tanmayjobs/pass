@@ -1,3 +1,11 @@
+"""
+This file contains all cryptography methods.
+    Hash
+    Check
+    Encrypt
+    Decrypt
+"""
+
 from cryptography.fernet import Fernet
 
 import os
@@ -8,6 +16,7 @@ dotenv.load_dotenv()
 
 
 class Crypt:
+
     @staticmethod
     def hash(password: str) -> str:
         password_bytes = password

@@ -1,3 +1,9 @@
+"""
+This file contains the User Model.
+User Model is created for each user.
+User Model is capable of accessing the Database to perform CRUD operation related to users.
+"""
+
 from database.db import SQLCursor, SQLQueries
 
 from utils.helpers.enums import UserType
@@ -10,7 +16,8 @@ class User:
     User model which contains all the user's public details.
     """
 
-    def __init__(self, user_id: int, user_type: UserType, username: str) -> None:
+    def __init__(self, user_id: int, user_type: UserType,
+                 username: str) -> None:
         self.user_id = user_id
         self.user_type = UserType(user_type)
         self.username = username
@@ -29,7 +36,8 @@ class User:
     @staticmethod
     def sign_in(username, password):
         with SQLCursor() as cursor:
-            user_data = cursor.execute(SQLQueries.SIGN_IN, (username,)).fetchone()
+            user_data = cursor.execute(SQLQueries.SIGN_IN,
+                                       (username, )).fetchone()
 
             if not user_data:
                 raise InvalidCredentials("Invalid username")
@@ -44,4 +52,5 @@ class User:
     @staticmethod
     def sign_up(username, password_hash, user_role):
         with SQLCursor() as cursor:
-            cursor.execute(SQLQueries.SIGN_UP, (username, password_hash, user_role))
+            cursor.execute(SQLQueries.SIGN_UP,
+                           (username, password_hash, user_role))

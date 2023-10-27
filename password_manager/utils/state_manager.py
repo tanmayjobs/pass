@@ -1,3 +1,9 @@
+"""
+This file contains the StateManager class.
+StateManager class is used to run the even loop for program.
+Also handles the global user value.
+"""
+
 from utils.exception_handler import handle_exception
 from menus.authentication_menu import AuthenticationMenu
 from menus.home_menu import HomeMenu
@@ -26,7 +32,8 @@ class StateManager:
     @staticmethod
     def after_auth():
         user_choice = int(input(StateManager.current_prompt.prompt))
-        StateManager.current_prompt = StateManager.current_prompt.handler(user_choice)
+        StateManager.current_prompt = StateManager.current_prompt.handler(
+            user_choice)
 
         if StateManager.current_prompt == AuthenticationMenu:
             StateManager.current_user = None

@@ -1,3 +1,9 @@
+"""
+This file contains the Teams Management Menu, don't confuse it with Team Management Menu(Focus on the 's' in Team).
+Here Team Managers can add or delete teams.
+And can also select one particular team to manage(which is further managed in Team Management Menu ).
+"""
+
 from controllers.teams_controller import TeamsController
 
 from utils.io_functions import show_teams, show_message
@@ -34,6 +40,7 @@ class TeamsManagementMenu(user_required_menu.UserRequiredMenu):
             else:
                 show_teams(teams)
                 team = TeamsController.choose_team(teams)
+                show_message(f"Team {team.team_name} is selected.")
                 return team_management_menu.TeamManagementMenu(self.user, team)
         elif user_choice == 4:
             return team_password_menu.TeamPasswordsMenu(self.user)

@@ -1,4 +1,10 @@
-from logs.logger import Logger, ERROR, DEBUG
+"""
+This file contains password controller.
+All the methods for passwords are defined here.
+These methods are general and can handle personal and team both type of passwords.
+"""
+
+from logs.logger import Logger, ERROR
 
 from models.user import User
 from models.team import Team

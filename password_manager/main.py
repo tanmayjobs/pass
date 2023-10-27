@@ -1,5 +1,6 @@
 """
 This file contains the entry point to the application.
+This file is responsible to start the Database core.
 """
 
 from database.db import SQLDatabase

@@ -1,3 +1,9 @@
+"""
+This file defines the base database class and database cursor.
+Database class is used to create DB.
+Database cursor is accessed only by models to interact with database.
+"""
+
 from database.queries import SQLQueries
 
 import os

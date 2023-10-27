@@ -1,3 +1,14 @@
+"""
+This file contains the personal password menu.
+Here user have choice to:
+    List
+    Search
+    Add
+    Delete
+    Update
+their personal passwords.
+"""
+
 from controllers.password_controller import PasswordController
 
 from utils.io_functions import show_passwords, show_message

@@ -1,20 +1,20 @@
+"""
+This file contains team controller.
+All the methods related to team are defined here.
+"""
+
 from logs.logger import Logger, ERROR
 
-from utils.helpers.exceptions import InvalidMemberName, MemberAlreadyExists
+from utils.helpers.exceptions import InvalidMemberName, MemberAlreadyExists, UserRemovingSelf
 
 from models.user import User
 from models.team import Team
 
 from sqlite3 import IntegrityError
 
-from utils.io_functions import (
-    create_team_input,
-    team_id_input,
-    team_member_username_input,
-    member_id_input,
-    show_members,
-    show_message,
-)
+from utils.io_functions import (create_team_input, team_id_input,
+                                team_member_username_input, member_id_input,
+                                show_members)
 
 
 class TeamsController:
@@ -86,17 +86,17 @@ class TeamsController:
             return
 
     @staticmethod
-    def delete_member(team: Team):
+    def delete_member(user: User, team: Team):
         try:
             all_members = team.members()
+            show_members(all_members)
 
-            if not all_members:
-                show_message("There are no members in your team, except you.")
-            else:
-                show_members(all_members)
+            member_id = all_members[int(member_id_input()) - 1].user_id
 
-                member_id = int(member_id_input()) - 1
-                team.delete_member(member_id)
+            if member_id == user.user_id:
+                raise UserRemovingSelf
+
+            team.delete_member(member_id)
         except (TypeError, IndexError) as error:
             Logger.log(ERROR, error)
             raise ValueError

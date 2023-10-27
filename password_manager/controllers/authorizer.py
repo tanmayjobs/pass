@@ -1,5 +1,7 @@
-from database.db import SQLCursor
-from database.queries import SQLQueries
+"""
+This file contains the controller for authentication.
+Sign In, Sign Up for authentication are defined in this file.
+"""
 
 from logs.logger import Logger, WARN, INFO
 
@@ -23,7 +25,7 @@ class Authorizer:
             username, password = credential_input()
 
         try:
-           user = User.sign_in(username, password)
+            user = User.sign_in(username, password)
         except InvalidCredentials:
             Logger.log(WARN, f"Invalid Credentials by {username}.")
             raise
