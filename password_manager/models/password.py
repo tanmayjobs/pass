@@ -4,7 +4,7 @@ Password Model is created for each password saved by any type of user.
 Password Model is capable of accessing the Database to perform CRUD operation related to passwords.
 """
 
-from database.db import SQLCursor, SQLQueries
+from database.db import SQLDatabase, SQLQueries
 
 from models.user import User
 
@@ -50,23 +50,28 @@ class Password:
         search_key: str = "",
         password_type: PasswordType = PasswordType.PERSONAL_PASSWORD,
     ):
-        with SQLCursor() as cursor:
-            if password_type == PasswordType.PERSONAL_PASSWORD:
-                query = (SQLQueries.PERSONAL_PASSWORDS_FILTER
-                         if search_key else SQLQueries.PERSONAL_PASSWORDS)
-            else:
-                query = (SQLQueries.TEAM_PASSWORDS_FILTER
-                         if search_key else SQLQueries.TEAM_PASSWORDS)
+        db = SQLDatabase()
 
-            params = (
-                *[f"%{search_key}%" for _ in range(3) if search_key],
-                user.user_id,
+        if password_type == PasswordType.PERSONAL_PASSWORD:
+            query = (
+                SQLQueries.PERSONAL_PASSWORDS_FILTER
+                if search_key
+                else SQLQueries.PERSONAL_PASSWORDS
+            )
+        else:
+            query = (
+                SQLQueries.TEAM_PASSWORDS_FILTER
+                if search_key
+                else SQLQueries.TEAM_PASSWORDS
             )
 
-            passwords = cursor.execute(query, params).fetchall()
-            passwords = [
-                Password.from_database(password) for password in passwords
-            ]
+        params = (
+            *[f"%{search_key}%" for _ in range(3) if search_key],
+            user.user_id,
+        )
+
+        passwords = db.get(query, params)
+        passwords = [Password.from_database(password) for password in passwords]
 
         return passwords
 
@@ -79,48 +84,46 @@ class Password:
         notes: str,
         team=None,
     ):
-        with SQLCursor() as cursor:
-            cursor.execute(
-                SQLQueries.ADD_PASSWORD,
-                (
-                    user.user_id,
-                    site_url,
-                    site_username,
-                    0 if not team else 1,
-                    password,
-                    notes,
-                ),
-            )
+        db = SQLDatabase()
+        last_transaction = db.add(
+            SQLQueries.ADD_PASSWORD,
+            (
+                user.user_id,
+                site_url,
+                site_username,
+                0 if not team else 1,
+                password,
+                notes,
+            ),
+        )
 
-            if team:
-                cursor.execute(
-                    SQLQueries.ADD_TEAM_PASSWORD_MAPPING,
-                    (cursor.lastrowid, team.team_id),
-                )
+        if team:
+            db.add(
+                SQLQueries.ADD_TEAM_PASSWORD_MAPPING,
+                (last_transaction.last_id, team.team_id),
+            )
 
     @staticmethod
     def delete_password(password):
-        with SQLCursor() as cursor:
-            cursor.execute(SQLQueries.DELETE_PASSWORD,
-                           (password.password_id, ))
-            if password.password_type == PasswordType.TEAM_PASSWORD:
-                cursor.execute(SQLQueries.DELETE_TEAM_PASSWORD,
-                               (password.password_id, ))
+        db = SQLDatabase()
+        db.remove(SQLQueries.DELETE_PASSWORD, (password.password_id,))
+
+        if password.password_type == PasswordType.TEAM_PASSWORD:
+            db.remove(SQLQueries.DELETE_TEAM_PASSWORD, (password.password_id,))
 
     @staticmethod
-    def update_password(password, site_url, site_username, encrypted_password,
-                        notes):
-        with SQLCursor() as cursor:
-            cursor.execute(
-                SQLQueries.UPDATE_PASSWORD,
-                (
-                    site_url,
-                    site_username,
-                    encrypted_password,
-                    notes,
-                    password.password_id,
-                ),
-            )
+    def update_password(password, site_url, site_username, encrypted_password, notes):
+        db = SQLDatabase()
+        db.update(
+            SQLQueries.UPDATE_PASSWORD,
+            (
+                site_url,
+                site_username,
+                encrypted_password,
+                notes,
+                password.password_id,
+            ),
+        )
 
     def strength(self, decrypted_password=None) -> PasswordStrength:
         if not decrypted_password:

@@ -346,3 +346,24 @@
 30-10-2023 10:14:29 INFO       User signed out.
 30-10-2023 10:14:40 INFO       User signed out.
 30-10-2023 10:14:45 INFO       Closing System.
+30-10-2023 12:17:57 INFO       Initializing System...
+30-10-2023 12:18:44 INFO       Closing System.
+30-10-2023 13:18:27 INFO       Initializing System...
+30-10-2023 13:18:30 INFO       Closing System.
+30-10-2023 13:19:07 INFO       Initializing System...
+30-10-2023 13:19:19 CRITICAL   Closing System due to unexpected error.<SQLDatabase.get() takes 2 positional arguments but 3 were given>
+30-10-2023 13:20:32 INFO       Initializing System...
+30-10-2023 13:20:38 CRITICAL   Closing System due to unexpected error.<list index out of range>
+30-10-2023 13:21:12 INFO       Initializing System...
+30-10-2023 13:21:18 WARNING    Invalid Credentials by tanmay.
+30-10-2023 13:23:00 ERROR      list index out of range
+30-10-2023 13:23:16 INFO       User signed out.
+30-10-2023 13:23:31 WARNING    Invalid Credentials by vinny.
+30-10-2023 13:24:23 ERROR      
+30-10-2023 13:25:24 CRITICAL   Closing System due to unexpected error.<SQLDatabase.add() missing 1 required positional argument: 'params'>
+30-10-2023 13:26:48 INFO       Initializing System...
+30-10-2023 13:27:15 INFO       User signed out.
+30-10-2023 13:27:17 INFO       Closing System.
+30-10-2023 13:27:20 INFO       Initializing System...
+30-10-2023 13:27:36 INFO       User signed out.
+30-10-2023 13:27:37 INFO       Closing System.

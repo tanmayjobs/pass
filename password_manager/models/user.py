@@ -4,7 +4,7 @@ User Model is created for each user.
 User Model is capable of accessing the Database to perform CRUD operation related to users.
 """
 
-from database.db import SQLCursor, SQLQueries
+from database.db import SQLDatabase, SQLQueries
 
 from utils.helpers.enums import UserType
 from utils.helpers.exceptions import InvalidCredentials
@@ -16,8 +16,7 @@ class User:
     User model which contains all the user's public details.
     """
 
-    def __init__(self, user_id: int, user_type: UserType,
-                 username: str) -> None:
+    def __init__(self, user_id: int, user_type: UserType, username: str) -> None:
         self.user_id = user_id
         self.user_type = UserType(user_type)
         self.username = username
@@ -35,22 +34,21 @@ class User:
 
     @staticmethod
     def sign_in(username, password):
-        with SQLCursor() as cursor:
-            user_data = cursor.execute(SQLQueries.SIGN_IN,
-                                       (username, )).fetchone()
+        db = SQLDatabase()
+        user_data = db.get(SQLQueries.SIGN_IN, (username,))
 
-            if not user_data:
-                raise InvalidCredentials("Invalid username")
+        if not user_data:
+            raise InvalidCredentials("Invalid username")
 
-            hashed_password = user_data[2]
+        user_data = user_data[0]
+        hashed_password = user_data[2]
 
-            if not Crypt.check(password, hashed_password):
-                raise InvalidCredentials("Invalid password!")
+        if not Crypt.check(password, hashed_password):
+            raise InvalidCredentials("Invalid password!")
 
         return User.from_database(user_data)
 
     @staticmethod
     def sign_up(username, password_hash, user_role):
-        with SQLCursor() as cursor:
-            cursor.execute(SQLQueries.SIGN_UP,
-                           (username, password_hash, user_role))
+        db = SQLDatabase()
+        db.add(SQLQueries.SIGN_UP, (username, password_hash, user_role))

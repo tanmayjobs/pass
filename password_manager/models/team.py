@@ -4,7 +4,7 @@ Team Model is created for each team created by team manager.
 Team Model is capable of accessing the Database to perform CRUD operation related to teams.
 """
 
-from database.db import SQLCursor, SQLQueries
+from database.db import SQLDatabase, SQLQueries
 
 from utils.helpers.exceptions import InvalidMemberName
 
@@ -31,45 +31,39 @@ class Team:
 
     @staticmethod
     def get_teams(user: User):
-        with SQLCursor() as cursor:
-            teams = cursor.execute(SQLQueries.ALL_TEAMS,
-                                   (user.user_id, )).fetchall()
-            teams = [Team.from_database(team) for team in teams]
+        db = SQLDatabase()
+        teams = db.get(SQLQueries.ALL_TEAMS, (user.user_id,))
+        teams = [Team.from_database(team) for team in teams]
 
         return teams
 
     @staticmethod
     def add(user: User, team_name: str):
-        with SQLCursor() as cursor:
-            cursor.execute(SQLQueries.ADD_TEAM, (user.user_id, team_name))
-            cursor.execute(SQLQueries.ADD_TEAM_LEADER,
-                           (cursor.lastrowid, user.user_id))
+        db = SQLDatabase()
+
+        last_transaction = db.add(SQLQueries.ADD_TEAM, (user.user_id, team_name))
+        db.add(SQLQueries.ADD_TEAM_LEADER, (last_transaction.last_id, user.user_id))
 
     @staticmethod
     def delete(user: User, team):
-        with SQLCursor() as cursor:
-            cursor.execute(SQLQueries.DELETE_ALL_TEAM_PASSWORDS,
-                           (team.team_id, user.user_id))
-            cursor.execute(SQLQueries.DELETE_ALL_TEAM_MEMBERS,
-                           (team.team_id, ))
-            cursor.execute(SQLQueries.DELETE_ALL_TEAM_PASSWORDS_RECORDS,
-                           (team.team_id, ))
-            cursor.execute(SQLQueries.DELETE_TEAM, (team.team_id, ))
+        db = SQLDatabase()
+        db.remove(SQLQueries.DELETE_ALL_TEAM_PASSWORDS, (team.team_id, user.user_id))
+        db.remove(SQLQueries.DELETE_ALL_TEAM_MEMBERS, (team.team_id,))
+        db.remove(SQLQueries.DELETE_ALL_TEAM_PASSWORDS_RECORDS, (team.team_id,))
+        db.remove(SQLQueries.DELETE_TEAM, (team.team_id,))
 
     @staticmethod
     def add_member(team, member_username: str):
-        with SQLCursor() as cursor:
-            cursor.execute(SQLQueries.ADD_MEMBER,
-                           (team.team_id, member_username))
-            if not cursor.rowcount:
-                raise InvalidMemberName
+        db = SQLDatabase()
+        last_transaction = db.add(SQLQueries.ADD_MEMBER, (team.team_id, member_username))
+        if not last_transaction.rows_changed:
+            raise InvalidMemberName
 
     def delete_member(self, member_id: str):
-        with SQLCursor() as cursor:
-            cursor.execute(SQLQueries.DELETE_MEMBER, (self.team_id, member_id))
+        db = SQLDatabase()
+        db.remove(SQLQueries.DELETE_MEMBER, (self.team_id, member_id))
 
     def members(self):
-        with SQLCursor() as cursor:
-            all_members = cursor.execute(SQLQueries.GET_MEMBERS,
-                                         (self.team_id, )).fetchall()
-            return [User.from_database(member) for member in all_members]
+        db = SQLDatabase()
+        all_members = db.get(SQLQueries.GET_MEMBERS, (self.team_id,))
+        return [User.from_database(member) for member in all_members]
