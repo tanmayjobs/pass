@@ -35,7 +35,7 @@ class PersonalPasswordsMenu(user_required_menu.UserRequiredMenu):
                 self.user, user_choice == 2)
 
             if not passwords:
-                show_message(f"You haven't saved any password yet.")
+                show_message(f"No passwords to show.")
             else:
                 show_passwords(passwords)
                 if user_choice < 3:

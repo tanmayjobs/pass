@@ -49,10 +49,6 @@ def search_key_input():
     return input("    Enter keywords for search:")
 
 
-def password_id_input():
-    return input("    Enter password id:")
-
-
 def password_ids_input():
     return input(
         "    Enter password ids to see password(comma seprated values or A for all):"
@@ -102,13 +98,19 @@ def create_team_input():
     return input("    Enter Team Name:")
 
 
-def team_id_input():
-    return input("    Enter team id:")
-
-
 def team_member_username_input():
     return input("    Enter username of the member:")
 
 
-def member_id_input():
-    return input("    Enter member id:")
+def select_by_id(data, data_name):
+    index = input(f"    Enter {data_name} id:")
+
+    if not index.isdigit():
+        raise ValueError
+
+    index = int(index) - 1
+
+    if index < 0 or index > len(data) - 1:
+        raise ValueError
+
+    return data[index]

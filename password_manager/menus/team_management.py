@@ -65,7 +65,7 @@ class TeamManagementMenu(user_required_menu.UserRequiredMenu,
             )
 
             if not passwords:
-                show_message(f"You haven't saved any password yet.")
+                show_message(f"No passwords to show.")
 
             else:
                 show_passwords(passwords)

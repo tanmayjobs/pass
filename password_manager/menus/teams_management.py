@@ -33,6 +33,7 @@ class TeamsManagementMenu(user_required_menu.UserRequiredMenu):
             else:
                 show_teams(teams)
                 TeamsController.delete_team(teams, self.user)
+                show_message("Team deleted successfully!")
         elif user_choice == 3:
             teams = TeamsController.get_teams(self.user)
             if not teams:

@@ -308,3 +308,41 @@
 27-10-2023 22:09:04 WARNING    Invalid Credentials by asd.
 27-10-2023 22:09:08 WARNING    Invalid Credentials by admin.
 27-10-2023 22:09:09 INFO       Closing System.
+30-10-2023 09:33:11 INFO       Initializing System...
+30-10-2023 09:33:14 INFO       Closing System.
+30-10-2023 09:33:45 INFO       Initializing System...
+30-10-2023 09:34:28 ERROR      argument should be a bytes-like object or ASCII string, not 'NoneType'
+30-10-2023 09:34:28 CRITICAL   Closing System due to unexpected error.<argument should be a bytes-like object or ASCII string, not 'NoneType'>
+30-10-2023 09:35:10 INFO       Initializing System...
+30-10-2023 09:35:27 ERROR      argument should be a bytes-like object or ASCII string, not 'NoneType'
+30-10-2023 09:39:02 INFO       Initializing System...
+30-10-2023 09:45:53 INFO       User signed out.
+30-10-2023 09:45:54 INFO       Closing System.
+30-10-2023 09:51:20 INFO       Initializing System...
+30-10-2023 09:57:30 INFO       Initializing System...
+30-10-2023 09:59:35 ERROR      list index out of range
+30-10-2023 10:00:41 INFO       User signed out.
+30-10-2023 10:00:42 INFO       Closing System.
+30-10-2023 10:01:01 INFO       Initializing System...
+30-10-2023 10:01:11 ERROR      
+30-10-2023 10:01:15 ERROR      
+30-10-2023 10:01:21 ERROR      
+30-10-2023 10:02:13 INFO       User signed out.
+30-10-2023 10:02:37 ERROR      list index out of range
+30-10-2023 10:02:41 ERROR      list index out of range
+30-10-2023 10:03:23 INFO       Initializing System...
+30-10-2023 10:04:46 INFO       User signed out.
+30-10-2023 10:04:47 INFO       Closing System.
+30-10-2023 10:06:32 INFO       Initializing System...
+30-10-2023 10:08:43 ERROR      
+30-10-2023 10:08:45 ERROR      
+30-10-2023 10:08:48 ERROR      
+30-10-2023 10:08:52 ERROR      
+30-10-2023 10:09:03 INFO       User signed out.
+30-10-2023 10:09:05 INFO       Closing System.
+30-10-2023 10:09:08 INFO       Initializing System...
+30-10-2023 10:13:49 INFO       User signed out.
+30-10-2023 10:14:02 INFO       User signed out.
+30-10-2023 10:14:29 INFO       User signed out.
+30-10-2023 10:14:40 INFO       User signed out.
+30-10-2023 10:14:45 INFO       Closing System.

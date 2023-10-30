@@ -12,9 +12,9 @@ from models.team import Team
 
 from sqlite3 import IntegrityError
 
-from utils.io_functions import (create_team_input, team_id_input,
-                                team_member_username_input, member_id_input,
-                                show_members)
+from utils.io_functions import (create_team_input,
+                                team_member_username_input,
+                                show_members, select_by_id)
 
 
 class TeamsController:
@@ -41,8 +41,7 @@ class TeamsController:
     @staticmethod
     def delete_team(teams: list[Team], user: User):
         try:
-            selected_team = int(team_id_input()) - 1
-            team = teams[selected_team]
+            team = select_by_id(teams, "team")
             Team.delete(user, team)
         except (TypeError, IndexError) as error:
             Logger.log(ERROR, error)
@@ -55,8 +54,7 @@ class TeamsController:
     @staticmethod
     def choose_team(teams: list[Team]):
         try:
-            selected_team = int(team_id_input()) - 1
-            team = teams[selected_team]
+            team = select_by_id(teams, "team")
         except (TypeError, IndexError) as error:
             Logger.log(ERROR, error)
             raise ValueError
@@ -91,7 +89,7 @@ class TeamsController:
             all_members = team.members()
             show_members(all_members)
 
-            member_id = all_members[int(member_id_input()) - 1].user_id
+            member_id = select_by_id(all_members, "member").user_id
 
             if member_id == user.user_id:
                 raise UserRemovingSelf

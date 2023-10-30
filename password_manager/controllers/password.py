@@ -13,8 +13,8 @@ from models.password import Password, PasswordType
 from utils.io_functions import (
     create_password_input,
     search_key_input,
-    password_id_input,
     password_ids_input,
+    select_by_id
 )
 
 
@@ -77,8 +77,7 @@ class PasswordController:
     @staticmethod
     def delete_password(user: User, passwords: list[Password]):
         try:
-            selected_password = int(password_id_input()) - 1
-            password = passwords[selected_password]
+            password = select_by_id(passwords, "password")
 
             Password.delete_password(password)
 
@@ -96,8 +95,7 @@ class PasswordController:
     @staticmethod
     def update_password(user: User, passwords: list[Password]):
         try:
-            selected_password = int(password_id_input()) - 1
-            password = passwords[selected_password]
+            password = select_by_id(passwords, "password")
             site_url, site_username, encrypted_password, notes = create_password_input(
             )
 
