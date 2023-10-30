@@ -69,7 +69,7 @@ def handle_exception(menu_func):
             Logger.log(CRITICAL,
                        f"Closing System due to unexpected error.<{error}>")
             show_message("Unexpected Error Occurred! Turning System Down...")
-            sys.exit(0)
+            sys.exit(1)
 
         else:
             return result
