@@ -16,7 +16,8 @@ class User:
     User model which contains all the user's public details.
     """
 
-    def __init__(self, user_id: int, user_type: UserType, username: str) -> None:
+    def __init__(self, user_id: int, user_type: UserType,
+                 username: str) -> None:
         self.user_id = user_id
         self.user_type = UserType(user_type)
         self.username = username
@@ -35,7 +36,7 @@ class User:
     @staticmethod
     def sign_in(username, password):
         db = SQLDatabase()
-        user_data = db.get(SQLQueries.SIGN_IN, (username,))
+        user_data = db.get(SQLQueries.SIGN_IN, (username, ))
 
         if not user_data:
             raise InvalidCredentials("Invalid username")

@@ -2,6 +2,7 @@
 All the SQL Queries are defined in this file.
 """
 
+
 class SQLQueries:
     CREATE_AUTHENTICATION_TABLE = """
     CREATE TABLE IF NOT EXISTS authentication(

@@ -12,8 +12,7 @@ from models.team import Team
 
 from sqlite3 import IntegrityError
 
-from utils.io_functions import (create_team_input,
-                                team_member_username_input,
+from utils.io_functions import (create_team_input, team_member_username_input,
                                 show_members, select_by_id)
 
 

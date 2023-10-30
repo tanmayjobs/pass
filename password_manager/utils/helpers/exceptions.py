@@ -2,6 +2,7 @@
 All the custom exceptions are defined here.
 """
 
+
 class UserNotFound(Exception):
     ...
 

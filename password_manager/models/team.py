@@ -32,7 +32,7 @@ class Team:
     @staticmethod
     def get_teams(user: User):
         db = SQLDatabase()
-        teams = db.get(SQLQueries.ALL_TEAMS, (user.user_id,))
+        teams = db.get(SQLQueries.ALL_TEAMS, (user.user_id, ))
         teams = [Team.from_database(team) for team in teams]
 
         return teams
@@ -41,21 +41,26 @@ class Team:
     def add(user: User, team_name: str):
         db = SQLDatabase()
 
-        last_transaction = db.add(SQLQueries.ADD_TEAM, (user.user_id, team_name))
-        db.add(SQLQueries.ADD_TEAM_LEADER, (last_transaction.last_id, user.user_id))
+        last_transaction = db.add(SQLQueries.ADD_TEAM,
+                                  (user.user_id, team_name))
+        db.add(SQLQueries.ADD_TEAM_LEADER,
+               (last_transaction.last_id, user.user_id))
 
     @staticmethod
     def delete(user: User, team):
         db = SQLDatabase()
-        db.remove(SQLQueries.DELETE_ALL_TEAM_PASSWORDS, (team.team_id, user.user_id))
-        db.remove(SQLQueries.DELETE_ALL_TEAM_MEMBERS, (team.team_id,))
-        db.remove(SQLQueries.DELETE_ALL_TEAM_PASSWORDS_RECORDS, (team.team_id,))
-        db.remove(SQLQueries.DELETE_TEAM, (team.team_id,))
+        db.remove(SQLQueries.DELETE_ALL_TEAM_PASSWORDS,
+                  (team.team_id, user.user_id))
+        db.remove(SQLQueries.DELETE_ALL_TEAM_MEMBERS, (team.team_id, ))
+        db.remove(SQLQueries.DELETE_ALL_TEAM_PASSWORDS_RECORDS,
+                  (team.team_id, ))
+        db.remove(SQLQueries.DELETE_TEAM, (team.team_id, ))
 
     @staticmethod
     def add_member(team, member_username: str):
         db = SQLDatabase()
-        last_transaction = db.add(SQLQueries.ADD_MEMBER, (team.team_id, member_username))
+        last_transaction = db.add(SQLQueries.ADD_MEMBER,
+                                  (team.team_id, member_username))
         if not last_transaction.rows_changed:
             raise InvalidMemberName
 
@@ -65,5 +70,5 @@ class Team:
 
     def members(self):
         db = SQLDatabase()
-        all_members = db.get(SQLQueries.GET_MEMBERS, (self.team_id,))
+        all_members = db.get(SQLQueries.GET_MEMBERS, (self.team_id, ))
         return [User.from_database(member) for member in all_members]

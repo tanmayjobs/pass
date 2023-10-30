@@ -10,12 +10,8 @@ from models.user import User
 from models.team import Team
 from models.password import Password, PasswordType
 
-from utils.io_functions import (
-    create_password_input,
-    search_key_input,
-    password_ids_input,
-    select_by_id
-)
+from utils.io_functions import (create_password_input, search_key_input,
+                                password_ids_input, select_by_id)
 
 
 class PasswordController:

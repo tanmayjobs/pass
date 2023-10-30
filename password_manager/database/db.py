@@ -1,7 +1,7 @@
 """
 This file defines the base database class and database cursor.
 Database class is used to create DB.
-Database cursor is accessed only by models to interact with database.
+Database is accessed only by models to interact with database.
 """
 
 from database.queries import SQLQueries
@@ -27,17 +27,18 @@ class SQLCursor:
         self.connection.commit()
         self.connection.close()
 
+
 class LastTransaction:
+
     def __init__(self, lastrowid, rowcount) -> None:
         self.last_id = lastrowid
         self.rows_changed = rowcount
 
     @staticmethod
     def from_cursor(cursor):
-        return LastTransaction(
-            lastrowid=cursor.lastrowid,
-            rowcount=cursor.rowcount
-        )
+        return LastTransaction(lastrowid=cursor.lastrowid,
+                               rowcount=cursor.rowcount)
+
 
 class SQLDatabase:
 
@@ -68,6 +69,6 @@ class SQLDatabase:
         with SQLCursor() as cursor:
             cursor.execute(query, params)
 
-    def update(self, query , params):
+    def update(self, query, params):
         with SQLCursor() as cursor:
             cursor.execute(query, params)
