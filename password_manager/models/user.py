@@ -6,8 +6,8 @@ User Model is capable of accessing the Database to perform CRUD operation relate
 
 from database.db import SQLDatabase, SQLQueries
 
-from utils.helpers.enums import UserType
-from utils.helpers.exceptions import InvalidCredentials
+from helpers.enums import UserType
+from helpers.exceptions import InvalidCredentials
 from utils.crypt import Crypt
 
 

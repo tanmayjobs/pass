@@ -5,7 +5,7 @@ All the Input-Output related methods are defined here.
 from models.password import Password, PasswordStrength
 
 from utils.crypt import Crypt
-from utils.helpers.exceptions import NullPassword, NullUsername, WeakPassword
+from helpers.exceptions import NullPassword, NullUsername, WeakPassword
 
 import pwinput
 

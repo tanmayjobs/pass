@@ -4,6 +4,7 @@ Database class is used to create DB.
 Database is accessed only by models to interact with database.
 """
 
+from logs.logger import Logger, DEBUG
 from database.queries import SQLQueries
 
 import os
@@ -56,6 +57,8 @@ class SQLDatabase:
             cursor.execute(SQLQueries.CREATE_TEAM_MEMBERS_TABLE)
 
     def get(self, query, params):
+        Logger.log(DEBUG, query)
+        Logger.log(DEBUG, params)
         with SQLCursor() as cursor:
             data = cursor.execute(query, params).fetchall()
             return data

@@ -4,9 +4,9 @@ Here Team Managers can add or delete teams.
 And can also select one particular team to manage(which is further managed in Team Management Menu ).
 """
 
-from controllers.teams import TeamsController
+import controllers.teams as TeamsController
 
-from utils.io_functions import show_teams, show_message
+from utils.io_functions import show_teams, show_message, create_team_input, select_by_id
 
 import menus.user_required_menu as user_required_menu
 import menus.team_passwords as team_passwords
@@ -25,13 +25,15 @@ class TeamsManagementMenu(user_required_menu.UserRequiredMenu):
 
     def handler(self, user_choice):
         if user_choice == 1:
-            TeamsController.add_team(self.user)
+            team_name = create_team_input()
+            TeamsController.add_team(self.user, team_name)
         elif user_choice == 2:
             teams = TeamsController.get_teams(self.user)
             if not teams:
                 show_message("You haven't created any teams yet.")
             else:
                 show_teams(teams)
+                team = select_by_id(teams, "team")
                 TeamsController.delete_team(teams, self.user)
                 show_message("Team deleted successfully!")
         elif user_choice == 3:
@@ -40,7 +42,7 @@ class TeamsManagementMenu(user_required_menu.UserRequiredMenu):
                 show_message("You haven't created any teams yet.")
             else:
                 show_teams(teams)
-                team = TeamsController.choose_team(teams)
+                team = select_by_id(teams, "team")
                 show_message(f"Team {team.team_name} is selected.")
                 return team_management.TeamManagementMenu(self.user, team)
         elif user_choice == 4:

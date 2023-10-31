@@ -7,7 +7,7 @@ from sqlite3 import IntegrityError
 
 from logs.logger import Logger, CRITICAL, INFO
 
-from utils.helpers.exceptions import (
+from helpers.exceptions import (
     InvalidCredentials,
     NullPassword,
     NullUsername,

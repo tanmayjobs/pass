@@ -2,7 +2,6 @@
 All the SQL Queries are defined in this file.
 """
 
-
 class SQLQueries:
     CREATE_AUTHENTICATION_TABLE = """
     CREATE TABLE IF NOT EXISTS authentication(
@@ -78,12 +77,29 @@ class SQLQueries:
     AND creator_id = ? AND password_type = 0;
     """
 
+    EVERY_TEAM_PASSWORDS = """
+    SELECT passwords.*
+    FROM team_members
+    INNER JOIN team_passwords ON team_passwords.team_id = team_members.team_id
+    INNER JOIN passwords ON team_passwords.password_id = passwords.id
+    WHERE team_members.member_id = ? and passwords.password_type = 1;
+    """
+
+    EVERY_TEAM_PASSWORDS_FILTER = """
+    SELECT passwords.*
+    FROM team_members
+    INNER JOIN team_passwords ON team_passwords.team_id = team_members.team_id
+    INNER JOIN passwords ON team_passwords.password_id = passwords.id
+    AND (passwords.site_url LIKE ? or passwords.site_username LIKE ? or passwords.notes LIKE ?)
+    WHERE member_id = ? and passwords.password_type = 1;
+    """
+
     TEAM_PASSWORDS = """
     SELECT passwords.id, passwords.creator_id, passwords.password_type, passwords.site_url, passwords.site_username, passwords.encrypted_password, passwords.notes
     FROM team_members
     INNER JOIN team_passwords ON team_passwords.team_id = team_members.team_id
     INNER JOIN passwords ON team_passwords.password_id = passwords.id
-    WHERE team_members.member_id = ?;
+    WHERE team_members.member_id = ? and team_passwords.team_id = ? and passwords.password_type = 1;
     """
 
     TEAM_PASSWORDS_FILTER = """
@@ -92,7 +108,7 @@ class SQLQueries:
     INNER JOIN team_passwords ON team_passwords.team_id = team_members.team_id
     INNER JOIN passwords ON team_passwords.password_id = passwords.id
     AND (passwords.site_url LIKE ? or passwords.site_username LIKE ? or passwords.notes LIKE ?)
-    WHERE member_id = ?
+    WHERE member_id = ? and team_passwords.team_id = ? and passwords.password_type = 1;
     """
 
     ADD_PASSWORD = """

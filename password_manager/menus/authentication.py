@@ -4,8 +4,9 @@ Here user can sign in or sign up.
 And can also exit from the system.
 """
 
-from controllers.authorizer import Authorizer
+import controllers.authorizer as Authorizer
 
+from utils.io_functions import credential_input
 from utils.io_functions import show_message
 
 
@@ -21,12 +22,14 @@ class AuthenticationMenu:
     @staticmethod
     def handler(user_choice):
         if user_choice == 1:
-            user = Authorizer.sign_in()
+            username, password = credential_input()
+            user = Authorizer.sign_in(username, password)
             return user
 
         elif user_choice == 2:
+            username, password = credential_input(check_strength=True)
             user_role = 1
-            Authorizer.sign_up(user_role)
+            Authorizer.sign_up(username, password, user_role)
 
             show_message("User created successfuly.")
 
@@ -50,12 +53,14 @@ class AuthenticationMenu:
     @staticmethod
     def handler(user_choice):
         if user_choice == 1:
-            user = Authorizer.sign_in()
+            username, password = credential_input()
+            user = Authorizer.sign_in(username, password)
             return user
 
         elif user_choice == 2 or user_choice == 3:
+            username, password = credential_input(check_strength=True)
             user_role = 0 if user_choice == 3 else 1
-            Authorizer.sign_up(user_role)
+            Authorizer.sign_up(username, password, user_role)
 
             show_message("User created successfuly.")
 

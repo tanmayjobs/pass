@@ -367,3 +367,438 @@
 30-10-2023 13:27:20 INFO       Initializing System...
 30-10-2023 13:27:36 INFO       User signed out.
 30-10-2023 13:27:37 INFO       Closing System.
+31-10-2023 10:53:04 INFO       Initializing System...
+31-10-2023 10:53:11 INFO       Closing System.
+31-10-2023 10:53:20 INFO       Initializing System...
+31-10-2023 10:59:22 INFO       Closing System.
+31-10-2023 10:59:26 INFO       Initializing System...
+31-10-2023 11:01:10 ERROR      argument should be a bytes-like object or ASCII string, not 'NoneType'
+31-10-2023 11:01:10 CRITICAL   Closing System due to unexpected error.<argument should be a bytes-like object or ASCII string, not 'NoneType'>
+31-10-2023 11:27:17 INFO       Initializing System...
+31-10-2023 11:38:10 ERROR      
+31-10-2023 11:38:29 INFO       User signed out.
+31-10-2023 11:42:31 INFO       User signed out.
+31-10-2023 11:43:11 ERROR      
+31-10-2023 11:43:16 INFO       User signed out.
+31-10-2023 11:43:36 ERROR      
+31-10-2023 11:43:48 INFO       User signed out.
+31-10-2023 11:44:10 INFO       User signed out.
+31-10-2023 11:45:06 INFO       User signed out.
+31-10-2023 11:45:08 INFO       Closing System.
+31-10-2023 11:48:01 INFO       Initializing System...
+31-10-2023 11:48:39 ERROR      
+31-10-2023 11:49:39 ERROR      
+31-10-2023 11:49:46 ERROR      
+31-10-2023 11:49:58 INFO       User signed out.
+31-10-2023 11:50:02 INFO       Closing System.
+31-10-2023 11:50:05 INFO       Initializing System...
+31-10-2023 11:50:18 INFO       User signed out.
+31-10-2023 11:50:37 ERROR      
+31-10-2023 11:50:40 ERROR      
+31-10-2023 11:50:44 INFO       User signed out.
+31-10-2023 11:50:57 INFO       User signed out.
+31-10-2023 11:51:41 INFO       User signed out.
+31-10-2023 11:52:33 INFO       User signed out.
+31-10-2023 11:52:35 INFO       Closing System.
+31-10-2023 11:54:03 INFO       Initializing System...
+31-10-2023 11:54:46 ERROR      
+31-10-2023 11:54:59 INFO       User signed out.
+31-10-2023 11:55:00 INFO       Closing System.
+31-10-2023 12:02:15 INFO       Initializing System...
+31-10-2023 12:04:35 INFO       Initializing System...
+31-10-2023 12:04:52 CRITICAL   Closing System due to unexpected error.<no such table: authentication>
+31-10-2023 12:05:10 INFO       Initializing System...
+31-10-2023 12:05:16 WARNING    Invalid Credentials by tanmay.
+31-10-2023 12:17:15 INFO       Initializing System...
+31-10-2023 12:18:03 ERROR      'NoneType' object has no attribute 'team_id'
+31-10-2023 12:18:03 CRITICAL   Closing System due to unexpected error.<'NoneType' object has no attribute 'team_id'>
+31-10-2023 12:18:57 INFO       Initializing System...
+31-10-2023 12:19:16 ERROR      no such column: NONE
+31-10-2023 12:19:16 CRITICAL   Closing System due to unexpected error.<no such column: NONE>
+31-10-2023 12:20:12 INFO       Initializing System...
+31-10-2023 12:22:20 INFO       Initializing System...
+31-10-2023 12:23:15 ERROR      
+31-10-2023 12:23:18 ERROR      
+31-10-2023 12:23:53 INFO       User signed out.
+31-10-2023 12:25:51 WARNING    Duplicate account creation attempt vinny.
+31-10-2023 13:38:39 INFO       User signed out.
+31-10-2023 13:39:47 INFO       User signed out.
+31-10-2023 13:39:48 INFO       Closing System.
+31-10-2023 13:40:30 INFO       Initializing System...
+31-10-2023 13:40:42 INFO       User signed out.
+31-10-2023 13:40:42 INFO       Closing System.
+31-10-2023 13:56:43 INFO       Initializing System...
+31-10-2023 13:57:37 ERROR      
+31-10-2023 13:58:00 INFO       User signed out.
+31-10-2023 13:58:01 INFO       Closing System.
+31-10-2023 14:19:48 INFO       Initializing System...
+31-10-2023 14:19:50 CRITICAL   Closing System due to unexpected error.<sign_up() missing 2 required positional arguments: 'password' and 'user_role'>
+31-10-2023 14:21:04 INFO       Initializing System...
+31-10-2023 14:21:12 INFO       Initializing System...
+31-10-2023 14:21:27 CRITICAL   Closing System due to unexpected error.<sign_in() missing 2 required positional arguments: 'username' and 'password'>
+31-10-2023 14:21:55 INFO       Initializing System...
+31-10-2023 14:22:02 CRITICAL   Closing System due to unexpected error.<get_passwords() got an unexpected keyword argument 'key'>
+31-10-2023 14:25:06 INFO       Initializing System...
+31-10-2023 14:27:12 INFO       User signed out.
+31-10-2023 14:27:18 WARNING    Duplicate account creation attempt vinny.
+31-10-2023 14:34:24 CRITICAL   Closing System due to unexpected error.<delete_password() takes 1 positional argument but 2 were given>
+31-10-2023 14:35:33 INFO       Initializing System...
+31-10-2023 14:36:11 ERROR      'list' object has no attribute 'password_id'
+31-10-2023 14:36:11 CRITICAL   Closing System due to unexpected error.<'list' object has no attribute 'password_id'>
+31-10-2023 14:36:22 INFO       Initializing System...
+31-10-2023 14:36:45 INFO       User signed out.
+31-10-2023 14:36:56 INFO       User signed out.
+31-10-2023 14:36:57 INFO       Closing System.
+31-10-2023 14:43:57 INFO       Initializing System...
+31-10-2023 14:44:12 ERROR      Incorrect number of bindings supplied. The current statement uses 1, and there are 2 supplied.
+31-10-2023 14:44:12 CRITICAL   Closing System due to unexpected error.<Incorrect number of bindings supplied. The current statement uses 1, and there are 2 supplied.>
+31-10-2023 15:42:34 INFO       Initializing System...
+31-10-2023 16:04:27 ERROR      Incorrect number of bindings supplied. The current statement uses 1, and there are 2 supplied.
+31-10-2023 16:04:27 CRITICAL   Closing System due to unexpected error.<Incorrect number of bindings supplied. The current statement uses 1, and there are 2 supplied.>
+31-10-2023 16:05:26 INFO       Initializing System...
+31-10-2023 16:05:32 ERROR      'NoneType' object has no attribute 'team_id'
+31-10-2023 16:05:32 CRITICAL   Closing System due to unexpected error.<'NoneType' object has no attribute 'team_id'>
+31-10-2023 16:07:06 INFO       Initializing System...
+31-10-2023 16:07:19 INFO       User signed out.
+31-10-2023 16:08:45 ERROR      Incorrect number of bindings supplied. The current statement uses 5, and there are 2 supplied.
+31-10-2023 16:08:45 CRITICAL   Closing System due to unexpected error.<Incorrect number of bindings supplied. The current statement uses 5, and there are 2 supplied.>
+31-10-2023 16:11:38 INFO       Initializing System...
+31-10-2023 16:11:54 ERROR      Incorrect number of bindings supplied. The current statement uses 5, and there are 1 supplied.
+31-10-2023 16:11:54 CRITICAL   Closing System due to unexpected error.<Incorrect number of bindings supplied. The current statement uses 5, and there are 1 supplied.>
+31-10-2023 16:14:41 INFO       Initializing System...
+31-10-2023 16:14:45 DEBUG      
+    SELECT * FROM authentication
+    WHERE username = ?;
+    
+31-10-2023 16:14:45 DEBUG      
+    SELECT * FROM authentication
+    WHERE username = ?;
+    
+31-10-2023 16:14:48 DEBUG      
+    SELECT passwords.*
+    FROM team_members
+    INNER JOIN team_passwords ON team_passwords.team_id = team_members.team_id
+    INNER JOIN passwords ON team_passwords.password_id = passwords.id
+    WHERE team_members.member_id = ? and passwords.password_type = 1;
+    
+31-10-2023 16:14:48 DEBUG      
+    SELECT passwords.*
+    FROM team_members
+    INNER JOIN team_passwords ON team_passwords.team_id = team_members.team_id
+    INNER JOIN passwords ON team_passwords.password_id = passwords.id
+    WHERE team_members.member_id = ? and passwords.password_type = 1;
+    
+31-10-2023 16:14:55 INFO       User signed out.
+31-10-2023 16:15:00 DEBUG      
+    SELECT * FROM authentication
+    WHERE username = ?;
+    
+31-10-2023 16:15:00 DEBUG      
+    SELECT * FROM authentication
+    WHERE username = ?;
+    
+31-10-2023 16:15:05 DEBUG      
+    SELECT * FROM teams
+    WHERE creator_id = ?;
+    
+31-10-2023 16:15:05 DEBUG      
+    SELECT * FROM teams
+    WHERE creator_id = ?;
+    
+31-10-2023 16:15:07 DEBUG      
+    SELECT passwords.*
+    FROM team_members
+    INNER JOIN team_passwords ON team_passwords.team_id = team_members.team_id
+    INNER JOIN passwords ON team_passwords.password_id = passwords.id
+    AND (passwords.site_url LIKE ? or passwords.site_username LIKE ? or passwords.notes LIKE ?)
+    WHERE member_id = ? and team_passwords.team_id = ? and passwords.password_type = 1;
+    
+31-10-2023 16:15:07 DEBUG      
+    SELECT passwords.*
+    FROM team_members
+    INNER JOIN team_passwords ON team_passwords.team_id = team_members.team_id
+    INNER JOIN passwords ON team_passwords.password_id = passwords.id
+    AND (passwords.site_url LIKE ? or passwords.site_username LIKE ? or passwords.notes LIKE ?)
+    WHERE member_id = ? and team_passwords.team_id = ? and passwords.password_type = 1;
+    
+31-10-2023 16:15:07 ERROR      Incorrect number of bindings supplied. The current statement uses 5, and there are 1 supplied.
+31-10-2023 16:15:07 CRITICAL   Closing System due to unexpected error.<Incorrect number of bindings supplied. The current statement uses 5, and there are 1 supplied.>
+31-10-2023 16:15:42 INFO       Initializing System...
+31-10-2023 16:15:47 DEBUG      
+    SELECT * FROM authentication
+    WHERE username = ?;
+    
+31-10-2023 16:15:47 DEBUG      ('vinny',)
+31-10-2023 16:15:50 DEBUG      
+    SELECT * FROM teams
+    WHERE creator_id = ?;
+    
+31-10-2023 16:15:50 DEBUG      (2,)
+31-10-2023 16:15:52 DEBUG      
+    SELECT passwords.*
+    FROM team_members
+    INNER JOIN team_passwords ON team_passwords.team_id = team_members.team_id
+    INNER JOIN passwords ON team_passwords.password_id = passwords.id
+    AND (passwords.site_url LIKE ? or passwords.site_username LIKE ? or passwords.notes LIKE ?)
+    WHERE member_id = ? and team_passwords.team_id = ? and passwords.password_type = 1;
+    
+31-10-2023 16:15:52 DEBUG      (2,)
+31-10-2023 16:15:52 ERROR      Incorrect number of bindings supplied. The current statement uses 5, and there are 1 supplied.
+31-10-2023 16:15:52 CRITICAL   Closing System due to unexpected error.<Incorrect number of bindings supplied. The current statement uses 5, and there are 1 supplied.>
+31-10-2023 16:16:40 INFO       Initializing System...
+31-10-2023 16:16:45 DEBUG      
+    SELECT * FROM authentication
+    WHERE username = ?;
+    
+31-10-2023 16:16:45 DEBUG      ('vinny',)
+31-10-2023 16:16:48 DEBUG      
+    SELECT * FROM teams
+    WHERE creator_id = ?;
+    
+31-10-2023 16:16:48 DEBUG      (2,)
+31-10-2023 16:16:50 DEBUG      
+    SELECT passwords.*
+    FROM team_members
+    INNER JOIN team_passwords ON team_passwords.team_id = team_members.team_id
+    INNER JOIN passwords ON team_passwords.password_id = passwords.id
+    AND (passwords.site_url LIKE ? or passwords.site_username LIKE ? or passwords.notes LIKE ?)
+    WHERE member_id = ? and team_passwords.team_id = ? and passwords.password_type = 1;
+    
+31-10-2023 16:16:50 DEBUG      (2, 1)
+31-10-2023 16:16:50 ERROR      Incorrect number of bindings supplied. The current statement uses 5, and there are 2 supplied.
+31-10-2023 16:16:50 CRITICAL   Closing System due to unexpected error.<Incorrect number of bindings supplied. The current statement uses 5, and there are 2 supplied.>
+31-10-2023 16:22:17 INFO       Initializing System...
+31-10-2023 16:22:27 DEBUG      
+    SELECT * FROM authentication
+    WHERE username = ?;
+    
+31-10-2023 16:22:27 DEBUG      ('vinny',)
+31-10-2023 16:22:31 DEBUG      
+    SELECT * FROM teams
+    WHERE creator_id = ?;
+    
+31-10-2023 16:22:31 DEBUG      (2,)
+31-10-2023 16:22:33 DEBUG      
+    SELECT passwords.*
+    FROM team_members
+    INNER JOIN team_passwords ON team_passwords.team_id = team_members.team_id
+    INNER JOIN passwords ON team_passwords.password_id = passwords.id
+    WHERE team_members.member_id = ? and passwords.password_type = 1;
+    
+31-10-2023 16:22:33 DEBUG      (2, 1)
+31-10-2023 16:22:33 ERROR      Incorrect number of bindings supplied. The current statement uses 1, and there are 2 supplied.
+31-10-2023 16:22:33 CRITICAL   Closing System due to unexpected error.<Incorrect number of bindings supplied. The current statement uses 1, and there are 2 supplied.>
+31-10-2023 16:23:24 INFO       Initializing System...
+31-10-2023 16:23:27 DEBUG      
+    SELECT * FROM authentication
+    WHERE username = ?;
+    
+31-10-2023 16:23:27 DEBUG      ('vinny',)
+31-10-2023 16:23:28 WARNING    Invalid Credentials by vinny.
+31-10-2023 16:23:34 DEBUG      
+    SELECT * FROM authentication
+    WHERE username = ?;
+    
+31-10-2023 16:23:34 DEBUG      ('vinny',)
+31-10-2023 16:23:37 DEBUG      
+    SELECT * FROM teams
+    WHERE creator_id = ?;
+    
+31-10-2023 16:23:37 DEBUG      (2,)
+31-10-2023 16:23:39 DEBUG      
+    SELECT passwords.id, passwords.creator_id, passwords.password_type, passwords.site_url, passwords.site_username, passwords.encrypted_password, passwords.notes
+    FROM team_members
+    INNER JOIN team_passwords ON team_passwords.team_id = team_members.team_id
+    INNER JOIN passwords ON team_passwords.password_id = passwords.id
+    WHERE team_members.member_id = ? and team_passwords.team_id = ? and passwords.password_type = 1;
+    
+31-10-2023 16:23:39 DEBUG      (2, 1)
+31-10-2023 16:23:43 DEBUG      
+    SELECT passwords.id, passwords.creator_id, passwords.password_type, passwords.site_url, passwords.site_username, passwords.encrypted_password, passwords.notes
+    FROM team_members
+    INNER JOIN team_passwords ON team_passwords.team_id = team_members.team_id
+    INNER JOIN passwords ON team_passwords.password_id = passwords.id
+    WHERE team_members.member_id = ? and team_passwords.team_id = ? and passwords.password_type = 1;
+    
+31-10-2023 16:23:43 DEBUG      (2, 1)
+31-10-2023 16:23:52 DEBUG      
+    SELECT passwords.id, passwords.creator_id, passwords.password_type, passwords.site_url, passwords.site_username, passwords.encrypted_password, passwords.notes
+    FROM team_members
+    INNER JOIN team_passwords ON team_passwords.team_id = team_members.team_id
+    INNER JOIN passwords ON team_passwords.password_id = passwords.id
+    WHERE team_members.member_id = ? and team_passwords.team_id = ? and passwords.password_type = 1;
+    
+31-10-2023 16:23:52 DEBUG      (2, 1)
+31-10-2023 16:24:01 DEBUG      
+    SELECT passwords.id, passwords.creator_id, passwords.password_type, passwords.site_url, passwords.site_username, passwords.encrypted_password, passwords.notes
+    FROM team_members
+    INNER JOIN team_passwords ON team_passwords.team_id = team_members.team_id
+    INNER JOIN passwords ON team_passwords.password_id = passwords.id
+    WHERE team_members.member_id = ? and team_passwords.team_id = ? and passwords.password_type = 1;
+    
+31-10-2023 16:24:01 DEBUG      (2, 1)
+31-10-2023 16:24:16 DEBUG      
+    SELECT authentication.id, username, NULL, user_role, is_deleted, created_at FROM team_members
+    INNER JOIN authentication ON authentication.id = team_members.member_id
+    WHERE team_id = ?;
+    
+31-10-2023 16:24:16 DEBUG      (1,)
+31-10-2023 16:24:27 DEBUG      
+    SELECT passwords.*
+    FROM team_members
+    INNER JOIN team_passwords ON team_passwords.team_id = team_members.team_id
+    INNER JOIN passwords ON team_passwords.password_id = passwords.id
+    WHERE team_members.member_id = ? and passwords.password_type = 1;
+    
+31-10-2023 16:24:27 DEBUG      (2,)
+31-10-2023 16:24:32 DEBUG      
+    SELECT * FROM teams
+    WHERE creator_id = ?;
+    
+31-10-2023 16:24:32 DEBUG      (2,)
+31-10-2023 16:24:41 DEBUG      
+    SELECT passwords.id, passwords.creator_id, passwords.password_type, passwords.site_url, passwords.site_username, passwords.encrypted_password, passwords.notes
+    FROM team_members
+    INNER JOIN team_passwords ON team_passwords.team_id = team_members.team_id
+    INNER JOIN passwords ON team_passwords.password_id = passwords.id
+    WHERE team_members.member_id = ? and team_passwords.team_id = ? and passwords.password_type = 1;
+    
+31-10-2023 16:24:41 DEBUG      (2, 1)
+31-10-2023 16:24:46 DEBUG      
+    SELECT authentication.id, username, NULL, user_role, is_deleted, created_at FROM team_members
+    INNER JOIN authentication ON authentication.id = team_members.member_id
+    WHERE team_id = ?;
+    
+31-10-2023 16:24:46 DEBUG      (1,)
+31-10-2023 16:24:46 DEBUG      
+    SELECT authentication.id, username, NULL, user_role, is_deleted, created_at FROM team_members
+    INNER JOIN authentication ON authentication.id = team_members.member_id
+    WHERE team_id = ?;
+    
+31-10-2023 16:24:46 DEBUG      (1,)
+31-10-2023 16:24:46 DEBUG      
+    SELECT authentication.id, username, NULL, user_role, is_deleted, created_at FROM team_members
+    INNER JOIN authentication ON authentication.id = team_members.member_id
+    WHERE team_id = ?;
+    
+31-10-2023 16:24:46 DEBUG      (1,)
+31-10-2023 16:24:57 DEBUG      
+    SELECT * FROM teams
+    WHERE creator_id = ?;
+    
+31-10-2023 16:24:57 DEBUG      (2,)
+31-10-2023 16:25:00 DEBUG      
+    SELECT authentication.id, username, NULL, user_role, is_deleted, created_at FROM team_members
+    INNER JOIN authentication ON authentication.id = team_members.member_id
+    WHERE team_id = ?;
+    
+31-10-2023 16:25:00 DEBUG      (2,)
+31-10-2023 16:25:00 DEBUG      
+    SELECT authentication.id, username, NULL, user_role, is_deleted, created_at FROM team_members
+    INNER JOIN authentication ON authentication.id = team_members.member_id
+    WHERE team_id = ?;
+    
+31-10-2023 16:25:00 DEBUG      (2,)
+31-10-2023 16:25:04 DEBUG      
+    SELECT passwords.id, passwords.creator_id, passwords.password_type, passwords.site_url, passwords.site_username, passwords.encrypted_password, passwords.notes
+    FROM team_members
+    INNER JOIN team_passwords ON team_passwords.team_id = team_members.team_id
+    INNER JOIN passwords ON team_passwords.password_id = passwords.id
+    WHERE team_members.member_id = ? and team_passwords.team_id = ? and passwords.password_type = 1;
+    
+31-10-2023 16:25:04 DEBUG      (2, 2)
+31-10-2023 16:25:11 DEBUG      
+    SELECT * FROM passwords
+    WHERE creator_id = ? AND password_type = 0;
+    
+31-10-2023 16:25:11 DEBUG      (2,)
+31-10-2023 16:25:15 INFO       User signed out.
+31-10-2023 16:25:20 DEBUG      
+    SELECT * FROM authentication
+    WHERE username = ?;
+    
+31-10-2023 16:25:20 DEBUG      ('tanmay',)
+31-10-2023 16:25:25 DEBUG      
+    SELECT * FROM passwords
+    WHERE creator_id = ? AND password_type = 0;
+    
+31-10-2023 16:25:25 DEBUG      (1,)
+31-10-2023 16:25:31 DEBUG      
+    SELECT passwords.*
+    FROM team_members
+    INNER JOIN team_passwords ON team_passwords.team_id = team_members.team_id
+    INNER JOIN passwords ON team_passwords.password_id = passwords.id
+    WHERE team_members.member_id = ? and passwords.password_type = 1;
+    
+31-10-2023 16:25:31 DEBUG      (1,)
+31-10-2023 16:25:34 INFO       User signed out.
+31-10-2023 16:25:41 DEBUG      
+    SELECT * FROM authentication
+    WHERE username = ?;
+    
+31-10-2023 16:25:41 DEBUG      ('vinny',)
+31-10-2023 16:25:46 DEBUG      
+    SELECT * FROM teams
+    WHERE creator_id = ?;
+    
+31-10-2023 16:25:46 DEBUG      (2,)
+31-10-2023 16:25:48 DEBUG      
+    SELECT authentication.id, username, NULL, user_role, is_deleted, created_at FROM team_members
+    INNER JOIN authentication ON authentication.id = team_members.member_id
+    WHERE team_id = ?;
+    
+31-10-2023 16:25:48 DEBUG      (1,)
+31-10-2023 16:25:48 DEBUG      
+    SELECT authentication.id, username, NULL, user_role, is_deleted, created_at FROM team_members
+    INNER JOIN authentication ON authentication.id = team_members.member_id
+    WHERE team_id = ?;
+    
+31-10-2023 16:25:48 DEBUG      (1,)
+31-10-2023 16:25:48 DEBUG      
+    SELECT authentication.id, username, NULL, user_role, is_deleted, created_at FROM team_members
+    INNER JOIN authentication ON authentication.id = team_members.member_id
+    WHERE team_id = ?;
+    
+31-10-2023 16:25:48 DEBUG      (1,)
+31-10-2023 16:25:52 DEBUG      
+    SELECT * FROM teams
+    WHERE creator_id = ?;
+    
+31-10-2023 16:25:52 DEBUG      (2,)
+31-10-2023 16:25:56 DEBUG      
+    SELECT authentication.id, username, NULL, user_role, is_deleted, created_at FROM team_members
+    INNER JOIN authentication ON authentication.id = team_members.member_id
+    WHERE team_id = ?;
+    
+31-10-2023 16:25:56 DEBUG      (2,)
+31-10-2023 16:26:02 INFO       User signed out.
+31-10-2023 16:26:06 DEBUG      
+    SELECT * FROM authentication
+    WHERE username = ?;
+    
+31-10-2023 16:26:06 DEBUG      ('tanmay',)
+31-10-2023 16:26:09 DEBUG      
+    SELECT passwords.*
+    FROM team_members
+    INNER JOIN team_passwords ON team_passwords.team_id = team_members.team_id
+    INNER JOIN passwords ON team_passwords.password_id = passwords.id
+    WHERE team_members.member_id = ? and passwords.password_type = 1;
+    
+31-10-2023 16:26:09 DEBUG      (1,)
+31-10-2023 16:26:15 DEBUG      
+    SELECT passwords.*
+    FROM team_members
+    INNER JOIN team_passwords ON team_passwords.team_id = team_members.team_id
+    INNER JOIN passwords ON team_passwords.password_id = passwords.id
+    AND (passwords.site_url LIKE ? or passwords.site_username LIKE ? or passwords.notes LIKE ?)
+    WHERE member_id = ? and passwords.password_type = 1;
+    
+31-10-2023 16:26:15 DEBUG      ('%server%', '%server%', '%server%', 1)
+31-10-2023 16:26:21 INFO       User signed out.
+31-10-2023 16:26:29 DEBUG      
+    SELECT * FROM authentication
+    WHERE username = ?;
+    
+31-10-2023 16:26:29 DEBUG      ('4',)
+31-10-2023 16:26:29 WARNING    Invalid Credentials by 4.
+31-10-2023 16:26:30 INFO       Closing System.

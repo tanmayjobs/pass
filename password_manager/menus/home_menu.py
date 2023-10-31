@@ -3,7 +3,7 @@ This file contains the home menu.
 From here user can go to personal or team passwords.
 """
 
-from controllers.authorizer import Authorizer
+import controllers.authorizer as Authorizer
 
 import menus.user_required_menu as user_required_menu
 import menus.personal_passwords as personal_passwords

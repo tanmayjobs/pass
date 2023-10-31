@@ -10,101 +10,92 @@ from models.user import User
 from models.team import Team
 from models.password import Password, PasswordType
 
-from utils.io_functions import (create_password_input, search_key_input,
-                                password_ids_input, select_by_id)
 
-
-class PasswordController:
-
-    @staticmethod
-    def show_true_passwords(passwords: list[Password]):
-        try:
-            user_input = password_ids_input()
-            if user_input == 'A':
-                return passwords
-
-            selected_passwords_id = list(
-                map(lambda x: int(x) - 1, user_input.split(",")))
-            selected_passwords = [
-                passwords[selected_id] for selected_id in selected_passwords_id
-            ]
-
-        except (TypeError, IndexError) as error:
-            Logger.log(ERROR, error)
-            raise ValueError
-
-        except:
-            raise
-
-        else:
-            return selected_passwords
-
-    @staticmethod
-    def get_passwords(
-        user: User,
-        key: bool = False,
-        password_type: PasswordType = PasswordType.PERSONAL_PASSWORD,
-    ):
-        try:
-            search_key = search_key_input() if key else ""
-
-            passwords = Password.get_passwords(user, search_key, password_type)
-
-        except Exception as error:
-            Logger.log(ERROR, error)
-            raise
-        else:
+def show_true_passwords(passwords: list[Password], user_input):
+    try:
+        if user_input == "A":
             return passwords
 
-    @staticmethod
-    def add_password(user: User, team: Team = None):
-        try:
-            site_url, site_username, password, notes = create_password_input()
-            Password.add_password(user, site_url, site_username, password,
-                                  notes, team)
+        selected_passwords_id = list(map(lambda x: int(x) - 1, user_input.split(",")))
+        selected_passwords = [
+            passwords[selected_id] for selected_id in selected_passwords_id
+        ]
 
-        except Exception as error:
-            Logger.log(ERROR, error)
-            raise
+    except (TypeError, IndexError) as error:
+        Logger.log(ERROR, error)
+        raise ValueError
 
-        else:
-            return
+    except:
+        raise
 
-    @staticmethod
-    def delete_password(user: User, passwords: list[Password]):
-        try:
-            password = select_by_id(passwords, "password")
+    else:
+        return selected_passwords
 
-            Password.delete_password(password)
 
-        except (TypeError, IndexError) as error:
-            Logger.log(ERROR, error)
-            raise ValueError
+def get_passwords(
+    user: User,
+    team: Team = None,
+    search_key: str = '',
+    password_type: PasswordType = PasswordType.PERSONAL_PASSWORD,
+):
+    try:
+        passwords = Password.get_passwords(user, team, search_key, password_type)
 
-        except Exception as error:
-            Logger.log(ERROR, error)
-            raise
+    except Exception as error:
+        Logger.log(ERROR, error)
+        raise
+    else:
+        return passwords
 
-        else:
-            return
 
-    @staticmethod
-    def update_password(user: User, passwords: list[Password]):
-        try:
-            password = select_by_id(passwords, "password")
-            site_url, site_username, encrypted_password, notes = create_password_input(
-            )
+def add_password(user: User, site_url, site_username, password, notes, team: Team = None):
+    try:
+        Password.add_password(
+            user,
+            site_url,
+            site_username,
+            password,
+            notes,
+            team,
+        )
 
-            Password.update_password(password, site_url, site_username,
-                                     encrypted_password, notes)
+    except Exception as error:
+        Logger.log(ERROR, error)
+        raise
 
-        except (TypeError, IndexError) as error:
-            Logger.log(ERROR, error)
-            raise ValueError
+    else:
+        return
 
-        except Exception as error:
-            Logger.log(ERROR, error)
-            raise
 
-        else:
-            return
+def delete_password(password):
+    try:
+        Password.delete_password(password)
+
+    except (TypeError, IndexError) as error:
+        Logger.log(ERROR, error)
+        raise ValueError
+
+    except Exception as error:
+        Logger.log(ERROR, error)
+        raise
+
+    else:
+        return
+
+
+def update_password(password, site_url, site_username, encrypted_password, notes):
+    try:
+        Password.update_password(
+            password, site_url, site_username, encrypted_password, notes
+        )
+
+    except (TypeError, IndexError) as error:
+        Logger.log(ERROR, error)
+        raise ValueError
+
+    except Exception as error:
+        Logger.log(ERROR, error)
+        raise
+
+    else:
+        return

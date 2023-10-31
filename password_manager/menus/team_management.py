@@ -3,12 +3,12 @@ This file contains the Team Management Menu
 Here user can manage any one previously selected team from Teams Password Menu.
 """
 
-from controllers.password import PasswordController
-from controllers.teams import TeamsController
+import controllers.password as PasswordController
+import controllers.teams as TeamsController
 
 from models.password import PasswordType
 
-from utils.io_functions import show_message, show_passwords
+from utils.io_functions import show_message, show_passwords, create_password_input, select_by_id, team_member_username_input, show_members
 
 import menus.user_required_menu as user_required_menu
 import menus.team_required_menu as team_required_menu
@@ -35,7 +35,8 @@ class TeamManagementMenu(user_required_menu.UserRequiredMenu,
 
     def handler(self, user_choice):
         if user_choice == 1:
-            TeamsController.add_member(self.user, self.team)
+            member_name = team_member_username_input()
+            TeamsController.add_member(self.user, self.team, member_name)
             show_message("Member added successfully.")
 
         elif user_choice == 2:
@@ -51,16 +52,21 @@ class TeamManagementMenu(user_required_menu.UserRequiredMenu,
                         "There are no members in your team, except you.")
 
                 else:
-                    TeamsController.delete_member(self.user, self.team)
+                    all_members = self.team.members()
+                    show_members(all_members)
+                    member_id = select_by_id(all_members, "member").user_id
+                    TeamsController.delete_member(self.user, self.team, member_id)
                     show_message("Member deleted successfully.")
 
         elif user_choice == 3:
-            PasswordController.add_password(self.user, self.team)
+            site_url, site_username, password, notes = create_password_input()
+            PasswordController.add_password(self.user, site_url, site_username, password, notes, self.team)
             show_message("Password added successfully.")
 
         elif user_choice == 4 or user_choice == 5:
             passwords = PasswordController.get_passwords(
                 self.user,
+                team=self.team,
                 password_type=PasswordType.TEAM_PASSWORD,
             )
 
@@ -71,11 +77,14 @@ class TeamManagementMenu(user_required_menu.UserRequiredMenu,
                 show_passwords(passwords)
 
                 if user_choice == 4:
-                    PasswordController.delete_password(self.user, passwords)
+                    password = select_by_id(passwords, "password")
+                    PasswordController.delete_password(password)
                     show_message("Password deleted successfully.")
 
                 else:
-                    PasswordController.update_password(self.user, passwords)
+                    password = select_by_id(passwords, "password")
+                    password_data = create_password_input()
+                    PasswordController.update_password(password, *password_data)
                     show_message("Password updated successfully.")
 
         elif user_choice == 6:
