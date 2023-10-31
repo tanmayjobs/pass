@@ -5,7 +5,6 @@ User Model is capable of accessing the Database to perform CRUD operation relate
 """
 
 from database.db import SQLDatabase, SQLQueries
-
 from helpers.enums import UserType
 from helpers.exceptions import InvalidCredentials
 from utils.crypt import Crypt

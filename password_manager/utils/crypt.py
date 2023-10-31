@@ -6,11 +6,10 @@ This file contains all cryptography methods.
     Decrypt
 """
 
-from cryptography.fernet import Fernet
-
 import os
 import dotenv
 import bcrypt
+from cryptography.fernet import Fernet
 
 dotenv.load_dotenv()
 

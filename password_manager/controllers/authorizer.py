@@ -3,15 +3,12 @@ This file contains the controller for authentication.
 Sign In, Sign Up for authentication are defined in this file.
 """
 
-from logs.logger import Logger, WARN, INFO
-
-from models.user import User
+from sqlite3 import IntegrityError
 
 from utils.crypt import Crypt
 from helpers.exceptions import InvalidCredentials
-
-from sqlite3 import IntegrityError
-
+from models.user import User
+from logs.logger import Logger, WARN, INFO
 
 
 def sign_in(username, password):

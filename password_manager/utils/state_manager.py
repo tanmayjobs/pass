@@ -8,7 +8,6 @@ from utils.exception_handler import handle_exception
 from menus.authentication import AuthenticationMenu
 from menus.home_menu import HomeMenu
 from utils.io_functions import show_message
-
 from models.user import User
 
 

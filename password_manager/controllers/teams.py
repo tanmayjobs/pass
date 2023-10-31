@@ -3,19 +3,12 @@ This file contains team controller.
 All the methods related to team are defined here.
 """
 
-from logs.logger import Logger, ERROR
-
-from helpers.exceptions import InvalidMemberName, MemberAlreadyExists, UserRemovingSelf
-
-from models.user import User
-from models.team import Team
-
 from sqlite3 import IntegrityError
 
-from utils.io_functions import (create_team_input, team_member_username_input,
-                                show_members, select_by_id)
-
-
+from logs.logger import Logger, ERROR
+from helpers.exceptions import InvalidMemberName, MemberAlreadyExists, UserRemovingSelf
+from models.user import User
+from models.team import Team
 
 
 def get_teams(user: User):

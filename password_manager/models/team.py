@@ -5,9 +5,7 @@ Team Model is capable of accessing the Database to perform CRUD operation relate
 """
 
 from database.db import SQLDatabase, SQLQueries
-
 from helpers.exceptions import InvalidMemberName
-
 from models.user import User
 
 

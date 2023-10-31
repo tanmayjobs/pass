@@ -2,12 +2,11 @@
 All the Input-Output related methods are defined here.
 """
 
-from models.password import Password, PasswordStrength
+import pwinput
 
+from models.password import Password, PasswordStrength
 from utils.crypt import Crypt
 from helpers.exceptions import NullPassword, NullUsername, WeakPassword
-
-import pwinput
 
 
 def credential_input(check_strength=False):

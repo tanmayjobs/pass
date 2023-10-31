@@ -3,10 +3,11 @@ This file defines a decorator for functions which handles the menus.
 Here all the exceptions(custom exceptions as well) are handled.
 """
 
+import sys
+
 from sqlite3 import IntegrityError
 
 from logs.logger import Logger, CRITICAL, INFO
-
 from helpers.exceptions import (
     InvalidCredentials,
     NullPassword,
@@ -17,8 +18,6 @@ from helpers.exceptions import (
     UserRemovingSelf,
 )
 from utils.io_functions import show_message
-
-import sys
 
 
 def handle_exception(menu_func):

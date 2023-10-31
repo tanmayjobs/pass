@@ -5,7 +5,6 @@ And can also exit from the system.
 """
 
 import controllers.authorizer as Authorizer
-
 from utils.io_functions import credential_input
 from utils.io_functions import show_message
 

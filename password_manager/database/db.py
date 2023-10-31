@@ -4,11 +4,11 @@ Database class is used to create DB.
 Database is accessed only by models to interact with database.
 """
 
-from logs.logger import Logger, DEBUG
-from database.queries import SQLQueries
-
-import os
 import sqlite3
+import os
+
+from database.queries import SQLQueries
+from logs.logger import Logger, DEBUG
 
 DB_PATH = "database/storage/"
 DB_FILE = DB_PATH + "database.db"

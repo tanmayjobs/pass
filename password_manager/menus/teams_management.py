@@ -5,12 +5,10 @@ And can also select one particular team to manage(which is further managed in Te
 """
 
 import controllers.teams as TeamsController
-
-from utils.io_functions import show_teams, show_message, create_team_input, select_by_id
-
 import menus.user_required_menu as user_required_menu
 import menus.team_passwords as team_passwords
 import menus.team_management as team_management
+from utils.io_functions import show_teams, show_message, create_team_input, select_by_id
 
 
 class TeamsManagementMenu(user_required_menu.UserRequiredMenu):

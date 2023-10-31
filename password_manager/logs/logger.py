@@ -3,9 +3,8 @@ This file create a Logger class used to log anything in the system.
 This file also setups the basic logging system.
 """
 
-from logging import INFO, DEBUG, WARN, CRITICAL, ERROR
-
 import logging
+from logging import INFO, DEBUG, WARN, CRITICAL, ERROR
 
 logging.basicConfig(
     level=logging.DEBUG,

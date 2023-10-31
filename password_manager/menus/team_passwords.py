@@ -5,15 +5,12 @@ And Team Managers have extra feature of Team Management.
 """
 
 import controllers.password as PasswordController
-
-from models.user import UserType
-from models.password import PasswordType
-
-from utils.io_functions import show_passwords, show_message, password_ids_input, search_key_input
-
 import menus.teams_management as teams_management
 import menus.user_required_menu as user_required_menu
 import menus.home_menu as home_menu
+from models.user import UserType
+from models.password import PasswordType
+from utils.io_functions import show_passwords, show_message, password_ids_input, search_key_input
 
 
 class TeamPasswordsMenu(user_required_menu.UserRequiredMenu):
@@ -54,7 +51,8 @@ class TeamPasswordsMenu(user_required_menu.UserRequiredMenu):
             else:
                 show_passwords(passwords)
                 user_input = password_ids_input()
-                passwords = PasswordController.show_true_passwords(passwords, user_input)
+                passwords = PasswordController.show_true_passwords(
+                    passwords, user_input)
                 show_passwords(passwords, False)
 
         elif user_choice == 3:
@@ -70,7 +68,7 @@ class TeamPasswordsMenu(user_required_menu.UserRequiredMenu):
             search_key = search_key_input() if user_choice == 2 else ""
             passwords = PasswordController.get_passwords(
                 self.user,
-                search_key= search_key,
+                search_key=search_key,
                 password_type=PasswordType.TEAM_PASSWORD,
             )
             if not passwords:
@@ -78,7 +76,8 @@ class TeamPasswordsMenu(user_required_menu.UserRequiredMenu):
             else:
                 show_passwords(passwords)
                 user_input = password_ids_input()
-                passwords = PasswordController.show_true_passwords(passwords, user_input)
+                passwords = PasswordController.show_true_passwords(
+                    passwords, user_input)
                 show_passwords(passwords, False)
 
         elif user_choice == 3:

@@ -5,14 +5,11 @@ Here user can manage any one previously selected team from Teams Password Menu.
 
 import controllers.password as PasswordController
 import controllers.teams as TeamsController
-
-from models.password import PasswordType
-
-from utils.io_functions import show_message, show_passwords, create_password_input, select_by_id, team_member_username_input, show_members
-
 import menus.user_required_menu as user_required_menu
 import menus.team_required_menu as team_required_menu
 import menus.teams_management as teams_management
+from models.password import PasswordType
+from utils.io_functions import show_message, show_passwords, create_password_input, select_by_id, team_member_username_input, show_members
 
 
 class TeamManagementMenu(user_required_menu.UserRequiredMenu,
@@ -55,12 +52,14 @@ class TeamManagementMenu(user_required_menu.UserRequiredMenu,
                     all_members = self.team.members()
                     show_members(all_members)
                     member_id = select_by_id(all_members, "member").user_id
-                    TeamsController.delete_member(self.user, self.team, member_id)
+                    TeamsController.delete_member(self.user, self.team,
+                                                  member_id)
                     show_message("Member deleted successfully.")
 
         elif user_choice == 3:
             site_url, site_username, password, notes = create_password_input()
-            PasswordController.add_password(self.user, site_url, site_username, password, notes, self.team)
+            PasswordController.add_password(self.user, site_url, site_username,
+                                            password, notes, self.team)
             show_message("Password added successfully.")
 
         elif user_choice == 4 or user_choice == 5:
@@ -84,7 +83,8 @@ class TeamManagementMenu(user_required_menu.UserRequiredMenu,
                 else:
                     password = select_by_id(passwords, "password")
                     password_data = create_password_input()
-                    PasswordController.update_password(password, *password_data)
+                    PasswordController.update_password(password,
+                                                       *password_data)
                     show_message("Password updated successfully.")
 
         elif user_choice == 6:

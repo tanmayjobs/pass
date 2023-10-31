@@ -4,15 +4,13 @@ Password Model is created for each password saved by any type of user.
 Password Model is capable of accessing the Database to perform CRUD operation related to passwords.
 """
 
-from database.db import SQLDatabase, SQLQueries
+import re
 
 from models.user import User
 from models.team import Team
-
+from database.db import SQLDatabase, SQLQueries
 from utils.crypt import Crypt
 from helpers.enums import PasswordType, PasswordStrength
-
-import re
 
 
 class Password:
@@ -55,17 +53,14 @@ class Password:
         db = SQLDatabase()
 
         if password_type == PasswordType.PERSONAL_PASSWORD:
-            query = (
-                SQLQueries.PERSONAL_PASSWORDS_FILTER
-                if search_key
-                else SQLQueries.PERSONAL_PASSWORDS
-            )
+            query = (SQLQueries.PERSONAL_PASSWORDS_FILTER
+                     if search_key else SQLQueries.PERSONAL_PASSWORDS)
         else:
             if not team:
                 query = SQLQueries.EVERY_TEAM_PASSWORDS_FILTER if search_key else SQLQueries.EVERY_TEAM_PASSWORDS
             else:
                 query = SQLQueries.TEAM_PASSWORDS_FILTER if search_key else SQLQueries.TEAM_PASSWORDS
-            
+
         if team:
             params = (
                 *[f"%{search_key}%" for _ in range(3) if search_key],
@@ -79,7 +74,9 @@ class Password:
             )
 
         passwords = db.get(query, params)
-        passwords = [Password.from_database(password) for password in passwords]
+        passwords = [
+            Password.from_database(password) for password in passwords
+        ]
 
         return passwords
 
@@ -114,13 +111,15 @@ class Password:
     @staticmethod
     def delete_password(password):
         db = SQLDatabase()
-        db.remove(SQLQueries.DELETE_PASSWORD, (password.password_id,))
+        db.remove(SQLQueries.DELETE_PASSWORD, (password.password_id, ))
 
         if password.password_type == PasswordType.TEAM_PASSWORD:
-            db.remove(SQLQueries.DELETE_TEAM_PASSWORD, (password.password_id,))
+            db.remove(SQLQueries.DELETE_TEAM_PASSWORD,
+                      (password.password_id, ))
 
     @staticmethod
-    def update_password(password, site_url, site_username, encrypted_password, notes):
+    def update_password(password, site_url, site_username, encrypted_password,
+                        notes):
         db = SQLDatabase()
         db.update(
             SQLQueries.UPDATE_PASSWORD,

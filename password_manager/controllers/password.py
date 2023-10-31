@@ -5,7 +5,6 @@ These methods are general and can handle personal and team both type of password
 """
 
 from logs.logger import Logger, ERROR
-
 from models.user import User
 from models.team import Team
 from models.password import Password, PasswordType
@@ -16,7 +15,8 @@ def show_true_passwords(passwords: list[Password], user_input):
         if user_input == "A":
             return passwords
 
-        selected_passwords_id = list(map(lambda x: int(x) - 1, user_input.split(",")))
+        selected_passwords_id = list(
+            map(lambda x: int(x) - 1, user_input.split(",")))
         selected_passwords = [
             passwords[selected_id] for selected_id in selected_passwords_id
         ]
@@ -39,7 +39,8 @@ def get_passwords(
     password_type: PasswordType = PasswordType.PERSONAL_PASSWORD,
 ):
     try:
-        passwords = Password.get_passwords(user, team, search_key, password_type)
+        passwords = Password.get_passwords(user, team, search_key,
+                                           password_type)
 
     except Exception as error:
         Logger.log(ERROR, error)
@@ -48,7 +49,12 @@ def get_passwords(
         return passwords
 
 
-def add_password(user: User, site_url, site_username, password, notes, team: Team = None):
+def add_password(user: User,
+                 site_url,
+                 site_username,
+                 password,
+                 notes,
+                 team: Team = None):
     try:
         Password.add_password(
             user,
@@ -83,11 +89,11 @@ def delete_password(password):
         return
 
 
-def update_password(password, site_url, site_username, encrypted_password, notes):
+def update_password(password, site_url, site_username, encrypted_password,
+                    notes):
     try:
-        Password.update_password(
-            password, site_url, site_username, encrypted_password, notes
-        )
+        Password.update_password(password, site_url, site_username,
+                                 encrypted_password, notes)
 
     except (TypeError, IndexError) as error:
         Logger.log(ERROR, error)
