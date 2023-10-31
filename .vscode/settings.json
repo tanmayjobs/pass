@@ -3,8 +3,8 @@
         {
             "previewLimit": 50,
             "driver": "SQLite",
-            "name": "password_manager",
-            "database": "${workspaceFolder:projects}/password_manager/database/storage/db.sql"
+            "name": "password_manager_database",
+            "database": "C:\\Users\\tmudgal\\OneDrive - WatchGuard Technologies Inc\\code\\learning\\pass\\password_manager\\database\\storage\\database.db"
         }
     ]
 }
