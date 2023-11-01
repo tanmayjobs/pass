@@ -19,4 +19,5 @@ key = str(Fernet.generate_key())
 with open('.env', 'w+') as env_file:
     env_file.write(f'KEY={key[1:]}')
 
+```
 4. Run the program using python main.py
